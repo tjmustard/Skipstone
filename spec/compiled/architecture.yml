@@ -1,0 +1,174 @@
+nodes:
+- id: system_skipstone
+  dimension: System
+  status: clean
+  associated_file: spec/compiled/SuperPRD.md
+  description: Offline-first PWA conversational intimacy web application orchestrating prompt catalogs, audio engine, state transitions, and responsive touch UI
+  inputs:
+  - data_type: user_touch_and_keyboard_events
+    source_id: browser_dom
+  - data_type: custom_deck_json_file
+    source_id: user_file_system
+  - data_type: cached_app_shell_and_assets
+    source_id: module_scaffolding_pwa
+  - data_type: built_in_prompt_catalogs
+    source_id: module_prompt_catalogs
+  outputs:
+  - data_type: dual_zone_split_game_ui
+    target_id: browser_viewport
+  - data_type: synthesized_audio_tones
+    target_id: audio_hardware
+  - data_type: persisted_custom_decks
+    target_id: client_indexeddb
+  - data_type: custom_deck_export_blob
+    target_id: user_downloads
+  edges:
+    depends_on: []
+    implements: []
+- id: module_scaffolding_pwa
+  dimension: Module
+  status: clean
+  associated_file: src/service-worker.ts
+  description: Vite asset pipeline, Tailwind styling, local font subsets (Inter, Outfit), and cache-first Service Worker with passive background updates
+  inputs:
+  - data_type: source_assets_and_webmanifest
+    source_id: filesystem
+  - data_type: service_worker_registration_request
+    source_id: module_ui_shell
+  outputs:
+  - data_type: cached_app_shell_and_assets
+    target_id: system_skipstone
+  - data_type: tailwind_styling_tokens
+    target_id: module_ui_shell
+  edges:
+    depends_on: []
+    implements:
+    - system_skipstone
+- id: module_prompt_catalogs
+  dimension: Module
+  status: clean
+  associated_file: src/data/registry.ts
+  description: Static TypeScript compilation and static registry of 8 prompt catalogs (415 items) across 3 intimacy tiers extracted from SI/
+  inputs:
+  - data_type: markdown_catalog_tables
+    source_id: SI/
+  - data_type: project_build_environment
+    source_id: module_scaffolding_pwa
+  outputs:
+  - data_type: built_in_prompt_catalogs
+    target_id: module_core_engine
+  - data_type: prompt_schema_types
+    target_id: module_custom_decks
+  edges:
+    depends_on:
+    - module_scaffolding_pwa
+    implements:
+    - system_skipstone
+- id: module_core_engine
+  dimension: Module
+  status: clean
+  associated_file: src/core/state.ts
+  description: Finite state machine, seedable Mulberry32 PRNG dealer with smoothed Bernoulli wildcards, Web Audio synthesis engine, touch gestures, and 15-min TTL session storage
+  inputs:
+  - data_type: built_in_prompt_catalogs
+    source_id: module_prompt_catalogs
+  - data_type: user_touch_and_keyboard_gestures
+    source_id: module_ui_shell
+  - data_type: active_custom_deck
+    source_id: module_custom_decks
+  outputs:
+  - data_type: app_state_and_card_stream
+    target_id: module_ui_shell
+  - data_type: synthesized_audio_tones
+    target_id: system_skipstone
+  - data_type: ephemeral_session_cache
+    target_id: system_skipstone
+  edges:
+    depends_on:
+    - module_prompt_catalogs
+    implements:
+    - system_skipstone
+- id: module_ui_shell
+  dimension: Module
+  status: clean
+  associated_file: src/ui/views/SplitGameView.ts
+  description: Modular UI views including responsive dual-zone SplitGameView (textContent-safe), DeckSelectorView, BriefingView, ProgressionModal, GroundingCheckoutView, and OS switcher privacy shield
+  inputs:
+  - data_type: app_state_and_card_stream
+    source_id: module_core_engine
+  - data_type: validated_custom_deck_catalogs
+    source_id: module_custom_decks
+  - data_type: tailwind_styling_tokens
+    source_id: module_scaffolding_pwa
+  outputs:
+  - data_type: user_touch_and_keyboard_gestures
+    target_id: module_core_engine
+  - data_type: custom_deck_file_selection
+    target_id: module_custom_decks
+  - data_type: service_worker_registration_request
+    target_id: module_scaffolding_pwa
+  - data_type: rendered_dom_views
+    target_id: system_skipstone
+  edges:
+    depends_on:
+    - module_core_engine
+    implements:
+    - system_skipstone
+- id: module_custom_decks
+  dimension: Module
+  status: clean
+  associated_file: src/data/validator.ts
+  description: Zero-dependency <2KB schema validator with 1MB file limit, custom_ ID namespacing, IndexedDB persistence, and JSON deck exporter
+  inputs:
+  - data_type: custom_deck_file_selection
+    source_id: module_ui_shell
+  - data_type: prompt_schema_types
+    source_id: module_prompt_catalogs
+  outputs:
+  - data_type: validated_custom_deck_catalogs
+    target_id: module_ui_shell
+  - data_type: active_custom_deck
+    target_id: module_core_engine
+  - data_type: persisted_custom_decks
+    target_id: system_skipstone
+  - data_type: custom_deck_export_blob
+    target_id: system_skipstone
+  edges:
+    depends_on:
+    - module_ui_shell
+    - module_core_engine
+    - module_prompt_catalogs
+    implements:
+    - system_skipstone
+- id: module_verification_suite
+  dimension: Module
+  status: clean
+  associated_file: tests/engine.test.ts
+  description: Automated Vitest test suite, headless AudioContext mocks, WCAG AAA color contrast verifier, and 180KB gzipped bundle budget assertion script
+  inputs:
+  - data_type: app_state_and_card_stream
+    source_id: module_core_engine
+  - data_type: validated_custom_deck_catalogs
+    source_id: module_custom_decks
+  - data_type: rendered_dom_views
+    source_id: module_ui_shell
+  - data_type: built_in_prompt_catalogs
+    source_id: module_prompt_catalogs
+  - data_type: cached_app_shell_and_assets
+    source_id: module_scaffolding_pwa
+  outputs:
+  - data_type: test_execution_results
+    target_id: system_skipstone
+  - data_type: wcag_aaa_contrast_reports
+    target_id: system_skipstone
+  - data_type: bundle_size_budget_results
+    target_id: system_skipstone
+  edges:
+    depends_on:
+    - module_custom_decks
+    - module_ui_shell
+    - module_core_engine
+    - module_prompt_catalogs
+    - module_scaffolding_pwa
+    implements:
+    - system_skipstone

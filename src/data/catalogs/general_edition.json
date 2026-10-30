@@ -1,0 +1,1214 @@
+{
+  "id": "general_edition",
+  "title": "General Edition",
+  "subtitle": "Friends, Acquaintances, & Strangers",
+  "description": "A progressive conversational journey moving from everyday perceptions to formative life experiences and existential reflections.",
+  "targetAudience": "general",
+  "defaultPassAction": "pass_left",
+  "participantMode": "group_left",
+  "themeColor": "from-blue-600 to-indigo-700",
+  "badge": "100 Cards",
+  "isCustom": false,
+  "prompts": [
+    {
+      "id": "gen_t1_01",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What was the very first impression you formed about me upon entering the room today?",
+      "listenerPrompt": "Notice if their perception matches your internal self-image. Resist correcting them; simply absorb their view.",
+      "passAction": "pass_left",
+      "tags": [
+        "perception",
+        "first_impressions"
+      ]
+    },
+    {
+      "id": "gen_t1_02",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is a small, mundane detail that brought you unexpected joy this past week?",
+      "listenerPrompt": "Listen for what recharges their energy in ordinary daily life.",
+      "passAction": "pass_left",
+      "tags": [
+        "gratitude",
+        "daily_life"
+      ]
+    },
+    {
+      "id": "gen_t1_03",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What artist, genre, or song do you listen to privately that would surprise most people who know you?",
+      "listenerPrompt": "Ask one curious question about when or why they started listening to it.",
+      "passAction": "pass_left",
+      "tags": [
+        "taste",
+        "quirks"
+      ]
+    },
+    {
+      "id": "gen_t1_04",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is an unusual habit or personal routine you maintain that you rarely discuss with others?",
+      "listenerPrompt": "Respond with warmth. Avoid making them feel self-conscious about their idiosyncrasies.",
+      "passAction": "pass_left",
+      "tags": [
+        "habits",
+        "quirks"
+      ]
+    },
+    {
+      "id": "gen_t1_05",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "If someone handed you a completely free day with zero obligations or screens, how would you spend the first four hours?",
+      "listenerPrompt": "Listen to whether their ideal morning leans toward solitary peace or social engagement.",
+      "passAction": "pass_left",
+      "tags": [
+        "aspirations",
+        "leisure"
+      ]
+    },
+    {
+      "id": "gen_t1_06",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is a compliment you received in the past year that has stuck with you ever since?",
+      "listenerPrompt": "Observe which parts of their character or effort they feel most validated around.",
+      "passAction": "pass_left",
+      "tags": [
+        "validation",
+        "self_worth"
+      ]
+    },
+    {
+      "id": "gen_t1_07",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is one topic or subject you could talk about for an hour without any preparation?",
+      "listenerPrompt": "Watch their body language as they speak about something they love.",
+      "passAction": "pass_left",
+      "tags": [
+        "passions",
+        "curiosity"
+      ]
+    },
+    {
+      "id": "gen_t1_08",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is a book, film, or show you recommend to people because it fundamentally altered how you think?",
+      "listenerPrompt": "Ask: 'What about that work challenged your existing perspective?'",
+      "passAction": "pass_left",
+      "tags": [
+        "influences",
+        "perspective"
+      ]
+    },
+    {
+      "id": "gen_t1_09",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What does your current living space say about who you are right now?",
+      "listenerPrompt": "Listen to how their environment reflects their current mental state.",
+      "passAction": "pass_left",
+      "tags": [
+        "environment",
+        "lifestyle"
+      ]
+    },
+    {
+      "id": "gen_t1_10",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is a harmless conspiracy theory or silly debate you are secretly willing to argue passionately?",
+      "listenerPrompt": "Lean into the playfulness of the topic without debating them seriously.",
+      "passAction": "pass_left",
+      "tags": [
+        "playful",
+        "humor"
+      ]
+    },
+    {
+      "id": "gen_t1_11",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is something you bought recently for under $50 that genuinely improved your everyday life?",
+      "listenerPrompt": "Acknowledge the practical wisdom in their choice.",
+      "passAction": "pass_left",
+      "tags": [
+        "daily_life",
+        "utility"
+      ]
+    },
+    {
+      "id": "gen_t1_12",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is a city or place you have visited that felt unexpectedly like home?",
+      "listenerPrompt": "Ask: 'What emotional tone did that place provide that you were missing?'",
+      "passAction": "pass_left",
+      "tags": [
+        "place",
+        "belonging"
+      ]
+    },
+    {
+      "id": "gen_t1_13",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is an aesthetic, piece of clothing, or look you wish you could pull off but haven't dared to?",
+      "listenerPrompt": "Encourage their creative impulse with an affirming response.",
+      "passAction": "pass_left",
+      "tags": [
+        "style",
+        "expression"
+      ]
+    },
+    {
+      "id": "gen_t1_14",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What was your favorite age or era of your life so far, and what made it stand out?",
+      "listenerPrompt": "Listen for the specific values—freedom, safety, adventure—that made that era special.",
+      "passAction": "pass_left",
+      "tags": [
+        "nostalgia",
+        "biography"
+      ]
+    },
+    {
+      "id": "gen_t1_15",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What food or dish instantly transports you back to your childhood?",
+      "listenerPrompt": "Ask who prepared that dish for them and what setting they picture.",
+      "passAction": "pass_left",
+      "tags": [
+        "childhood",
+        "sensory"
+      ]
+    },
+    {
+      "id": "gen_t1_16",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is an assumption people often make about you based on your appearance that is incorrect?",
+      "listenerPrompt": "Reflect back what you hear: 'It sounds like you feel stereotyped around...'",
+      "passAction": "pass_left",
+      "tags": [
+        "perception",
+        "identity"
+      ]
+    },
+    {
+      "id": "gen_t1_17",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is a skill or craft you do not possess that you deeply respect in others?",
+      "listenerPrompt": "Validate their appreciation of human mastery.",
+      "passAction": "pass_left",
+      "tags": [
+        "admiration",
+        "craft"
+      ]
+    },
+    {
+      "id": "gen_t1_18",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "If your life were an autobiography, what would the current chapter title be?",
+      "listenerPrompt": "Ask: 'What needs to happen for this chapter to reach its turning point?'",
+      "passAction": "pass_left",
+      "tags": [
+        "self_concept",
+        "metaphor"
+      ]
+    },
+    {
+      "id": "gen_t1_19",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is something you learned how to do later in life than most people?",
+      "listenerPrompt": "Celebrate their willingness to learn and be a beginner.",
+      "passAction": "pass_left",
+      "tags": [
+        "humility",
+        "growth"
+      ]
+    },
+    {
+      "id": "gen_t1_20",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is an obsolete piece of technology or cultural trend you genuinely miss?",
+      "listenerPrompt": "Share in the nostalgic reflection without rushing them.",
+      "passAction": "pass_left",
+      "tags": [
+        "nostalgia",
+        "culture"
+      ]
+    },
+    {
+      "id": "gen_t1_21",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What kind of compliment makes you feel most genuinely seen?",
+      "listenerPrompt": "Store this insight internally for future interactions with them.",
+      "passAction": "pass_left",
+      "tags": [
+        "validation",
+        "communication"
+      ]
+    },
+    {
+      "id": "gen_t1_22",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is one small luxury you refuse to compromise on?",
+      "listenerPrompt": "Acknowledge the boundary they set around their comfort.",
+      "passAction": "pass_left",
+      "tags": [
+        "preferences",
+        "comfort"
+      ]
+    },
+    {
+      "id": "gen_t1_23",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is a sound, smell, or sensation that instantly calms your nervous system?",
+      "listenerPrompt": "Pay attention to what sensory anchors bring them peace.",
+      "passAction": "pass_left",
+      "tags": [
+        "sensory",
+        "grounding"
+      ]
+    },
+    {
+      "id": "gen_t1_24",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "If you could witness any historical event as an invisible observer, which would you pick?",
+      "listenerPrompt": "Ask what attracts them to that exact human moment.",
+      "passAction": "pass_left",
+      "tags": [
+        "imagination",
+        "history"
+      ]
+    },
+    {
+      "id": "gen_t1_25",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is something you used to be intensely self-conscious about that you now embrace?",
+      "listenerPrompt": "Validate their journey toward self-acceptance.",
+      "passAction": "pass_left",
+      "tags": [
+        "acceptance",
+        "growth"
+      ]
+    },
+    {
+      "id": "gen_t1_26",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is a motto or principle you find yourself repeating to yourself during hectic days?",
+      "listenerPrompt": "Reflect on how that phrase serves as an internal compass for them.",
+      "passAction": "pass_left",
+      "tags": [
+        "resilience",
+        "mantras"
+      ]
+    },
+    {
+      "id": "gen_t1_27",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What was your very first job, and what practical lesson did it teach you about human nature?",
+      "listenerPrompt": "Listen for how early experiences shaped their view of work.",
+      "passAction": "pass_left",
+      "tags": [
+        "work",
+        "early_life"
+      ]
+    },
+    {
+      "id": "gen_t1_28",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is a topic or field you know virtually nothing about, but feel intimidated to ask about?",
+      "listenerPrompt": "Normalize the feeling of not knowing; express shared curiosity.",
+      "passAction": "pass_left",
+      "tags": [
+        "curiosity",
+        "vulnerability_light"
+      ]
+    },
+    {
+      "id": "gen_t1_29",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is something funny or eccentric someone in your family did that you assumed was completely normal until you grew up?",
+      "listenerPrompt": "Enjoy the humor with them without being dismissive.",
+      "passAction": "pass_left",
+      "tags": [
+        "family_quirks",
+        "upbringing"
+      ]
+    },
+    {
+      "id": "gen_t1_30",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "On a scale from 1 to 10, how energized or depleted do you feel right now in this exact moment?",
+      "listenerPrompt": "Accept their number unconditionally without asking them to put on a cheerful face.",
+      "passAction": "pass_left",
+      "tags": [
+        "state_check",
+        "attunement"
+      ]
+    },
+    {
+      "id": "gen_t2_01",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is a belief or worldview you held firmly five years ago that you have since abandoned?",
+      "listenerPrompt": "Listen to the pivotal experience that triggered the shift in their perspective.",
+      "passAction": "pass_left",
+      "tags": [
+        "beliefs",
+        "evolution"
+      ]
+    },
+    {
+      "id": "gen_t2_02",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What has been the single most humbling experience of your adult life so far?",
+      "listenerPrompt": "Honor the courage it takes to admit failure or miscalculation.",
+      "passAction": "pass_left",
+      "tags": [
+        "humility",
+        "mistakes"
+      ]
+    },
+    {
+      "id": "gen_t2_03",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is a quiet act of kindness or assistance you did for someone that you never told anyone about?",
+      "listenerPrompt": "Affirm their character without turning it into a grand spectacle.",
+      "passAction": "pass_left",
+      "tags": [
+        "integrity",
+        "altruism"
+      ]
+    },
+    {
+      "id": "gen_t2_04",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "In what specific situations do you catch yourself performing or wearing an emotional mask rather than being yourself?",
+      "listenerPrompt": "Reflect on whether you have ever felt forced into that same dynamic.",
+      "passAction": "pass_left",
+      "tags": [
+        "authenticity",
+        "social_masks"
+      ]
+    },
+    {
+      "id": "gen_t2_05",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is a piece of well-intentioned advice you received in the past that turned out to be completely wrong for you?",
+      "listenerPrompt": "Validate the clarity they gained by stepping away from conventional advice.",
+      "passAction": "pass_left",
+      "tags": [
+        "discernment",
+        "autonomy"
+      ]
+    },
+    {
+      "id": "gen_t2_06",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is an unresolved frustration or regret you carry regarding a friendship that ended without closure?",
+      "listenerPrompt": "Hold space for their lingering ambiguity. Avoid trying to solve or rationalize it.",
+      "passAction": "pass_left",
+      "tags": [
+        "relationships",
+        "closure"
+      ]
+    },
+    {
+      "id": "gen_t2_07",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is a personal boundary you struggled to enforce until you learned the lesson the hard way?",
+      "listenerPrompt": "Acknowledge the emotional cost required to set self-protective limits.",
+      "passAction": "pass_left",
+      "tags": [
+        "boundaries",
+        "growth"
+      ]
+    },
+    {
+      "id": "gen_t2_08",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What part of your personality do you most frequently suppress to keep peace in group settings?",
+      "listenerPrompt": "Reassure them: 'That part of you is welcome and safe in this room.'",
+      "passAction": "pass_left",
+      "tags": [
+        "suppression",
+        "harmony"
+      ]
+    },
+    {
+      "id": "gen_t2_09",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "When was the last time you felt intense envy or jealousy, and what did that emotion reveal about what you feel you are missing?",
+      "listenerPrompt": "Help de-stigmatize jealousy by acknowledging it as an indicator of unmet yearning.",
+      "passAction": "pass_left",
+      "tags": [
+        "envy",
+        "desire"
+      ]
+    },
+    {
+      "id": "gen_t2_10",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is a criticism someone offered about your blindspots that stung deeply because you knew it was accurate?",
+      "listenerPrompt": "Thank them for their candor. Reflect on how rare self-honesty is.",
+      "passAction": "pass_left",
+      "tags": [
+        "blindspots",
+        "critique"
+      ]
+    },
+    {
+      "id": "gen_t2_11",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is an ambition or life path you quietly walked away from because the personal toll was too high?",
+      "listenerPrompt": "Recognize walking away as an act of discernment, not defeat.",
+      "passAction": "pass_left",
+      "tags": [
+        "ambition",
+        "pivots"
+      ]
+    },
+    {
+      "id": "gen_t2_12",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is an emotional pattern or coping mechanism you developed as a child that no longer serves you as an adult?",
+      "listenerPrompt": "Acknowledge that this mechanism helped them survive when they were younger.",
+      "passAction": "pass_left",
+      "tags": [
+        "patterns",
+        "upbringing"
+      ]
+    },
+    {
+      "id": "gen_t2_13",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "In what relationship or area of life do you currently feel the most taken for granted?",
+      "listenerPrompt": "Validate their unspoken exhaustion and unseen labor.",
+      "passAction": "pass_left",
+      "tags": [
+        "validation",
+        "exhaustion"
+      ]
+    },
+    {
+      "id": "gen_t2_14",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is something you often judge harshly in others that you secretly know you do yourself?",
+      "listenerPrompt": "Smile with mutual recognition of human projection.",
+      "passAction": "pass_left",
+      "tags": [
+        "projection",
+        "shadow"
+      ]
+    },
+    {
+      "id": "gen_t2_15",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What was the most difficult conversation you had in the past two years, and what did it take to speak up?",
+      "listenerPrompt": "Notice their emotional fortitude in confronting discomfort directly.",
+      "passAction": "pass_left",
+      "tags": [
+        "courage",
+        "communication"
+      ]
+    },
+    {
+      "id": "gen_t2_16",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is a promise you made to yourself that you have repeatedly broken?",
+      "listenerPrompt": "Offer unconditional grace rather than judgment.",
+      "passAction": "pass_left",
+      "tags": [
+        "self_integrity",
+        "forgiveness"
+      ]
+    },
+    {
+      "id": "gen_t2_17",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "When you are spiraling or feeling overwhelmed, what is your most destructive default behavior?",
+      "listenerPrompt": "Listen without offering coping fixes or therapeutic advice.",
+      "passAction": "pass_left",
+      "tags": [
+        "coping",
+        "vulnerability"
+      ]
+    },
+    {
+      "id": "gen_t2_18",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "Who in your life do you feel you owe an apology to, and what has kept you from offering it?",
+      "listenerPrompt": "Reflect on how heavy unexpressed apologies feel over time.",
+      "passAction": "pass_left",
+      "tags": [
+        "amends",
+        "reconciliation"
+      ]
+    },
+    {
+      "id": "gen_t2_19",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is an accomplishment of yours that looks impressive from the outside, but felt hollow once you achieved it?",
+      "listenerPrompt": "Explore the contrast between social expectation and personal fulfillment.",
+      "passAction": "pass_left",
+      "tags": [
+        "achievement",
+        "meaning"
+      ]
+    },
+    {
+      "id": "gen_t2_20",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is a question you wish people would ask you more often instead of 'What do you do for work?'",
+      "listenerPrompt": "After they answer, ask them that exact question directly.",
+      "passAction": "pass_left",
+      "tags": [
+        "curiosity",
+        "depth"
+      ]
+    },
+    {
+      "id": "gen_t2_21",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is the biggest risk you took that failed completely, and what did you salvage from the wreckage?",
+      "listenerPrompt": "Affirm their willingness to venture into uncertainty.",
+      "passAction": "pass_left",
+      "tags": [
+        "risk",
+        "resilience"
+      ]
+    },
+    {
+      "id": "gen_t2_22",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "In what ways do you feel like an impostor in your current career, studies, or social circle?",
+      "listenerPrompt": "Remind them gently that competent, reflective people are often the most prone to self-doubt.",
+      "passAction": "pass_left",
+      "tags": [
+        "impostor_syndrome",
+        "work"
+      ]
+    },
+    {
+      "id": "gen_t2_23",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is a truth about your life that you spent a long time denying before finally accepting it?",
+      "listenerPrompt": "Acknowledge the quiet relief that comes after denial breaks.",
+      "passAction": "pass_left",
+      "tags": [
+        "truth",
+        "acceptance"
+      ]
+    },
+    {
+      "id": "gen_t2_24",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What was the loneliest period of your life, and how did you survive it?",
+      "listenerPrompt": "Maintain warm eye contact. Let them know they are not alone right now.",
+      "passAction": "pass_left",
+      "tags": [
+        "loneliness",
+        "endurance"
+      ]
+    },
+    {
+      "id": "gen_t2_25",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is an expectation your family or community held for you that you had to deliberately shatter?",
+      "listenerPrompt": "Validate the courage it takes to differentiate oneself from family expectations.",
+      "passAction": "pass_left",
+      "tags": [
+        "family",
+        "individuation"
+      ]
+    },
+    {
+      "id": "gen_t2_26",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is something you find very difficult to ask for, even when you desperately need it?",
+      "listenerPrompt": "Ask: 'What makes receiving help feel vulnerable or dangerous?'",
+      "passAction": "pass_left",
+      "tags": [
+        "needs",
+        "asking_help"
+      ]
+    },
+    {
+      "id": "gen_t2_27",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is an assumption people hold about your life that makes them think it is easier than it actually is?",
+      "listenerPrompt": "Acknowledge the invisible friction they carry every day.",
+      "passAction": "pass_left",
+      "tags": [
+        "misconceptions",
+        "struggle"
+      ]
+    },
+    {
+      "id": "gen_t2_28",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "When was the last time you broke down and wept, and what finally triggered the tears?",
+      "listenerPrompt": "Hold the emotional space gently. Do not rush them to laugh or move on.",
+      "passAction": "pass_left",
+      "tags": [
+        "grief",
+        "emotional_release"
+      ]
+    },
+    {
+      "id": "gen_t2_29",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is a decision you made that everyone around you disagreed with, but turned out to be right for you?",
+      "listenerPrompt": "Celebrate their trust in their internal compass.",
+      "passAction": "pass_left",
+      "tags": [
+        "intuition",
+        "autonomy"
+      ]
+    },
+    {
+      "id": "gen_t2_30",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is something you are holding onto tightly that you know you eventually need to release?",
+      "listenerPrompt": "Ask: 'What are you afraid will happen the day you let it go?'",
+      "passAction": "pass_left",
+      "tags": [
+        "letting_go",
+        "transition"
+      ]
+    },
+    {
+      "id": "gen_t3_01",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is the heaviest personal burden or struggle you are currently carrying that you rarely talk about?",
+      "listenerPrompt": "Listen with complete reverence. Do not offer a silver lining. Simply say: 'I hear you, and thank you for trusting me with that.'",
+      "passAction": "pass_left",
+      "tags": [
+        "burdens",
+        "raw_vulnerability"
+      ]
+    },
+    {
+      "id": "gen_t3_02",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is your deepest unresolved existential fear when you lie awake at night?",
+      "listenerPrompt": "Remain present with the discomfort. Existential weight is shared by all humans.",
+      "passAction": "pass_left",
+      "tags": [
+        "existential",
+        "mortality"
+      ]
+    },
+    {
+      "id": "gen_t3_03",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "In what social context or chapter of your life have you felt the most invisible or powerless?",
+      "listenerPrompt": "Reflect their worth: 'You are visible and significant in this circle.'",
+      "passAction": "pass_left",
+      "tags": [
+        "powerlessness",
+        "healing"
+      ]
+    },
+    {
+      "id": "gen_t3_04",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is an aspect of your character or past actions that you find most difficult to forgive yourself for?",
+      "listenerPrompt": "Look them in the eye and remind them: 'You are more than the worst mistake you have ever made.'",
+      "passAction": "pass_left",
+      "tags": [
+        "shame",
+        "self_forgiveness"
+      ]
+    },
+    {
+      "id": "gen_t3_05",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "If you passed away tomorrow, what is the single most important unspoken truth you would regret leaving unsaid?",
+      "listenerPrompt": "Ask: 'Who needs to hear that truth, and what is stopping you from telling them this week?'",
+      "passAction": "pass_left",
+      "tags": [
+        "mortality",
+        "truth"
+      ]
+    },
+    {
+      "id": "gen_t3_06",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What does your inner critic tell you repeatedly when you feel inadequate?",
+      "listenerPrompt": "Summarize what you heard, then counter it with one genuine virtue you see in them.",
+      "passAction": "pass_left",
+      "tags": [
+        "inner_critic",
+        "shame"
+      ]
+    },
+    {
+      "id": "gen_t3_07",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is a wound from your upbringing that you realize has dictated your romantic or personal choices?",
+      "listenerPrompt": "Acknowledge the immense courage required to connect childhood patterns to present realities.",
+      "passAction": "pass_left",
+      "tags": [
+        "attachment",
+        "core_wounds"
+      ]
+    },
+    {
+      "id": "gen_t3_08",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What would genuine peace look like in your life, and what internal barrier prevents you from reaching it?",
+      "listenerPrompt": "Listen to the tension between their outward striving and inner desire for rest.",
+      "passAction": "pass_left",
+      "tags": [
+        "peace",
+        "existential"
+      ]
+    },
+    {
+      "id": "gen_t3_09",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "When was the last time you felt truly loved and accepted for who you are, without performing or producing anything?",
+      "listenerPrompt": "Absorb their answer. Note how critical unconditional acceptance is for them.",
+      "passAction": "pass_left",
+      "tags": [
+        "love",
+        "unconditional_acceptance"
+      ]
+    },
+    {
+      "id": "gen_t3_10",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is a secret dream you have never spoken aloud because you fear people would mock it or think you foolish?",
+      "listenerPrompt": "Validate their dream with total sincerity. Treat it like fragile gold.",
+      "passAction": "pass_left",
+      "tags": [
+        "dreams",
+        "vulnerability"
+      ]
+    },
+    {
+      "id": "gen_t3_11",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is the hardest truth about aging or the passage of time that you have recently had to confront?",
+      "listenerPrompt": "Reflect on how fleeting life is, and honor their vulnerability.",
+      "passAction": "pass_left",
+      "tags": [
+        "time",
+        "mortality"
+      ]
+    },
+    {
+      "id": "gen_t3_12",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "If you could ask an omniscient being one question about your future or purpose, what would it be?",
+      "listenerPrompt": "Ask: 'What would you do differently today if the answer was what you feared?'",
+      "passAction": "pass_left",
+      "tags": [
+        "purpose",
+        "destiny"
+      ]
+    },
+    {
+      "id": "gen_t3_13",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What part of yourself do you feel you have sacrificed or lost in order to survive or succeed in society?",
+      "listenerPrompt": "Mourn that lost piece alongside them. Ask if it is possible to reclaim it.",
+      "passAction": "pass_left",
+      "tags": [
+        "loss_of_self",
+        "society"
+      ]
+    },
+    {
+      "id": "gen_t3_14",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What has been the most excruciating loss or bereavement of your life, and how did it change your soul?",
+      "listenerPrompt": "Offer no clichés. Sit in silence with them for three seconds before speaking.",
+      "passAction": "pass_left",
+      "tags": [
+        "grief",
+        "bereavement"
+      ]
+    },
+    {
+      "id": "gen_t3_15",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is something you desperately need to hear from someone who may never say it to you?",
+      "listenerPrompt": "Ask them gently: 'May I say those words to you right now?'",
+      "passAction": "pass_left",
+      "tags": [
+        "unmet_needs",
+        "healing"
+      ]
+    },
+    {
+      "id": "gen_t3_16",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "In what moments do you feel the most fundamentally alienated from the human race?",
+      "listenerPrompt": "Counter their sense of isolation with genuine presence: 'You are right here with us.'",
+      "passAction": "pass_left",
+      "tags": [
+        "alienation",
+        "humanity"
+      ]
+    },
+    {
+      "id": "gen_t3_17",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is a moral compromise you made in your past that still haunts your conscience?",
+      "listenerPrompt": "Recognize that their ongoing guilt shows their moral core remains intact.",
+      "passAction": "pass_left",
+      "tags": [
+        "conscience",
+        "morality"
+      ]
+    },
+    {
+      "id": "gen_t3_18",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What would it take for you to feel like your life was truly enough, exactly as it is?",
+      "listenerPrompt": "Reflect on their definition of sufficiency and wholeness.",
+      "passAction": "pass_left",
+      "tags": [
+        "contentment",
+        "self_worth"
+      ]
+    },
+    {
+      "id": "gen_t3_19",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is the most painful thing someone you loved and trusted ever said to you?",
+      "listenerPrompt": "Acknowledge how deep words can cut, and validate the pain it caused.",
+      "passAction": "pass_left",
+      "tags": [
+        "betrayal",
+        "words"
+      ]
+    },
+    {
+      "id": "gen_t3_20",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is an aspect of your physical or mental health that terrifies you when you look toward the future?",
+      "listenerPrompt": "Hold their fear with compassion. Bodily and mental vulnerability is universal.",
+      "passAction": "pass_left",
+      "tags": [
+        "health",
+        "fear"
+      ]
+    },
+    {
+      "id": "gen_t3_21",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "If everyone who ever knew you gathered in one room, what misconception would they all share about you?",
+      "listenerPrompt": "Ask: 'What would you say to clear the record once and for all?'",
+      "passAction": "pass_left",
+      "tags": [
+        "legacy",
+        "misconceptions"
+      ]
+    },
+    {
+      "id": "gen_t3_22",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What does forgiveness mean to you, and is there someone you refuse to forgive on principle?",
+      "listenerPrompt": "Respect their choice without forcing toxic positivity or premature forgiveness.",
+      "passAction": "pass_left",
+      "tags": [
+        "forgiveness",
+        "principles"
+      ]
+    },
+    {
+      "id": "gen_t3_23",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is the loneliest decision you have ever had to make entirely on your own?",
+      "listenerPrompt": "Affirm the strength it took to stand by their decision alone.",
+      "passAction": "pass_left",
+      "tags": [
+        "solitude",
+        "decisions"
+      ]
+    },
+    {
+      "id": "gen_t3_24",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is something you love deeply that you have never felt completely safe sharing with the world?",
+      "listenerPrompt": "Thank them for choosing to share that guarded part of themselves here.",
+      "passAction": "pass_left",
+      "tags": [
+        "sacred",
+        "vulnerability"
+      ]
+    },
+    {
+      "id": "gen_t3_25",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "If you could relive one single hour of your past with your current awareness, which hour would you choose and why?",
+      "listenerPrompt": "Notice whether they choose a moment of unresolved pain or pure unadulterated joy.",
+      "passAction": "pass_left",
+      "tags": [
+        "nostalgia",
+        "memory"
+      ]
+    },
+    {
+      "id": "gen_t3_26",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is the hardest thing you have ever had to accept about who you are as a human being?",
+      "listenerPrompt": "Acknowledge the quiet grace that comes with embracing our limitations.",
+      "passAction": "pass_left",
+      "tags": [
+        "acceptance",
+        "humanity"
+      ]
+    },
+    {
+      "id": "gen_t3_27",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "When you think about the end of your life, what do you most hope someone will say about how you loved?",
+      "listenerPrompt": "Reflect back: 'I can see that capacity to love in how you...'",
+      "passAction": "pass_left",
+      "tags": [
+        "legacy",
+        "love"
+      ]
+    },
+    {
+      "id": "gen_t3_28",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is a silent battle you are fighting right now that you have convinced yourself you must win alone?",
+      "listenerPrompt": "Offer support: 'You do not have to carry the entire weight in secret.'",
+      "passAction": "pass_left",
+      "tags": [
+        "isolation",
+        "strength"
+      ]
+    },
+    {
+      "id": "gen_t3_29",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What does your soul feel hungry for at this stage of your life journey?",
+      "listenerPrompt": "Listen for their core existential need—peace, creative expression, connection, or agency.",
+      "passAction": "pass_left",
+      "tags": [
+        "purpose",
+        "yearning"
+      ]
+    },
+    {
+      "id": "gen_t3_30",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "Right now, in this circle, what does it feel like to be completely honest with us?",
+      "listenerPrompt": "Express gratitude for their presence and their willingness to be real.",
+      "passAction": "pass_left",
+      "tags": [
+        "here_and_now",
+        "integration"
+      ]
+    },
+    {
+      "id": "gen_wild_01",
+      "tier": 1,
+      "type": "wildcard",
+      "speakerPrompt": "WILDCARD: Silent Eye Contact. Lock eyes with the person to your left for 30 seconds without speaking. Notice what emotions surface.",
+      "listenerPrompt": "Breathe steadily. Resist breaking the silence or using nervous laughter.",
+      "passAction": "pass_left",
+      "tags": [
+        "nonverbal",
+        "connection"
+      ]
+    },
+    {
+      "id": "gen_wild_02",
+      "tier": 1,
+      "type": "wildcard",
+      "speakerPrompt": "WILDCARD: Spontaneous Compliment. Turn to the person to your right and give them a genuine compliment based solely on what you have noticed about them today.",
+      "listenerPrompt": "Receive the compliment simply with 'Thank you.' Do not deflect or downplay it.",
+      "passAction": "pass_left",
+      "tags": [
+        "affirmation",
+        "presence"
+      ]
+    },
+    {
+      "id": "gen_wild_03",
+      "tier": 1,
+      "type": "wildcard",
+      "speakerPrompt": "WILDCARD: Physical Anchor. Everyone in the circle take three synchronized deep breaths together. Inhale for 4 seconds, exhale for 6 seconds.",
+      "listenerPrompt": "Participate fully in syncing your nervous system with the group.",
+      "passAction": "pass_left",
+      "tags": [
+        "somatic",
+        "grounding"
+      ]
+    },
+    {
+      "id": "gen_wild_04",
+      "tier": 2,
+      "type": "wildcard",
+      "speakerPrompt": "WILDCARD: The Hot Seat. For 60 seconds, everyone in the circle can ask you one quick, honest question. You must answer immediately with your first instinct or pass.",
+      "listenerPrompt": "Keep questions curious and respectful. Do not interrogate.",
+      "passAction": "pass_left",
+      "tags": [
+        "hot_seat",
+        "candor"
+      ]
+    },
+    {
+      "id": "gen_wild_05",
+      "tier": 2,
+      "type": "wildcard",
+      "speakerPrompt": "WILDCARD: Unspoken Gratitude. Turn to the person who has spoken least in this circle and express one thing you appreciate about their presence.",
+      "listenerPrompt": "Notice how it feels to have quiet presence acknowledged.",
+      "passAction": "pass_left",
+      "tags": [
+        "inclusion",
+        "gratitude"
+      ]
+    },
+    {
+      "id": "gen_wild_06",
+      "tier": 2,
+      "type": "wildcard",
+      "speakerPrompt": "WILDCARD: Musical Connection. Open your phone's music player and play 30 seconds of a song that captures your current emotional state. No explanation needed.",
+      "listenerPrompt": "Listen to the melody and words closely. Feel what they are feeling.",
+      "passAction": "pass_left",
+      "tags": [
+        "music",
+        "emotional_resonance"
+      ]
+    },
+    {
+      "id": "gen_wild_07",
+      "tier": 2,
+      "type": "wildcard",
+      "speakerPrompt": "WILDCARD: Confession of Habit. Share one petty, irrational pet peeve that you know makes no sense, but still irritates you without fail.",
+      "listenerPrompt": "Laugh and normalize everyday human irritation.",
+      "passAction": "pass_left",
+      "tags": [
+        "humor",
+        "pet_peeves"
+      ]
+    },
+    {
+      "id": "gen_wild_08",
+      "tier": 3,
+      "type": "wildcard",
+      "speakerPrompt": "WILDCARD: Vulnerable Request. Ask the circle for one piece of emotional support, perspective, or encouragement you need this week.",
+      "listenerPrompt": "Offer genuine support: 'We are in your corner.'",
+      "passAction": "pass_left",
+      "tags": [
+        "support",
+        "community"
+      ]
+    },
+    {
+      "id": "gen_wild_09",
+      "tier": 3,
+      "type": "wildcard",
+      "speakerPrompt": "WILDCARD: Mutual Perception. Everyone in the circle shares in one word what quality or energy they feel you bring to this group.",
+      "listenerPrompt": "Offer one truthful, encouraging word.",
+      "passAction": "pass_left",
+      "tags": [
+        "affirmation",
+        "mirroring"
+      ]
+    },
+    {
+      "id": "gen_wild_10",
+      "tier": 3,
+      "type": "wildcard",
+      "speakerPrompt": "WILDCARD: Shared Silence. Put the phone down in the middle. The entire group remains completely silent for 45 seconds, simply acknowledging each other's shared humanity.",
+      "listenerPrompt": "Rest in the quiet connection. Notice the shift in the room's energy.",
+      "passAction": "pass_left",
+      "tags": [
+        "sacred_silence",
+        "grounding"
+      ]
+    }
+  ]
+}

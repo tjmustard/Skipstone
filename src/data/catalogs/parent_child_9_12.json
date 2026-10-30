@@ -1,0 +1,554 @@
+{
+  "id": "parent_child_9_12",
+  "title": "Parent & Pre-Teen",
+  "subtitle": "Bridges & Growing Independence (Ages 9–12)",
+  "description": "Engineered for pre-teens and caregivers navigating the bridge between childhood and adolescence. Focuses on peer dynamics, emerging autonomy, moral reasoning, and felt security.",
+  "targetAudience": "parent_child",
+  "defaultPassAction": "pass_partner",
+  "participantMode": "dyadic",
+  "themeColor": "from-violet-500 to-purple-600",
+  "badge": "45 Cards",
+  "isCustom": false,
+  "prompts": [
+    {
+      "id": "pc912_t1_01",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "If you could redesign your bedroom with an unlimited budget, what are three specific things you would immediately add or change?",
+      "listenerPrompt": "Caregiver: Listen for how they define their personal sanctuary and taste. Avoid commenting on clutter, practicality, or cost.",
+      "passAction": "pass_partner",
+      "tags": [
+        "personal_space",
+        "taste"
+      ]
+    },
+    {
+      "id": "pc912_t1_02",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is a meme, trend, video game, or YouTube/TikTok channel that you find hilarious, but you think adults just don't understand?",
+      "listenerPrompt": "Caregiver: Stay curious rather than dismissive. Ask them to explain the joke or why their peers love it.",
+      "passAction": "pass_partner",
+      "tags": [
+        "culture",
+        "humor"
+      ]
+    },
+    {
+      "id": "pc912_t1_03",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is one skill, hobby, or sport you've been working on where you feel like you are noticeably improving?",
+      "listenerPrompt": "Caregiver: Enthusiastically validate their personal effort and discipline rather than innate talent.",
+      "passAction": "pass_partner",
+      "tags": [
+        "competence",
+        "growth"
+      ]
+    },
+    {
+      "id": "pc912_t1_04",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "If we could plan a road trip or day trip just for the two of us, where would we go and what music would we blast in the car?",
+      "listenerPrompt": "Caregiver: Step into their vision of an adventure. Commit mentally to letting them control the car playlist.",
+      "passAction": "pass_partner",
+      "tags": [
+        "shared_time",
+        "bonding"
+      ]
+    },
+    {
+      "id": "pc912_t1_05",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is a slang word or phrase your friends use all the time that sounds totally ridiculous when an adult tries to say it?",
+      "listenerPrompt": "Caregiver: Laugh at yourself. Dare to try using it in a sentence right now and let them grade your delivery.",
+      "passAction": "pass_partner",
+      "tags": [
+        "slang",
+        "playfulness"
+      ]
+    },
+    {
+      "id": "pc912_t1_06",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What book, movie, or fictional character do you relate to the most right now, and why do you feel connected to them?",
+      "listenerPrompt": "Caregiver: Notice what qualities they admire—courage, being misunderstood, cleverness, or loyalty.",
+      "passAction": "pass_partner",
+      "tags": [
+        "identity",
+        "media"
+      ]
+    },
+    {
+      "id": "pc912_t1_07",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is something grown-ups complain about that you think is actually not that big of a deal?",
+      "listenerPrompt": "Caregiver: Be open to an objective critique of adult stress. Smile and consider if they have a point.",
+      "passAction": "pass_partner",
+      "tags": [
+        "perspective",
+        "adult_world"
+      ]
+    },
+    {
+      "id": "pc912_t1_08",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "If you could switch lives with anyone at school for one single day, who would it be and what would you want to experience?",
+      "listenerPrompt": "Caregiver: Listen without prying into school gossip. Observe what social or athletic advantages they covet.",
+      "passAction": "pass_partner",
+      "tags": [
+        "school_life",
+        "curiosity"
+      ]
+    },
+    {
+      "id": "pc912_t1_09",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is your favorite meal or snack that we make or get together, and what makes it the ultimate comfort food?",
+      "listenerPrompt": "Caregiver: Connect with the shared comfort. Offer to make or get it together soon.",
+      "passAction": "pass_partner",
+      "tags": [
+        "comfort",
+        "rituals"
+      ]
+    },
+    {
+      "id": "pc912_t1_10",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is an invention that doesn't exist yet that would make everyday school or homework 10 times easier?",
+      "listenerPrompt": "Caregiver: Appreciate their ingenuity. Build playfully on their idea.",
+      "passAction": "pass_partner",
+      "tags": [
+        "creativity",
+        "school"
+      ]
+    },
+    {
+      "id": "pc912_t1_11",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is something you secretly enjoy doing that you think your friends might tease you about if they knew?",
+      "listenerPrompt": "Caregiver: Validate that holding unique, quiet interests is a sign of individuality, not weakness.",
+      "passAction": "pass_partner",
+      "tags": [
+        "quirks",
+        "authenticity"
+      ]
+    },
+    {
+      "id": "pc912_t1_12",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "If you were put in charge of planning the menu and activities for our family's next weekend, what would our schedule look like?",
+      "listenerPrompt": "Caregiver: Celebrate their leadership. Note the balance they choose between quiet downtime and shared action.",
+      "passAction": "pass_partner",
+      "tags": [
+        "agency",
+        "family_life"
+      ]
+    },
+    {
+      "id": "pc912_t1_13",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is a fact, trivia piece, or piece of knowledge you learned recently that totally blew your mind?",
+      "listenerPrompt": "Caregiver: Show genuine astonishment. Let them be the teacher who informs you.",
+      "passAction": "pass_partner",
+      "tags": [
+        "curiosity",
+        "learning"
+      ]
+    },
+    {
+      "id": "pc912_t1_14",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is the coolest thing about being the exact age you are right now?",
+      "listenerPrompt": "Caregiver: Acknowledge the unique perks of this golden window before teenage years.",
+      "passAction": "pass_partner",
+      "tags": [
+        "growing_up",
+        "gratitude"
+      ]
+    },
+    {
+      "id": "pc912_t1_15",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "If you could pick one famous athlete, artist, or creator to meet in person, who would you choose and what would you ask them?",
+      "listenerPrompt": "Caregiver: Explore what values or talents draw them to this role model.",
+      "passAction": "pass_partner",
+      "tags": [
+        "aspirations",
+        "role_models"
+      ]
+    },
+    {
+      "id": "pc912_t2_01",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "Have you ever felt caught in the middle of school drama or peer pressure where you didn't know what the right move was?",
+      "listenerPrompt": "Caregiver: Resist the urge to give moral lectures or immediate solutions. Ask: 'What felt like the hardest part of that situation?'",
+      "passAction": "pass_partner",
+      "tags": [
+        "peers",
+        "moral_dilemmas"
+      ]
+    },
+    {
+      "id": "pc912_t2_02",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is a house rule or boundary we have that you think is genuinely unfair or outdated for someone your age?",
+      "listenerPrompt": "Caregiver: Listen with neutrality. Do not immediately defend the rule. Ask: 'What would a fair compromise look like in your eyes?'",
+      "passAction": "pass_partner",
+      "tags": [
+        "boundaries",
+        "autonomy"
+      ]
+    },
+    {
+      "id": "pc912_t2_03",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is something that makes you feel anxious or stressed about school or friendships that you rarely talk to me about?",
+      "listenerPrompt": "Caregiver: Honor their vulnerability. Reflect back: 'It makes complete sense why that would feel heavy.'",
+      "passAction": "pass_partner",
+      "tags": [
+        "anxiety",
+        "vulnerability"
+      ]
+    },
+    {
+      "id": "pc912_t2_04",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "When was a time you felt really embarrassed or self-conscious, and what did you wish someone had done to support you?",
+      "listenerPrompt": "Caregiver: Normalize social awkwardness. Pre-teens experience heightened spotlight effect. Share warmth and empathy.",
+      "passAction": "pass_partner",
+      "tags": [
+        "embarrassment",
+        "support"
+      ]
+    },
+    {
+      "id": "pc912_t2_05",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is something you feel like I don't give you enough credit or trust for handling on your own?",
+      "listenerPrompt": "Caregiver: Take a breath. Acknowledge their readiness for more responsibility: 'I hear you, and I want to find ways to trust you with that.'",
+      "passAction": "pass_partner",
+      "tags": [
+        "trust",
+        "independence"
+      ]
+    },
+    {
+      "id": "pc912_t2_06",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "Have you ever stood by and watched someone get made fun of or excluded and felt guilty afterward for not stepping in?",
+      "listenerPrompt": "Caregiver: Reassure them that moral courage in peer groups is extremely difficult. Avoid shaming; discuss how scary intervening feels.",
+      "passAction": "pass_partner",
+      "tags": [
+        "moral_courage",
+        "guilt"
+      ]
+    },
+    {
+      "id": "pc912_t2_07",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "When I am upset or frustrated with you, what is something I say or do that hurts your feelings the most?",
+      "listenerPrompt": "Caregiver: This requires genuine maturity. Do not justify your parenting. Simply say: 'I am so sorry I made you feel that way. I will work on that.'",
+      "passAction": "pass_partner",
+      "tags": [
+        "parent_child_repair",
+        "conflict"
+      ]
+    },
+    {
+      "id": "pc912_t2_08",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is an expectation—about grades, sports, behavior, or chores—that feels like too much pressure right now?",
+      "listenerPrompt": "Caregiver: Validate the weight they carry. Pre-teens often internalize unspoken parental standards deeply.",
+      "passAction": "pass_partner",
+      "tags": [
+        "pressure",
+        "expectations"
+      ]
+    },
+    {
+      "id": "pc912_t2_09",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "Have you ever kept a secret from me because you were afraid I would overreact, punish you, or get super disappointed?",
+      "listenerPrompt": "Caregiver: Anchor your felt safety: 'My top priority is always your safety and our connection, never punishing you for being honest.'",
+      "passAction": "pass_partner",
+      "tags": [
+        "secrets",
+        "felt_safety"
+      ]
+    },
+    {
+      "id": "pc912_t2_10",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is something you wish you were better at, where you feel like other kids make it look effortless?",
+      "listenerPrompt": "Caregiver: Counter the myth of effortless achievement. Remind them that everyone battles hidden insecurities.",
+      "passAction": "pass_partner",
+      "tags": [
+        "comparison",
+        "insecurity"
+      ]
+    },
+    {
+      "id": "pc912_t2_11",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "When you have a rough day at school, do you prefer that I give you space to decompress first, or do you want me to ask you about it?",
+      "listenerPrompt": "Caregiver: Respect their decompression style. Commit to honoring their stated boundary when they come home.",
+      "passAction": "pass_partner",
+      "tags": [
+        "communication_style",
+        "boundaries"
+      ]
+    },
+    {
+      "id": "pc912_t2_12",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is a quality in one of your friends that you really admire and wish you had more of in yourself?",
+      "listenerPrompt": "Caregiver: Explore their relational values (loyalty, humor, confidence, kindness).",
+      "passAction": "pass_partner",
+      "tags": [
+        "friendships",
+        "values"
+      ]
+    },
+    {
+      "id": "pc912_t2_13",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is something about the way the world or adult life works that seems hypocritical or unfair to you?",
+      "listenerPrompt": "Caregiver: Affirm their keen sense of justice. Engage in an authentic, philosophical dialogue as peers.",
+      "passAction": "pass_partner",
+      "tags": [
+        "justice",
+        "critical_thinking"
+      ]
+    },
+    {
+      "id": "pc912_t2_14",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is a memory from when you were little that you still cherish, but you worry you might forget as you grow older?",
+      "listenerPrompt": "Caregiver: Savor this nostalgia together. Offer to write down the details together so it is never lost.",
+      "passAction": "pass_partner",
+      "tags": [
+        "nostalgia",
+        "growing_up"
+      ]
+    },
+    {
+      "id": "pc912_t2_15",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "If you could change one thing about how we spend our evenings together during the school week, what would it be?",
+      "listenerPrompt": "Caregiver: Listen for their desire for more quality time, fewer screens, or more unhurried rest.",
+      "passAction": "pass_partner",
+      "tags": [
+        "family_rhythm",
+        "connection"
+      ]
+    },
+    {
+      "id": "pc912_t3_01",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is your biggest fear or worry when you think about getting older and heading into middle school or high school?",
+      "listenerPrompt": "Caregiver: Listen with complete empathy. Pre-teen transitions provoke intense dread. Reassure them: 'We will walk through every step together.'",
+      "passAction": "pass_partner",
+      "tags": [
+        "future_fears",
+        "transitions"
+      ]
+    },
+    {
+      "id": "pc912_t3_02",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "Do you ever feel like you have to act like a different version of yourself around certain friends just to fit in?",
+      "listenerPrompt": "Caregiver: Validate how exhausting code-switching is. Remind them that genuine friends love who they are without any mask.",
+      "passAction": "pass_partner",
+      "tags": [
+        "belonging",
+        "authenticity"
+      ]
+    },
+    {
+      "id": "pc912_t3_03",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is something you are afraid to ask me about—whether it's about growing up, bodies, relationships, or the future?",
+      "listenerPrompt": "Caregiver: Stay calm, unshockable, and grounded. Say: 'No question is ever off-limits, weird, or embarrassing with me.'",
+      "passAction": "pass_partner",
+      "tags": [
+        "taboo_questions",
+        "safety"
+      ]
+    },
+    {
+      "id": "pc912_t3_04",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "When was a time you felt completely alone or misunderstood, even if people were all around you?",
+      "listenerPrompt": "Caregiver: Sit quietly with their truth. Say: 'Thank you for letting me see that lonely place. You are not alone right now.'",
+      "passAction": "pass_partner",
+      "tags": [
+        "loneliness",
+        "healing"
+      ]
+    },
+    {
+      "id": "pc912_t3_05",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is one way you feel like I misunderstand who you are becoming as you get older?",
+      "listenerPrompt": "Caregiver: Recognize that pre-teens outgrow old parental mental models. Say: 'Help me understand who you are today.'",
+      "passAction": "pass_partner",
+      "tags": [
+        "individuation",
+        "identity"
+      ]
+    },
+    {
+      "id": "pc912_t3_06",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "Do you ever worry about my happiness, stress levels, or health? What do you notice that worries you?",
+      "listenerPrompt": "Caregiver: Reassure them that parenting them is a joy, and adult burdens are yours to carry, not theirs to shoulder.",
+      "passAction": "pass_partner",
+      "tags": [
+        "parentification",
+        "reassurance"
+      ]
+    },
+    {
+      "id": "pc912_t3_07",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is a mistake or failure you had this past year that made you feel like you let down either me or yourself?",
+      "listenerPrompt": "Caregiver: Look into their eyes and dismantle that shame: 'Mistakes are how we grow. You could never be a disappointment to me.'",
+      "passAction": "pass_partner",
+      "tags": [
+        "shame",
+        "unconditional_love"
+      ]
+    },
+    {
+      "id": "pc912_t3_08",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is a core value or belief that you are starting to develop that might be different from what our family believes?",
+      "listenerPrompt": "Caregiver: Welcome their independent mind. Affirm: 'I love that you are thinking for yourself and exploring your own values.'",
+      "passAction": "pass_partner",
+      "tags": [
+        "differentiation",
+        "beliefs"
+      ]
+    },
+    {
+      "id": "pc912_t3_09",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is the best way for me to show you that I love and support you without making you feel embarrassed or babied?",
+      "listenerPrompt": "Caregiver: Learn their updated love language for this developmental stage (e.g., subtle fist-bumps, notes, private praise).",
+      "passAction": "pass_partner",
+      "tags": [
+        "love_languages",
+        "respect"
+      ]
+    },
+    {
+      "id": "pc912_t3_10",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "If you could freeze time right now, what is one thing about our relationship that you hope never changes as you grow up?",
+      "listenerPrompt": "Caregiver: Absorb the warmth of this truth. Tell them how much that same bond means to your life.",
+      "passAction": "pass_partner",
+      "tags": [
+        "attachment",
+        "secure_base"
+      ]
+    },
+    {
+      "id": "pc912_wild_01",
+      "tier": 1,
+      "type": "wildcard",
+      "speakerPrompt": "WILDCARD: The Music Trade. Pass the phone back and forth and play each other the chorus of your favorite current song. No judging allowed!",
+      "listenerPrompt": "Caregiver: Listen to the lyrics and beat with open curiosity. Appreciate their musical world.",
+      "passAction": "pass_partner",
+      "tags": [
+        "music",
+        "connection"
+      ]
+    },
+    {
+      "id": "pc912_wild_02",
+      "tier": 1,
+      "type": "wildcard",
+      "speakerPrompt": "WILDCARD: Staring Contest with a Twist. Stare into each other's eyes without blinking. The first person to blink or laugh must answer: 'What is one funny habit the other person has?'",
+      "listenerPrompt": "Caregiver: Lean into the laughter and gentle teasing.",
+      "passAction": "pass_partner",
+      "tags": [
+        "playful",
+        "humor"
+      ]
+    },
+    {
+      "id": "pc912_wild_03",
+      "tier": 2,
+      "type": "wildcard",
+      "speakerPrompt": "WILDCARD: Free Pass Voucher. The pre-teen gets one 'Free Pass Voucher' they can use on any question tonight or save for later—no questions asked, no explanation needed.",
+      "listenerPrompt": "Caregiver: Fully honor this boundary. Absolute autonomy builds psychological safety.",
+      "passAction": "pass_partner",
+      "tags": [
+        "autonomy",
+        "boundaries"
+      ]
+    },
+    {
+      "id": "pc912_wild_04",
+      "tier": 2,
+      "type": "wildcard",
+      "speakerPrompt": "WILDCARD: Two Truths and an Apology. Both players share: one thing you appreciate about the other person, and one small recent thing you wish you had handled better with them.",
+      "listenerPrompt": "Caregiver: Model vulnerability first by offering your own gentle apology for a small friction point.",
+      "passAction": "pass_partner",
+      "tags": [
+        "repair",
+        "reciprocity"
+      ]
+    },
+    {
+      "id": "pc912_wild_05",
+      "tier": 3,
+      "type": "wildcard",
+      "speakerPrompt": "WILDCARD: The Safe Harbor Promise. Look each other in the eye and repeat this out loud: 'No matter what happens, no matter how bad a mistake seems, you can always come to me first.'",
+      "listenerPrompt": "Caregiver: Speak with deep sincerity. This is the cornerstone of adolescent psychological safety.",
+      "passAction": "pass_partner",
+      "tags": [
+        "safe_harbor",
+        "attachment"
+      ]
+    }
+  ]
+}

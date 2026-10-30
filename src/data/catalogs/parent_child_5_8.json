@@ -1,0 +1,554 @@
+{
+  "id": "parent_child_5_8",
+  "title": "Parent & Child",
+  "subtitle": "Wonder & Big Feelings (Ages 5–8)",
+  "description": "Engineered for young children and their caregivers. Transitions gently from playful imagination to emotional naming and secure attachment.",
+  "targetAudience": "parent_child",
+  "defaultPassAction": "pass_partner",
+  "participantMode": "dyadic",
+  "themeColor": "from-sky-500 to-cyan-600",
+  "badge": "45 Cards",
+  "isCustom": false,
+  "prompts": [
+    {
+      "id": "pc58_t1_01",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "If you could invent a brand-new animal by combining any two animals in the world, what would it look like and what sound would it make?",
+      "listenerPrompt": "Caregiver: Listen with wide eyes. Ask what this new creature eats or where it sleeps. Step entirely into their imagination.",
+      "passAction": "pass_partner",
+      "tags": [
+        "imagination",
+        "playful"
+      ]
+    },
+    {
+      "id": "pc58_t1_02",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is the funniest thing that happened to you or someone else this week that made you giggle out loud?",
+      "listenerPrompt": "Caregiver: Laugh along with them. Resist downplaying silly bathroom humor or nonsensical jokes.",
+      "passAction": "pass_partner",
+      "tags": [
+        "humor",
+        "joy"
+      ]
+    },
+    {
+      "id": "pc58_t1_03",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "If our house had a secret hidden room that only you and I knew about, what would we keep inside it?",
+      "listenerPrompt": "Caregiver: Notice what they want to protect or play with. Validate their ideas without worrying about house rules.",
+      "passAction": "pass_partner",
+      "tags": [
+        "secret_worlds",
+        "play"
+      ]
+    },
+    {
+      "id": "pc58_t1_04",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "If you could have any superpower for just one afternoon, which one would you pick and what is the first thing you would do?",
+      "listenerPrompt": "Caregiver: Explore their choice. Does the superpower focus on freedom (flying), safety (invisible), or helping others?",
+      "passAction": "pass_partner",
+      "tags": [
+        "powers",
+        "agency"
+      ]
+    },
+    {
+      "id": "pc58_t1_05",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is your absolute favorite game or activity we do together, where you wish we never had to stop?",
+      "listenerPrompt": "Caregiver: Take mental note of where they feel most connected to you. Smile and thank them for telling you.",
+      "passAction": "pass_partner",
+      "tags": [
+        "connection",
+        "shared_play"
+      ]
+    },
+    {
+      "id": "pc58_t1_06",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "If you could change the color of the sky to any color other than blue, what color would you choose and why?",
+      "listenerPrompt": "Caregiver: Picture their world in your mind. Tell them what the trees or clouds would look like under their new sky.",
+      "passAction": "pass_partner",
+      "tags": [
+        "sensory",
+        "creativity"
+      ]
+    },
+    {
+      "id": "pc58_t1_07",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "Which of your stuffed animals or toys do you think has the biggest adventures when we leave the room?",
+      "listenerPrompt": "Caregiver: Lean into animism—it is developmentally natural for this age. Treat the toy as a real character.",
+      "passAction": "pass_partner",
+      "tags": [
+        "pretend_play",
+        "wonder"
+      ]
+    },
+    {
+      "id": "pc58_t1_08",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "If we could pack a backpack right now and go anywhere for an adventure, where would you want us to head?",
+      "listenerPrompt": "Caregiver: Do not bring up logistics, costs, or bedtime. Just pack that imaginary backpack together.",
+      "passAction": "pass_partner",
+      "tags": [
+        "adventure",
+        "bonding"
+      ]
+    },
+    {
+      "id": "pc58_t1_09",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is the best smell in the entire world to your nose?",
+      "listenerPrompt": "Caregiver: Connect with their sensory memory. Share whether you like that smell too.",
+      "passAction": "pass_partner",
+      "tags": [
+        "sensory",
+        "favorites"
+      ]
+    },
+    {
+      "id": "pc58_t1_10",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "If you could make up a brand-new rule for our dinner table that we all had to follow tonight, what would it be?",
+      "listenerPrompt": "Caregiver: Keep an open, amused expression. Do not shut down silly ideas like 'dessert first.'",
+      "passAction": "pass_partner",
+      "tags": [
+        "agency",
+        "humor"
+      ]
+    },
+    {
+      "id": "pc58_t1_11",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is something grown-ups do all the time that looks super boring or silly to you?",
+      "listenerPrompt": "Caregiver: Be prepared to hear about your phone habits, cleaning, or talking. Laugh with them.",
+      "passAction": "pass_partner",
+      "tags": [
+        "grown_up_world",
+        "observation"
+      ]
+    },
+    {
+      "id": "pc58_t1_12",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "If your shoes could talk, what would they say about everywhere your feet took them today?",
+      "listenerPrompt": "Caregiver: Mirror their energy. Ask if the shoes felt tired or excited.",
+      "passAction": "pass_partner",
+      "tags": [
+        "perspective",
+        "body_movement"
+      ]
+    },
+    {
+      "id": "pc58_t1_13",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is one thing you are really, really good at that makes you feel proud of yourself?",
+      "listenerPrompt": "Caregiver: Enthusiastically affirm their competence. Say: 'I love watching you do that!'",
+      "passAction": "pass_partner",
+      "tags": [
+        "self_worth",
+        "pride"
+      ]
+    },
+    {
+      "id": "pc58_t1_14",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "If we built a fort out of all the blankets and pillows in the house, what would we call our kingdom?",
+      "listenerPrompt": "Caregiver: Validate their naming. Offer to make a mental map of the fort.",
+      "passAction": "pass_partner",
+      "tags": [
+        "play",
+        "cooperation"
+      ]
+    },
+    {
+      "id": "pc58_t1_15",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is your favorite sound to hear right before you fall asleep at night?",
+      "listenerPrompt": "Caregiver: Listen for their bedtime security cues (fan, breathing, rain, a song).",
+      "passAction": "pass_partner",
+      "tags": [
+        "comfort",
+        "bedtime"
+      ]
+    },
+    {
+      "id": "pc58_t2_01",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is something that made you feel mad or frustrated recently, even if nobody else noticed?",
+      "listenerPrompt": "Caregiver: Do not explain why they shouldn't feel mad. Say: 'It makes total sense that frustrated you.'",
+      "passAction": "pass_partner",
+      "tags": [
+        "big_feelings",
+        "anger"
+      ]
+    },
+    {
+      "id": "pc58_t2_02",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "When you feel sad or hurt, what helps your heart feel just a little bit better?",
+      "listenerPrompt": "Caregiver: Learn their emotional repair language—do they need a silent hug, a blanket, or space?",
+      "passAction": "pass_partner",
+      "tags": [
+        "emotional_regulation",
+        "comfort"
+      ]
+    },
+    {
+      "id": "pc58_t2_03",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "Have you ever felt left out by friends at school or on the playground? What did that feel like inside your body?",
+      "listenerPrompt": "Caregiver: Help them notice somatic feelings (heavy chest, tight stomach, throat lump). Never dismiss the incident.",
+      "passAction": "pass_partner",
+      "tags": [
+        "belonging",
+        "somatic_awareness"
+      ]
+    },
+    {
+      "id": "pc58_t2_04",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is something you tried to do recently that felt really hard, where you wanted to give up?",
+      "listenerPrompt": "Caregiver: Praise their perseverance rather than just the outcome. Normalize that hard things take practice.",
+      "passAction": "pass_partner",
+      "tags": [
+        "grit",
+        "growth_mindset"
+      ]
+    },
+    {
+      "id": "pc58_t2_05",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is a rule in our house that you think is unfair or hard to follow?",
+      "listenerPrompt": "Caregiver: Do not defend the rule immediately. Listen first to why it feels hard or unfair to them.",
+      "passAction": "pass_partner",
+      "tags": [
+        "boundaries",
+        "listening"
+      ]
+    },
+    {
+      "id": "pc58_t2_06",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "Have you ever made a mistake or broken something by accident and felt scared to tell me?",
+      "listenerPrompt": "Caregiver: Assure them right now: 'You can always tell me when things go wrong. My love for you does not break.'",
+      "passAction": "pass_partner",
+      "tags": [
+        "safety",
+        "unconditional_love"
+      ]
+    },
+    {
+      "id": "pc58_t2_07",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is something kind you saw someone do for someone else that made you feel warm inside?",
+      "listenerPrompt": "Caregiver: Reinforce their emerging moral compass and empathy for others.",
+      "passAction": "pass_partner",
+      "tags": [
+        "empathy",
+        "kindness"
+      ]
+    },
+    {
+      "id": "pc58_t2_08",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "When I get busy, rushed, or stressed out, what do I look or sound like to you?",
+      "listenerPrompt": "Caregiver: Brace yourself for an honest reflection. Do not get defensive. Simply say: 'Thank you for telling me.'",
+      "passAction": "pass_partner",
+      "tags": [
+        "parent_mirror",
+        "awareness"
+      ]
+    },
+    {
+      "id": "pc58_t2_09",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "Is there something you are curious about or wonder about that feels too big or confusing to understand?",
+      "listenerPrompt": "Caregiver: Welcome their existential wonderings (death, stars, god, growing up) without having to know all the answers.",
+      "passAction": "pass_partner",
+      "tags": [
+        "curiosity",
+        "big_questions"
+      ]
+    },
+    {
+      "id": "pc58_t2_10",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "If your feelings were weather today, would you be sunshine, rain, a windy storm, or quiet snow?",
+      "listenerPrompt": "Caregiver: Ask what made the weather turn that way today. Accept all weather patterns.",
+      "passAction": "pass_partner",
+      "tags": [
+        "emotional_metaphor",
+        "attunement"
+      ]
+    },
+    {
+      "id": "pc58_t2_11",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is something you wish I remembered to say to you more often?",
+      "listenerPrompt": "Caregiver: Absorb what words they hunger for. Say those words to them before this card is passed.",
+      "passAction": "pass_partner",
+      "tags": [
+        "validation",
+        "words_of_affirmation"
+      ]
+    },
+    {
+      "id": "pc58_t2_12",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "Have you ever felt jealous of a brother, sister, or classmate? What did they have or do that made you feel that way?",
+      "listenerPrompt": "Caregiver: Normalize envy. Tell them it's normal to feel that way, and validate their feelings.",
+      "passAction": "pass_partner",
+      "tags": [
+        "jealousy",
+        "sibling_dynamics"
+      ]
+    },
+    {
+      "id": "pc58_t2_13",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "When you are scared or nervous, where do you feel it in your body, and what helps it go away?",
+      "listenerPrompt": "Caregiver: Help them place a hand on that body part (chest, tummy, head) and take a deep breath together.",
+      "passAction": "pass_partner",
+      "tags": [
+        "somatic",
+        "anxiety"
+      ]
+    },
+    {
+      "id": "pc58_t2_14",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is something you are learning how to do that makes you feel a little older and bigger?",
+      "listenerPrompt": "Caregiver: Celebrate their emerging autonomy and independence.",
+      "passAction": "pass_partner",
+      "tags": [
+        "growing_up",
+        "autonomy"
+      ]
+    },
+    {
+      "id": "pc58_t2_15",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "If you could teach me one thing that I don't know how to do, what would you teach me?",
+      "listenerPrompt": "Caregiver: Become the enthusiastic student. Let them be the teacher and expert.",
+      "passAction": "pass_partner",
+      "tags": [
+        "role_reversal",
+        "confidence"
+      ]
+    },
+    {
+      "id": "pc58_t3_01",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is your biggest fear when it is dark or when you are all by yourself?",
+      "listenerPrompt": "Caregiver: Pull them in close or hold their hands. Say: 'I am always watching out for you. You are safe here.'",
+      "passAction": "pass_partner",
+      "tags": [
+        "fears",
+        "felt_safety"
+      ]
+    },
+    {
+      "id": "pc58_t3_02",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "Do you ever worry that I am disappointed in you or upset with you, even when you haven't done anything wrong?",
+      "listenerPrompt": "Caregiver: Reassure them clearly: 'Even when I look tired or stressed, my heart is completely full of love for you.'",
+      "passAction": "pass_partner",
+      "tags": [
+        "reassurance",
+        "attachment"
+      ]
+    },
+    {
+      "id": "pc58_t3_03",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is something you feel like grown-ups don't understand about what it feels like to be a kid right now?",
+      "listenerPrompt": "Caregiver: Listen without lecturing. Kids often carry heavy pressures to conform and behave.",
+      "passAction": "pass_partner",
+      "tags": [
+        "empathy",
+        "childhood"
+      ]
+    },
+    {
+      "id": "pc58_t3_04",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "When was a time you felt really sad, and you just wanted someone to hold you without asking questions?",
+      "listenerPrompt": "Caregiver: Offer a warm, gentle hug right now if they would like one.",
+      "passAction": "pass_partner",
+      "tags": [
+        "grief",
+        "comfort"
+      ]
+    },
+    {
+      "id": "pc58_t3_05",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "If you could whisper a secret wish into a star tonight that nobody else could hear, what would you wish for?",
+      "listenerPrompt": "Caregiver: Treat their wish with profound gentleness. Do not tease or dismiss it.",
+      "passAction": "pass_partner",
+      "tags": [
+        "wishes",
+        "inner_heart"
+      ]
+    },
+    {
+      "id": "pc58_t3_06",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is something that makes you feel brave, even when something scary is happening?",
+      "listenerPrompt": "Caregiver: Affirm the courage inside them: 'That bravery is always right there inside you.'",
+      "passAction": "pass_partner",
+      "tags": [
+        "bravery",
+        "resilience"
+      ]
+    },
+    {
+      "id": "pc58_t3_07",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "Do you always feel like you can be your true self around me, or are there times you feel like you have to be extra good?",
+      "listenerPrompt": "Caregiver: Give them permission to be messy and imperfect: 'You do not have to earn my love by being perfect.'",
+      "passAction": "pass_partner",
+      "tags": [
+        "perfectionism",
+        "acceptance"
+      ]
+    },
+    {
+      "id": "pc58_t3_08",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is the happiest memory you have of our family so far?",
+      "listenerPrompt": "Caregiver: Relive that memory together. Notice what made that moment shine in their eyes.",
+      "passAction": "pass_partner",
+      "tags": [
+        "family_memory",
+        "joy"
+      ]
+    },
+    {
+      "id": "pc58_t3_09",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "Is there anything you ever worry about happening to our family or to our home?",
+      "listenerPrompt": "Caregiver: Address their anxieties with grounding presence and factual safety. Anchor them in the present moment.",
+      "passAction": "pass_partner",
+      "tags": [
+        "security",
+        "family_fears"
+      ]
+    },
+    {
+      "id": "pc58_t3_10",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "How do you know for sure that I love you, even when we have had a hard day?",
+      "listenerPrompt": "Caregiver: Listen to their emotional anchors. Affirm: 'Nothing you ever do can make me stop loving you.'",
+      "passAction": "pass_partner",
+      "tags": [
+        "unconditional_love",
+        "attachment"
+      ]
+    },
+    {
+      "id": "pc58_wild_01",
+      "tier": 1,
+      "type": "wildcard",
+      "speakerPrompt": "WILDCARD: The Mirror Dance. Stand up face-to-face. For 30 seconds, one person moves in slow motion, and the other person must mirror every single movement exactly!",
+      "listenerPrompt": "Caregiver: Play along fully! Switch who leads after 15 seconds.",
+      "passAction": "pass_partner",
+      "tags": [
+        "physical_play",
+        "co-regulation"
+      ]
+    },
+    {
+      "id": "pc58_wild_02",
+      "tier": 1,
+      "type": "wildcard",
+      "speakerPrompt": "WILDCARD: Secret Handshake. Invent a 3-step secret handshake between the two of you that only you two will ever know.",
+      "listenerPrompt": "Caregiver: Practice it until both of you can do it smoothly without looking.",
+      "passAction": "pass_partner",
+      "tags": [
+        "shared_ritual",
+        "play"
+      ]
+    },
+    {
+      "id": "pc58_wild_03",
+      "tier": 2,
+      "type": "wildcard",
+      "speakerPrompt": "WILDCARD: Bear Hug Squeeze. Give each other the biggest, warmest bear hug you can manage. Squeeze gently for five full seconds while taking a deep breath together.",
+      "listenerPrompt": "Caregiver: Provide firm, grounding deep-pressure touch to calm both of your nervous systems.",
+      "passAction": "pass_partner",
+      "tags": [
+        "somatic",
+        "oxytocin"
+      ]
+    },
+    {
+      "id": "pc58_wild_04",
+      "tier": 2,
+      "type": "wildcard",
+      "speakerPrompt": "WILDCARD: Three Good Things. Take turns back-and-forth naming three little things from today that you are thankful for.",
+      "listenerPrompt": "Caregiver: Celebrate the small things with equal delight (e.g., crunchy leaves, warm pancakes).",
+      "passAction": "pass_partner",
+      "tags": [
+        "gratitude",
+        "reciprocity"
+      ]
+    },
+    {
+      "id": "pc58_wild_05",
+      "tier": 3,
+      "type": "wildcard",
+      "speakerPrompt": "WILDCARD: Heart-to-Heart Whispers. Look into each other's eyes and whisper one true thing you love about the other person's heart.",
+      "listenerPrompt": "Caregiver: Speak directly to who they are, not just what they achieve.",
+      "passAction": "pass_partner",
+      "tags": [
+        "intimacy",
+        "affirmation"
+      ]
+    }
+  ]
+}

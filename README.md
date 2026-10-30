@@ -90,7 +90,7 @@ flowchart LR
 
 ## 🗂️ The 8 Included Decks (415 Prompts)
 
-All 415 structured prompts and listener attunement prompts are statically bundled directly inside `index.html`:
+All 415 structured prompts and listener attunement prompts are statically bundled into the client application:
 
 | # | Deck Name | Target Audience | Scope | Turn Mechanism |
 |---|---|---|---|---|
@@ -108,38 +108,61 @@ All 415 structured prompts and listener attunement prompts are statically bundle
 ## 🛡️ Privacy & Zero-Cloud Architecture
 
 Skipstone is engineered around the principle of the **Offline Sanctuary**:
-- **0 Bytes Transmitted:** No telemetry, analytics, error logging, or remote calls. All data, audio, and logic reside locally in the single HTML bundle.
+- **0 Bytes Transmitted:** No telemetry, analytics, error logging, or remote calls. All data, audio synthesis, and logic reside locally in the client bundle.
 - **Local Talking Piece:** Co-located physical turn-taking preserves vocal nuance, somatic cues, and eye contact that networked multiplayer games destroy.
-- **Confidentiality by Design:** No user history or answers are recorded. What is spoken stays in the room.
+- **Confidentiality by Design:** No user history or answers are recorded. What is spoken stays in the room. Ephemeral session state uses a 15-minute TTL in browser `sessionStorage` and is wiped upon session completion.
+- **Custom Deck Privacy:** Imported custom JSON decks are validated locally (<2KB validator) and stored in client-side IndexedDB without cloud synchronisation.
 
 ---
 
 ## 🛠️ Developer Setup & Testing
 
-Skipstone uses Python with [`uv`](https://docs.astral.sh/uv/) for development toolchain management and automated linting/formatting:
+### Web Application (Vite + TypeScript + Vitest)
+
+Skipstone uses Node.js with Vite and Vitest for client development, bundling, and testing:
 
 ```bash
 # 1. Install dependencies
+npm install
+
+# 2. Run local development server
+npm run dev
+
+# 3. Run automated deterministic test suite
+npm test
+
+# 4. Typecheck, build production bundle, and verify size budget (<= 180KB gzipped)
+npm run build
+```
+
+### Toolchain & Linters (Python + uv)
+
+The HACF developer toolchain and specification scripts use Python managed by [`uv`](https://docs.astral.sh/uv/):
+
+```bash
+# 1. Install toolchain dependencies
 uv sync
 
 # 2. Run code style & linting checks
 uv run ruff check .
 uv run ruff format --check .
-
-# 3. Run test suite
-uv run pytest tests/
 ```
 
 ### Directory Structure
 ```
 .
-├── index.html                  # Standalone client application & full deck catalog
-├── pyproject.toml              # Python project metadata & dev dependencies
-├── SI/                         # Living specs, catalog documents, & master plan
-│   ├── living_master_plan_skipstone.md
-│   ├── skipstone_connection_app.html
-│   └── [deck_name]_deck.md     # Markdown authoring source for each deck
-├── tests/                      # Automated test suite
+├── index.html                  # Root PWA shell mount point
+├── package.json                # Web app dependencies and npm scripts
+├── pyproject.toml              # Python toolchain metadata & ruff config
+├── public/                     # Static PWA assets, manifest, and service worker
+├── src/                        # Modular TypeScript application source
+│   ├── core/                   # State machine, PRNG dealer, Web Audio, gestures, storage
+│   ├── data/                   # Catalog registry, JSON decks, schema validator
+│   └── ui/                     # Modular views, split card layout, modals, components
+├── scripts/                    # Bundle size checker & catalog compiler
+├── tests/                      # Deterministic Vitest test suite
+├── SI/                         # Original authoring source & catalog tables
+├── spec/                       # Ground truth specifications & architecture hypergraph
 └── .agents/                    # Toolchain and agent automation workflows
 ```
 
