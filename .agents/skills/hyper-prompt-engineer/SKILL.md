@@ -1,5 +1,5 @@
 ---
-name: prompt-engineer
+name: hyper-prompt-engineer
 description: Collaboratively designs an optimal, personalized prompt with the user using advanced LLM prompt engineering best practices. Explains the rationale behind structural choices educationally. Framework-agnostic. Use when the user wants to create or refine an AI prompt.
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: update
+name: hyper-update
 description: Interactive smart-upgrade command. Fetches latest upstream framework, auto-updates non-sensitive files, and guides user through section-by-section collaborative merge of sensitive customizable files. Backs up any replaced or merged file to .agents/.backup/YYYY-MM-DD/.
 ---
 

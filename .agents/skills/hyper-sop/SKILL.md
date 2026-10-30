@@ -1,5 +1,5 @@
 ---
-name: sop
+name: hyper-sop
 description: Explains the Master SOP and guides the user to the correct framework phase. Use when a new user needs orientation or when you need to re-anchor to the correct workflow phase.
 trigger: /hyper-sop
 ---

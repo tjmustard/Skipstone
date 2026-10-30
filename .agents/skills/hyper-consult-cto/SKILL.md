@@ -1,5 +1,5 @@
 ---
-name: consult-cto
+name: hyper-consult-cto
 description: Activates a CTO persona to collaboratively plan and review technical decisions before entering the formal Hypergraph specification pipeline. Use when brainstorming architecture, evaluating trade-offs, or planning a new feature with a trusted technical advisor.
 ---
 

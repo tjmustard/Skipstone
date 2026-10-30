@@ -1,5 +1,5 @@
 ---
-name: peer-review
+name: hyper-peer-review
 description: Evaluates external peer review findings against the actual codebase, separating valid issues from misunderstandings, and produces a prioritized action plan. Use when another model or reviewer has provided feedback on the current implementation.
 ---
 

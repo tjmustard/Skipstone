@@ -1,5 +1,5 @@
 ---
-name: create-issue
+name: hyper-create-issue
 description: Quickly captures a bug, feature request, or improvement as a structured GitHub issue without interrupting the user's development flow. Use when the user needs to log something fast while staying focused on current work.
 ---
 

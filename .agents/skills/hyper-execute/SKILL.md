@@ -1,5 +1,5 @@
 ---
-name: execute
+name: hyper-execute
 description: Implements the current plan precisely and in full, following existing code patterns and updating the hypergraph after every modification. Use when ready to write code against a compiled MiniPRD.
 ---
 

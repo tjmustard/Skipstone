@@ -1,5 +1,5 @@
 ---
-name: new-workflow
+name: hyper-new-workflow
 description: Converts a desired behavior, prompt, or idea into a properly formatted workflow file in the Hypergraph Coding Agent Framework. Use when the user wants to create a new slash command or workflow.
 ---
 

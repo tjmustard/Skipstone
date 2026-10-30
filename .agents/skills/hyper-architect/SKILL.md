@@ -1,5 +1,5 @@
 ---
-name: architect
+name: hyper-architect
 description: Relentlessly interviews the user one question at a time, providing a recommended answer with each question and exploring the codebase before asking anything derivable from existing code. Produces a Draft PRD.
 trigger: /hyper-architect
 ---

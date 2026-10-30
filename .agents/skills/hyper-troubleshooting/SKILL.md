@@ -1,5 +1,5 @@
 ---
-name: troubleshooting
+name: hyper-troubleshooting
 description: Guides the user through diagnosing and recovering from common failure states in the Hypergraph Coding Agent Framework. Use when the user reports bugs, hallucinations, desynchronization, or errors with the framework agents.
 ---
 

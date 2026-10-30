@@ -1,5 +1,5 @@
 ---
-name: audit
+name: hyper-audit
 description: Strictly verifies the codebase against a specific MiniPRD and reconciles the Hypergraph memory.
 trigger: /hyper-audit [Path to MiniPRD]
 ---

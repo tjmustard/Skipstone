@@ -1,5 +1,5 @@
 ---
-name: contextualize
+name: hyper-contextualize
 description: Audits and fixes HACF agent instruction files (CLAUDE.md, AGENTS.md, GEMINI.md) in an installed project to ensure HACF is framed as a development toolchain, not the project subject. Use when HACF content bleeds into project plans, PRDs, or architecture docs.
 ---
 

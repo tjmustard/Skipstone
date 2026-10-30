@@ -1,5 +1,5 @@
 ---
-name: co-research
+name: hyper-co-research
 description: A prompt designed to instantiate a peer-level AI research partner for highly complex technical fields like software engineering, drug discovery, and materials science. It actively challenges assumptions using First Principles thinking, enforces strict anti-hallucination rules with standardized citations, and maintains an exhaustively detailed "Living Master Plan" (including a "Graveyard" of failed iterations) to track long-term project evolution.
 trigger: /hyper-co-research
 ---

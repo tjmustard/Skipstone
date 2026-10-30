@@ -1,5 +1,5 @@
 ---
-name: stitch-design
+name: hyper-stitch-design
 description: Translates rough UI/UX ideas and visual references into a concrete Design System specification with tokens, component specs, and layout rules. Use when starting UI work or defining visual standards for a feature.
 ---
 

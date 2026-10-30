@@ -1,5 +1,5 @@
 ---
-name: tutorial-generator
+name: hyper-tutorial-generator
 description: Generates a markdown tutorial from an integration test or user-provided files through iterative LLM + human collaboration. Tutorials are saved to tutorials/<name>/ with organized supporting files.
 trigger: /hyper-tutorial-generator
 ---

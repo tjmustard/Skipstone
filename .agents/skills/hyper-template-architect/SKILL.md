@@ -1,5 +1,5 @@
 ---
-name: template-architect
+name: hyper-template-architect
 description: Reverse-engineers a filled-out source document into a reusable Markdown template for a downstream AI agent. Use when the user provides a completed document and wants to extract a reusable template from it.
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: learning-opportunity
+name: hyper-learning-opportunity
 description: Pauses development mode to teach a technical concept at three increasing levels of complexity, tailored to a technical PM audience. Use when the user wants to understand something they encountered while building.
 ---
 

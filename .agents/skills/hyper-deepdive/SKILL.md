@@ -1,5 +1,5 @@
 ---
-name: deepdive
+name: hyper-deepdive
 description: Temporarily pauses the main development plan to exhaustively explore, research, or brainstorm a specific topic using First Principles thinking and strict epistemic humility. Use when the user needs to deeply understand a concept before making a decision.
 ---
 

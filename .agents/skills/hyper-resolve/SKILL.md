@@ -1,5 +1,5 @@
 ---
-name: resolve
+name: hyper-resolve
 description: Mediates Red Team findings, forces architectural trade-offs, and compiles the final SuperPRD and MiniPRDs.
 trigger: /hyper-resolve
 ---

@@ -1,5 +1,5 @@
 ---
-name: create-skill
+name: hyper-create-skill
 description: Converts an agentic prompt or Gemini Gem into a new structured skill for the Hypergraph Coding Agent Framework. Use this skill when asked to create a new skill from a prompt, gem, or idea.
 ---
 
