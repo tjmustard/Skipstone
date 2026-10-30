@@ -1,0 +1,28 @@
+[project]
+name = "skipstone"
+version = "0.1.0"
+description = "Free, open-source, offline-first relational intimacy application modeled on skipping stones across water."
+requires-python = ">=3.11"
+
+[tool.ruff]
+line-length = 100
+extend-exclude = [".agents"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "D"]
+ignore = ["D100", "D104"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.isort]
+known-first-party = ["skipstone"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+    "ruff>=0.17.3",
+]

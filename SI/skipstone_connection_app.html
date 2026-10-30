@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Skipstone — Offline Conversation Decks</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif']
+          },
+          colors: {
+            deepNavy: '#0B1120',
+            slateCard: '#1E293B',
+            softAmber: '#F59E0B',
+            emeraldSafe: '#10B981',
+            roseHeart: '#F43F5E',
+            indigoFocus: '#6366F1'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Prevent rubber banding on iOS */
+    html, body {
+      overscroll-behavior-y: none;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .custom-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    /* Subtle pulse animation for speaking indicator */
+    @keyframes subtlePulse {
+      0%, 100% { opacity: 0.9; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.02); }
+    }
+    .pulse-glow {
+      animation: subtlePulse 4s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-[#0A0E17] text-slate-100 font-sans antialiased h-screen w-screen overflow-hidden flex flex-col justify-between">
+
+  <!-- ========================================== -->
+  <!-- APPLICATION HEADER & NAVIGATION (Minimal) -->
+  <!-- ========================================== -->
+  <header id="app-header" class="w-full max-w-lg mx-auto px-4 py-3 flex items-center justify-between border-b border-slate-800/60 z-30 shrink-0">
+    <button id="btn-home" class="flex items-center space-x-2 text-slate-400 hover:text-white transition-colors focus:outline-none">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+      </svg>
+      <span class="text-xs uppercase tracking-widest font-semibold font-display">Decks</span>
+    </button>
+
+    <div id="deck-indicator" class="text-center truncate px-2 hidden">
+      <h2 id="header-deck-title" class="text-xs font-semibold text-slate-200 truncate font-display">General Edition</h2>
+      <div id="header-tier-indicator" class="flex items-center justify-center space-x-1.5 mt-0.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+        <span class="text-[10px] text-emerald-400 font-medium tracking-wide">LEVEL 1: WARM UP</span>
+      </div>
+    </div>
+
+    <div class="flex items-center space-x-2">
+      <button id="btn-sound-toggle" aria-label="Toggle Sound" class="p-2 rounded-full text-slate-400 hover:text-white hover:bg-slate-800/50 transition">
+        <svg id="icon-sound-on" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>
+        </svg>
+        <svg id="icon-sound-off" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path>
+        </svg>
+      </button>
+
+      <button id="btn-conclude" class="hidden px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 text-xs font-medium transition focus:outline-none">
+        Finish
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================================== -->
+  <!-- MAIN VIEWPORT CONTAINER                   -->
+  <!-- ========================================== -->
+  <main id="viewport" class="flex-1 w-full max-w-lg mx-auto relative overflow-hidden flex flex-col p-4">
+
+    <!-- VIEW 1: DECK SELECTOR -->
+    <section id="view-deck-select" class="flex-1 flex flex-col justify-start overflow-y-auto custom-scrollbar pt-2 space-y-4">
+      <div class="text-center space-y-1 mb-2">
+        <h1 class="text-2xl font-bold font-display text-white tracking-tight">Skipstone</h1>
+        <p class="text-xs text-slate-400 max-w-xs mx-auto">Start on the surface. Settle in the deep. 100% free, offline pass-and-play decks for real connection.</p>
+      </div>
+
+      <!-- Cohort Decks List -->
+      <div id="deck-list-container" class="space-y-3 pb-6">
+        <!-- Injected via JavaScript -->
+      </div>
+    </section>
+
+    <!-- VIEW 2: SOCIAL CONTRACT & PRE-GAME BRIEFING -->
+    <section id="view-intro-contract" class="flex-1 flex flex-col justify-between hidden py-2 overflow-y-auto custom-scrollbar">
+      <div class="space-y-4 my-auto">
+        <div class="text-center space-y-1">
+          <span id="contract-deck-badge" class="px-3 py-1 rounded-full text-[11px] font-semibold tracking-wider uppercase bg-amber-500/20 text-amber-300 border border-amber-500/30">
+            Selected Deck
+          </span>
+          <h2 id="contract-deck-title" class="text-xl font-bold font-display text-white mt-2">Dating & Early Courtship</h2>
+          <p id="contract-deck-desc" class="text-xs text-slate-400 px-4">Dismantle rehearsed dating scripts and connect genuinely.</p>
+        </div>
+
+        <!-- Research-backed instructions box -->
+        <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 space-y-3 shadow-xl">
+          <div class="flex items-center space-x-2 text-indigo-400 text-xs font-semibold uppercase tracking-wider">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span>How This Game Works</span>
+          </div>
+
+          <div class="space-y-2.5 text-xs text-slate-300 leading-relaxed">
+            <div class="flex items-start space-x-2">
+              <span class="text-amber-400 font-bold shrink-0">1. Top Half:</span>
+              <p><strong class="text-white">Read the question aloud.</strong> The person holding the phone speaks first or answers the prompt.</p>
+            </div>
+            <div class="flex items-start space-x-2">
+              <span class="text-emerald-400 font-bold shrink-0">2. Bottom Half:</span>
+              <p><strong class="text-white">Active Listener Cue.</strong> Research shows deep intimacy requires listeners to validate and understand, not offer unsolicited advice.</p>
+            </div>
+            <div class="flex items-start space-x-2">
+              <span class="text-rose-400 font-bold shrink-0">3. Pass the Device:</span>
+              <p id="contract-pass-instruction"><strong class="text-white">Answer, then pass to your partner.</strong> The phone serves as the talking piece.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Psychological Ground Rules -->
+        <div class="bg-indigo-950/30 border border-indigo-900/40 rounded-2xl p-4 space-y-2">
+          <h3 class="text-xs font-bold text-indigo-300 uppercase tracking-wider flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+            The Social Contract (Agreement)
+          </h3>
+          <ul class="text-[11px] text-slate-300 space-y-1.5 list-disc list-inside">
+            <li><strong class="text-white">Right to Pass:</strong> Anyone may pass on any question with zero explanation.</li>
+            <li><strong class="text-white">Mutual Confidentiality:</strong> What is spoken stays strictly between us.</li>
+            <li><strong class="text-white">Listen to Understand:</strong> Resist fixing, correcting, or arguing.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-4 pb-2">
+        <button id="btn-start-session" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white font-semibold font-display shadow-lg shadow-indigo-600/30 active:scale-[0.98] transition">
+          We Agree — Begin Conversation
+        </button>
+      </div>
+    </section>
+
+    <!-- VIEW 3: ACTIVE PLAY ZONE (Split Top & Bottom layout) -->
+    <section id="view-active-card" class="flex-1 flex flex-col justify-between hidden select-none">
+      
+      <!-- Physical Pass Notice Banner -->
+      <div id="pass-indicator-bar" class="w-full bg-slate-900/90 border border-slate-800 rounded-xl py-1.5 px-3 flex items-center justify-between text-xs mb-3 shadow-md">
+        <div class="flex items-center space-x-2 text-slate-300 font-medium">
+          <svg class="w-4 h-4 text-amber-400 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+          <span id="pass-direction-text">Pass phone to your partner</span>
+        </div>
+        <span id="session-card-count" class="text-[10px] text-slate-500 font-mono">1 / 45</span>
+      </div>
+
+      <!-- MAIN SPLIT CARD COMPONENT -->
+      <div id="split-card-container" class="flex-1 flex flex-col rounded-3xl overflow-hidden border border-slate-800 shadow-2xl relative bg-slate-900 transition-all duration-300">
+        
+        <!-- TOP HALF: THE SPEAKER'S PROMPT (To be read aloud) -->
+        <div id="speaker-half" class="flex-1 p-6 flex flex-col justify-between relative bg-[#131B2E] border-b border-slate-800/80 transition-colors">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-1.5">
+              <span id="card-tier-pill" class="px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                Level 1: Warm Up
+              </span>
+              <span id="card-type-pill" class="hidden px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-amber-500/20 text-amber-400 border border-amber-500/30">
+                Wildcard
+              </span>
+            </div>
+            <span class="text-[10px] font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1">
+              <svg class="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+              Read Aloud
+            </span>
+          </div>
+
+          <div class="my-auto py-3">
+            <p id="speaker-prompt-text" class="text-lg md:text-xl font-medium text-slate-100 leading-snug tracking-tight font-display">
+              What was the very first visual or behavioral detail you noticed about me when we first met?
+            </p>
+          </div>
+
+          <div class="flex items-center justify-between text-[11px] text-slate-400">
+            <span id="speaker-tag-text" class="text-slate-400">#first_impressions</span>
+            <span class="text-slate-500 flex items-center gap-1">
+              <span>Speaker Holds Phone</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- BOTTOM HALF: ACTIVE LISTENER ATTUNEMENT CUE -->
+        <div id="listener-half" class="flex-1 p-6 flex flex-col justify-between relative bg-[#0D1525] transition-colors">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"></path>
+              </svg>
+              Listener Attunement Cue
+            </span>
+            <span class="text-[10px] text-slate-400">Science of Closeness</span>
+          </div>
+
+          <div class="my-auto py-3">
+            <p id="listener-prompt-text" class="text-sm md:text-base font-normal text-emerald-200/90 leading-relaxed italic">
+              Notice the gap between what you intended to project and what they actually perceived. Smile and simply absorb their response without correcting them.
+            </p>
+          </div>
+
+          <div class="flex items-center justify-between text-[11px] text-slate-400">
+            <span>Goal: Perceived Responsiveness</span>
+            <span class="text-emerald-400/80 font-medium">Listen to Understand</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- BOTTOM CONTROL ACTIONS -->
+      <div class="pt-3 pb-1 flex items-center space-x-2">
+        <button id="btn-pass-prompt" class="flex-1 py-3 px-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-semibold tracking-wide border border-slate-700/60 transition active:scale-[0.98] flex items-center justify-center space-x-1.5">
+          <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg>
+          <span>Pass Question</span>
+        </button>
+
+        <button id="btn-next-card" class="flex-[2] py-3 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white text-sm font-semibold font-display shadow-lg shadow-indigo-600/30 transition active:scale-[0.98] flex items-center justify-center space-x-2">
+          <span>Answered &bull; Next Card</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- VIEW 4: TIER UNLOCK TRANSITION SCREEN -->
+    <section id="view-tier-unlocked" class="flex-1 flex flex-col justify-center items-center hidden text-center p-6 space-y-5">
+      <div id="unlock-badge-container" class="w-20 h-20 rounded-full flex items-center justify-center bg-amber-500/10 border-2 border-amber-500/40 text-amber-400 text-3xl shadow-xl shadow-amber-500/10">
+        ✨
+      </div>
+
+      <div class="space-y-2">
+        <span class="text-xs uppercase tracking-widest font-semibold text-slate-400">Threshold Reached</span>
+        <h2 id="unlock-tier-title" class="text-2xl font-bold font-display text-white">Level 2 Unlocked: Confessions</h2>
+        <p id="unlock-tier-desc" class="text-xs text-slate-300 max-w-xs mx-auto leading-relaxed">
+          You have built mutual safety in Level 1. The questions will now dig deeper into personal lessons, blindspots, and vulnerabilities.
+        </p>
+      </div>
+
+      <div class="pt-4 w-full max-w-xs">
+        <button id="btn-proceed-unlocked" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold font-display shadow-lg shadow-amber-500/20 active:scale-[0.98] transition">
+          Step Into Level 2
+        </button>
+      </div>
+    </section>
+
+    <!-- VIEW 5: TWO-STEP GROUNDING DE-ESCALATION CHECKOUT -->
+    <section id="view-checkout" class="flex-1 flex flex-col justify-between hidden py-2 overflow-y-auto custom-scrollbar">
+      <div class="space-y-4 my-auto">
+        <div class="text-center space-y-1">
+          <span class="px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider bg-rose-500/20 text-rose-300 border border-rose-500/30">
+            Grounding Checkout
+          </span>
+          <h2 class="text-xl font-bold font-display text-white mt-2">Closing the Circle</h2>
+          <p class="text-xs text-slate-400 px-4">Research shows closing vulnerable conversations with grounding restores nervous system calm.</p>
+        </div>
+
+        <!-- Checkout Card 1 -->
+        <div id="checkout-step-1" class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3 shadow-xl">
+          <div class="flex items-center space-x-2 text-indigo-400 text-xs font-semibold uppercase">
+            <span class="w-5 h-5 rounded-full bg-indigo-500/20 flex items-center justify-center text-[10px] font-bold text-indigo-300">1</span>
+            <span>Step 1: Emotional Check-In</span>
+          </div>
+          <p class="text-sm font-medium text-slate-200 leading-snug">
+            Each person share <strong class="text-white">one single word</strong> that describes your emotional state right now.
+          </p>
+          <p class="text-xs text-slate-400 italic">
+            Examples: Grounded, Seen, Tender, Relieved, Tired, Connected.
+          </p>
+        </div>
+
+        <!-- Checkout Card 2 -->
+        <div id="checkout-step-2" class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3 shadow-xl">
+          <div class="flex items-center space-x-2 text-emerald-400 text-xs font-semibold uppercase">
+            <span class="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center text-[10px] font-bold text-emerald-300">2</span>
+            <span>Step 2: Mutual Appreciation</span>
+          </div>
+          <p class="text-sm font-medium text-slate-200 leading-snug">
+            Turn to your partner (or person to your left) and share: <br>
+            <strong class="text-white">"One thing I truly appreciated about how you listened today was..."</strong>
+          </p>
+        </div>
+      </div>
+
+      <div class="pt-4 pb-2">
+        <button id="btn-complete-checkout" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white font-semibold font-display shadow-lg shadow-emerald-600/30 active:scale-[0.98] transition">
+          Checkout Complete &bull; Put Phone Away
+        </button>
+      </div>
+    </section>
+
+    <!-- VIEW 6: FINAL CONCLUSION (PUT THE PHONE AWAY) -->
+    <section id="view-final-farewell" class="flex-1 flex flex-col justify-center items-center hidden text-center p-6 space-y-6">
+      <div class="w-20 h-20 rounded-full bg-indigo-500/10 border-2 border-indigo-500/30 flex items-center justify-center text-indigo-400 text-3xl shadow-xl">
+        🌙
+      </div>
+
+      <div class="space-y-3 max-w-xs">
+        <h2 class="text-2xl font-bold font-display text-white">Put The Phone Away</h2>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          The technology has served its purpose. The intimacy lives between you, not in the screen.
+        </p>
+        <p class="text-[11px] text-slate-400 italic">
+          Thank each other for being open and brave today.
+        </p>
+      </div>
+
+      <div class="pt-6 w-full max-w-xs">
+        <button id="btn-back-to-decks" class="w-full py-3 px-5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium text-xs tracking-wide transition border border-slate-700/60">
+          Return to Deck Menu
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- TOAST NOTIFICATIONS (No alert() used)      -->
+  <!-- ========================================== -->
+  <div id="toast-message" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-slate-800 text-slate-200 text-xs px-4 py-2.5 rounded-full border border-slate-700 shadow-2xl transition-all duration-300 opacity-0 pointer-events-none z-50 flex items-center space-x-2">
+    <span id="toast-text">Notification message</span>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- APPLICATION LOGIC & DATA REGISTRY          -->
+  <!-- ========================================== -->
+  <script>
+    /* -------------------------------------------------------------
+       AUDIO SYNTHESIZER (Web Audio API - Zero external asset URLs)
+       ------------------------------------------------------------- */
+    class SoundEngine {
+      constructor() {
+        this.ctx = null;
+        this.enabled = true;
+      }
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) this.ctx = new AudioContext();
+        }
+      }
+      playTone(freq, type = 'sine', duration = 0.15, vol = 0.1) {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = type;
+          osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+          gain.gain.setValueAtTime(vol, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + duration);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + duration);
+        } catch (e) {
+          console.warn("Audio play prevented:", e);
+        }
+      }
+      cardFlip() {
+        this.playTone(320, 'sine', 0.12, 0.08);
+      }
+      tierUnlock() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        [440, 554, 659, 880].forEach((f, idx) => {
+          setTimeout(() => this.playTone(f, 'triangle', 0.25, 0.07), idx * 110);
+        });
+      }
+      checkoutBell() {
+        this.playTone(528, 'sine', 0.4, 0.1);
+      }
+    }
+    const sound = new SoundEngine();
+
+    /* -------------------------------------------------------------
+       CATALOG REGISTRY & EMBEDDED DECKS
+       Contains General, 4x Parent-Child, Dating, Lovers, Family
+       ------------------------------------------------------------- */
+    const DECKS_REGISTRY = [
+      {
+        id: "general_edition",
+        title: "General Edition",
+        subtitle: "Friends, Acquaintances, & Strangers",
+        description: "A progressive conversational journey moving from everyday perceptions to formative life experiences and existential reflections.",
+        participantMode: "group_left",
+        themeColor: "from-blue-600 to-indigo-700",
+        badge: "100 Cards",
+        passText: "Answer, then pass to your left",
+        prompts: [
+          { tier: 1, type: "prompt", speaker: "What was the very first impression you formed about me upon entering the room today?", listener: "Notice if their perception matches your internal self-image. Resist correcting them; simply absorb their view.", tag: "#first_impressions" },
+          { tier: 1, type: "prompt", speaker: "What is a small, mundane detail that brought you unexpected joy this past week?", listener: "Listen for what recharges their energy in ordinary daily life.", tag: "#gratitude" },
+          { tier: 1, type: "prompt", speaker: "What artist, genre, or song do you listen to privately that would surprise most people who know you?", listener: "Ask one curious question about when or why they started listening to it.", tag: "#taste" },
+          { tier: 1, type: "prompt", speaker: "What is an unusual habit or personal routine you maintain that you rarely discuss with others?", listener: "Respond with warmth. Avoid making them feel self-conscious about their idiosyncrasies.", tag: "#quirks" },
+          { tier: 1, type: "wildcard", speaker: "WILDCARD: Silent Eye Contact. Lock eyes with the person to your left for 30 seconds without speaking. Notice what emotions surface.", listener: "Breathe steadily. Resist breaking the silence or using nervous laughter.", tag: "#somatic" },
+          { tier: 1, type: "prompt", speaker: "What is a book, film, or show you recommend to people because it fundamentally altered how you think?", listener: "Ask: 'What about that work challenged your existing perspective?'", tag: "#influences" },
+          { tier: 2, type: "prompt", speaker: "What is a belief or worldview you held firmly five years ago that you have since abandoned?", listener: "Listen to the pivotal experience that triggered the shift in their perspective.", tag: "#evolution" },
+          { tier: 2, type: "prompt", speaker: "What has been the single most humbling experience of your adult life so far?", listener: "Honor the courage it takes to admit failure or miscalculation.", tag: "#humility" },
+          { tier: 2, type: "prompt", speaker: "In what specific situations do you catch yourself performing or wearing an emotional mask rather than being yourself?", listener: "Reflect on whether you have ever felt forced into that same dynamic.", tag: "#authenticity" },
+          { tier: 2, type: "wildcard", speaker: "WILDCARD: The Hot Seat. For 60 seconds, everyone in the circle can ask you one quick, honest question. You must answer immediately or pass.", listener: "Keep questions curious and respectful. Do not interrogate.", tag: "#candor" },
+          { tier: 3, type: "prompt", speaker: "What is the heaviest personal burden or struggle you are currently carrying that you rarely talk about?", listener: "Listen with complete reverence. Do not offer a silver lining. Simply say: 'I hear you, and thank you for trusting me with that.'", tag: "#raw_vulnerability" },
+          { tier: 3, type: "prompt", speaker: "What is an aspect of your character or past actions that you find most difficult to forgive yourself for?", listener: "Look them in the eye and remind them: 'You are more than the worst mistake you have ever made.'", tag: "#self_forgiveness" },
+          { tier: 3, type: "wildcard", speaker: "WILDCARD: Shared Silence. Put the phone down in the middle. The entire group remains completely silent for 45 seconds, simply acknowledging each other's shared humanity.", listener: "Rest in the quiet connection. Notice the shift in the room's energy.", tag: "#sacred_silence" }
+        ]
+      },
+      {
+        id: "dating_courtship",
+        title: "Dating & Early Courtship",
+        subtitle: "Unmasking, Chemistry, & Core Alignment",
+        description: "Dismantle rehearsed dating scripts, evaluate authentic lifestyle alignment, and spark genuine relational chemistry.",
+        participantMode: "dyadic",
+        themeColor: "from-amber-600 to-rose-600",
+        badge: "45 Cards",
+        passText: "Answer, then pass to your partner",
+        prompts: [
+          { tier: 1, type: "prompt", speaker: "What was the very first visual or behavioral detail you noticed about me when we met today or on our first date?", listener: "Notice the gap between what you intended to project and what they actually perceived. Smile and take it in.", tag: "#attraction" },
+          { tier: 1, type: "prompt", speaker: "What does your ideal, completely guilt-free Sunday look like from the minute you wake up until you go to sleep?", listener: "Observe their lifestyle rhythm: do they crave social stimulation, high adventure, or quiet domestic recharge?", tag: "#lifestyle" },
+          { tier: 1, type: "prompt", speaker: "What is an instant, non-negotiable 'green flag' that immediately makes you respect or feel drawn to someone?", listener: "Store this internally. Notice what signals integrity, safety, and respect to them.", tag: "#green_flags" },
+          { tier: 1, type: "wildcard", speaker: "WILDCARD: 20-Second Eye Lock. Set the phone down. Maintain unbroken eye contact with each other for 20 continuous seconds in silence. Notice what shifts in your body.", listener: "Resist laughing or glancing away. Breathe calmly.", tag: "#eye_contact" },
+          { tier: 2, type: "prompt", speaker: "What is an unhealthy communication habit or reflex you carried out of your last relationship that you are actively trying to unlearn?", listener: "Honor their candor. Do not weaponize this admission later. Say: 'Thank you for being self-aware about that.'", tag: "#growth" },
+          { tier: 2, type: "prompt", speaker: "When you are stressed, hurt, or emotionally overwhelmed, do you naturally withdraw into isolation or seek immediate proximity?", listener: "Recognize their attachment style reflex. Respect their regulation pattern without judgment.", tag: "#attachment" },
+          { tier: 2, type: "wildcard", speaker: "WILDCARD: Unfiltered First Impression Reveal. Both players finish this prompt: 'When I first saw you, I assumed you were... but now that we've spoken, I realize you are...'", listener: "Enjoy the revelation of how mutual perceptions evolve through conversation.", tag: "#first_impressions" },
+          { tier: 3, type: "prompt", speaker: "What is an emotional wound or pattern from your past that you fear might make you difficult to love?", listener: "Look at them with compassion. Say: 'You are not damaged goods. You are human, and you deserve genuine care.'", tag: "#wounds" },
+          { tier: 3, type: "prompt", speaker: "What is your deepest, most primal fear when it comes to falling completely in love with someone?", listener: "Listen for their core fear: loss of autonomy, abandonment, betrayal, or not being enough.", tag: "#fear_of_intimacy" },
+          { tier: 3, type: "wildcard", speaker: "WILDCARD: The Candor Contract. Both players complete this: 'One thing I find genuinely compelling about you tonight is... and one question I am still curious about is...'", listener: "Receive the compliment and answer their curious question with complete authenticity.", tag: "#chemistry" }
+        ]
+      },
+      {
+        id: "lovers_committed",
+        title: "Lovers & Committed Partners",
+        subtitle: "Depth, Rekindling, & Sacred Attunement",
+        description: "Engineered for long-term partners to reverse relational drift, navigate recurring gridlocks, voice unspoken desires, and deepen intimacy.",
+        participantMode: "dyadic",
+        themeColor: "from-rose-600 to-indigo-900",
+        badge: "45 Cards",
+        passText: "Answer, then pass to your partner",
+        prompts: [
+          { tier: 1, type: "prompt", speaker: "What is a physical feature, mannerism, or subtle expression of mine that you still find quietly irresistible?", listener: "Absorb the attraction without false modesty. Look into their eyes and smile.", tag: "#attraction" },
+          { tier: 1, type: "prompt", speaker: "What was a specific trip, quiet evening, or chaotic adventure in our history together where you fell in love with me all over again?", listener: "Relive the scene together. Notice what emotional climate made that memory shine.", tag: "#nostalgia" },
+          { tier: 1, type: "wildcard", speaker: "WILDCARD: 60-Second Forehead Rest. Set the phone down. Gently press your foreheads together with eyes closed and take 5 synchronized deep breaths in silence.", listener: "Sync your heartbeats and breathing rhythms. Let physical tension melt.", tag: "#somatic" },
+          { tier: 2, type: "prompt", speaker: "What is an emotional need or desire of yours that has gone largely unmet recently because we've both been in survival/work mode?", listener: "Resist explaining why you have been busy. Listen to the yearning underneath the unmet need.", tag: "#unmet_needs" },
+          { tier: 2, type: "prompt", speaker: "When we find ourselves in our recurring argument or gridlock, what is the painful story your mind tells you about my feelings for you?", listener: "Do not argue with their internal narrative. Say: 'I hate that my reaction makes you feel that story.'", tag: "#gridlock" },
+          { tier: 2, type: "wildcard", speaker: "WILDCARD: The Sincere Amends. Both partners complete this: 'One specific moment recently where I was impatient, distracted, or cold with you is... and I am genuinely sorry.'", listener: "Receive their apology with grace. Say: 'I accept your apology, and I love you.'", tag: "#amends" },
+          { tier: 3, type: "prompt", speaker: "What is an old wound or betrayal in our past together that you still haven't fully healed from, even if we said we moved on?", listener: "Do not say 'Are we still talking about that?' Hear the residual pain. Say: 'I am so sorry for the scar that left.'", tag: "#deep_repair" },
+          { tier: 3, type: "prompt", speaker: "What is a fantasy, sensual yearning, or erotic desire you have kept hidden because you feared shame or judgment?", listener: "Create a container of zero judgment, total safety, and open-minded acceptance.", tag: "#erotic_intimacy" },
+          { tier: 3, type: "wildcard", speaker: "WILDCARD: The Covenant Gaze. Place the phone down between you. Hold hands across the table or bed. Maintain unbroken eye contact in silence for 45 seconds while recalling the first week you met.", listener: "Do not break away. Let every year of your shared journey exist in the gaze.", tag: "#sacred_gaze" }
+        ]
+      },
+      {
+        id: "family_circles",
+        title: "Family Circles (3+ Players)",
+        subtitle: "Lore, Legacy, & Collective Healing",
+        description: "For gatherings of 3 or more family members (grandparents, parents, siblings, cousins) to unlock oral lore and celebrate shared resilience.",
+        participantMode: "group_left",
+        themeColor: "from-amber-500 to-emerald-700",
+        badge: "45 Cards",
+        passText: "Answer, then pass to your left",
+        prompts: [
+          { tier: 1, type: "prompt", speaker: "What is an iconic family story or legendary mishap from our past that someone brings up at almost every major holiday dinner?", listener: "Group: Laugh together and let others chime in with their favorite details after the speaker finishes.", tag: "#family_lore" },
+          { tier: 1, type: "prompt", speaker: "What is a culinary dish, recipe, or cooking smell that immediately feels like home and belongs strictly to our family?", listener: "Group: Acknowledge who originally perfected or passed down that recipe.", tag: "#heritage" },
+          { tier: 1, type: "wildcard", speaker: "WILDCARD: Pass the Phone Photo Tour. Pass the phone around the circle. Each person has 20 seconds to show one favorite photo of a family memory saved on their own device.", listener: "Group: Marvel at the memories and how fast time moves.", tag: "#visual_memories" },
+          { tier: 2, type: "prompt", speaker: "What is a role or label you were assigned as a child in this family (the smart one, the wild one, the caretaker) that feels too small for who you are today?", listener: "Group: Notice how easy it is to pigeonhole relatives into childhood archetypes. Let the old label drop.", tag: "#differentiation" },
+          { tier: 2, type: "prompt", speaker: "What was an unseen sacrifice an older generation made to ensure that younger generations had opportunities they never had?", listener: "Group: Express quiet gratitude to the elders in the room or in memory.", tag: "#sacrifices" },
+          { tier: 2, type: "wildcard", speaker: "WILDCARD: Circle of Gratitude. The speaker looks at the person to their right and shares one specific thing they appreciate about them. Repeat around the circle.", listener: "Group: Listen silently as each person receives their affirmation.", tag: "#gratitude_circle" },
+          { tier: 3, type: "prompt", speaker: "What is an intergenerational pattern or silence (emotional suppression, harsh judgment) that you hope our generation permanently halts?", listener: "Group: Affirm the cycle-breakers in the family. Breaking generational patterns takes extraordinary bravery.", tag: "#cycle_breakers" },
+          { tier: 3, type: "prompt", speaker: "If this was our final gathering together, what is the most honest truth you would want everyone in this room to know about your love for them?", listener: "Group: Breathe in the words. Let the enduring weight of familial commitment land in everyone's chest.", tag: "#legacy" },
+          { tier: 3, type: "wildcard", speaker: "WILDCARD: The Circle of Benediction. Place phone in the center. Everyone join hands or touch shoulders. The speaker says one blessing or wish over this family for the coming year.", listener: "Group: Squeeze hands in agreement. Let warmth resonate through the circle.", tag: "#solidarity" }
+        ]
+      },
+      {
+        id: "parent_child_5_8",
+        title: "Parent & Child (Ages 5–8)",
+        subtitle: "Wonder, Play, & Big Feelings",
+        description: "For young children and caregivers. Transitions gently from playful imagination to emotional naming and felt security.",
+        participantMode: "dyadic",
+        themeColor: "from-emerald-500 to-teal-700",
+        badge: "45 Cards",
+        passText: "Answer, then pass to your partner",
+        prompts: [
+          { tier: 1, type: "prompt", speaker: "If you could invent a brand-new animal by combining any two animals in the world, what would it look like and what sound would it make?", listener: "Caregiver: Listen with wide eyes. Ask what this new creature eats or where it sleeps. Step entirely into their imagination.", tag: "#imagination" },
+          { tier: 1, type: "prompt", speaker: "What is the funniest thing that happened to you or someone else this week that made you giggle out loud?", listener: "Caregiver: Laugh along with them. Resist downplaying silly bathroom humor or nonsensical jokes.", tag: "#joy" },
+          { tier: 1, type: "wildcard", speaker: "WILDCARD: The Mirror Dance. Stand up face-to-face. For 30 seconds, one person moves in slow motion, and the other person must mirror every single movement exactly!", listener: "Caregiver: Play along fully! Switch who leads after 15 seconds.", tag: "#co_regulation" },
+          { tier: 2, type: "prompt", speaker: "What is something that made you feel mad or frustrated recently, even if nobody else noticed?", listener: "Caregiver: Do not explain why they shouldn't feel mad. Say: 'It makes total sense that frustrated you.'", tag: "#big_feelings" },
+          { tier: 2, type: "prompt", speaker: "When I get busy, rushed, or stressed out, what do I look or sound like to you?", listener: "Caregiver: Brace yourself for an honest reflection. Do not get defensive. Simply say: 'Thank you for telling me.'", tag: "#parent_mirror" },
+          { tier: 2, type: "wildcard", speaker: "WILDCARD: Bear Hug Squeeze. Give each other the biggest, warmest bear hug you can manage. Squeeze gently for five full seconds while taking a deep breath together.", listener: "Caregiver: Provide firm, grounding deep-pressure touch to calm both of your nervous systems.", tag: "#somatic" },
+          { tier: 3, type: "prompt", speaker: "What is your biggest fear when it is dark or when you are all by yourself?", listener: "Caregiver: Pull them in close or hold their hands. Say: 'I am always watching out for you. You are safe here.'", tag: "#felt_safety" },
+          { tier: 3, type: "prompt", speaker: "How do you know for sure that I love you, even when we have had a hard day?", listener: "Caregiver: Listen to their emotional anchors. Affirm: 'Nothing you ever do can make me stop loving you.'", tag: "#unconditional_love" },
+          { tier: 3, type: "wildcard", speaker: "WILDCARD: Heart-to-Heart Whispers. Look into each other's eyes and whisper one true thing you love about the other person's heart.", listener: "Caregiver: Speak directly to who they are, not just what they achieve.", tag: "#affirmation" }
+        ]
+      },
+      {
+        id: "parent_child_9_12",
+        title: "Parent & Pre-Teen (Ages 9–12)",
+        subtitle: "Bridges & Growing Independence",
+        description: "For pre-teens and caregivers. Focuses on peer dynamics, school pressures, emerging autonomy, and non-defensive listening.",
+        participantMode: "dyadic",
+        themeColor: "from-cyan-600 to-blue-800",
+        badge: "45 Cards",
+        passText: "Answer, then pass to your partner",
+        prompts: [
+          { tier: 1, type: "prompt", speaker: "What is a meme, trend, video game, or YouTube channel that you find hilarious, but you think adults just don't get?", listener: "Caregiver: Stay curious rather than dismissive. Ask them to explain the joke or why their friends love it.", tag: "#humor" },
+          { tier: 1, type: "prompt", speaker: "If we could plan a road trip or day trip just for the two of us, where would we go and what music would we play?", listener: "Caregiver: Step into their vision. Commit mentally to letting them control the car playlist.", tag: "#bonding" },
+          { tier: 1, type: "wildcard", speaker: "WILDCARD: The Music Trade. Pass the phone back and forth and play each other the chorus of your favorite current song. No judging allowed!", listener: "Caregiver: Listen to the lyrics and beat with open curiosity. Appreciate their musical world.", tag: "#music" },
+          { tier: 2, type: "prompt", speaker: "What is a house rule or boundary we have that you think is genuinely unfair or outdated for someone your age?", listener: "Caregiver: Listen with neutrality. Do not immediately defend the rule. Ask: 'What would a fair compromise look like?'", tag: "#autonomy" },
+          { tier: 2, type: "prompt", speaker: "When I am upset or frustrated with you, what is something I say or do that hurts your feelings the most?", listener: "Caregiver: This requires genuine maturity. Do not justify your parenting. Simply say: 'I am so sorry I made you feel that way. I will work on that.'", tag: "#repair" },
+          { tier: 2, type: "wildcard", speaker: "WILDCARD: Free Pass Voucher. The pre-teen gets one 'Free Pass Voucher' they can use on any question tonight—no questions asked, no explanation needed.", listener: "Caregiver: Fully honor this boundary. Absolute autonomy builds psychological safety.", tag: "#boundaries" },
+          { tier: 3, type: "prompt", speaker: "What is your biggest fear or worry when you think about getting older and heading into middle or high school?", listener: "Caregiver: Listen with complete empathy. Reassure them: 'We will walk through every step together.'", tag: "#transitions" },
+          { tier: 3, type: "prompt", speaker: "What is a mistake or failure you had this past year that made you feel like you let down either me or yourself?", listener: "Caregiver: Look into their eyes and dismantle that shame: 'Mistakes are how we grow. You could never be a disappointment to me.'", tag: "#unconditional_love" },
+          { tier: 3, type: "wildcard", speaker: "WILDCARD: The Safe Harbor Promise. Look each other in the eye and repeat out loud: 'No matter what happens, no matter how bad a mistake seems, you can always come to me first.'", listener: "Caregiver: Speak with deep sincerity. This is the cornerstone of adolescent psychological safety.", tag: "#safe_harbor" }
+        ]
+      },
+      {
+        id: "parent_child_13_17",
+        title: "Parent & Teen (Ages 13–17)",
+        subtitle: "Identity, Freedom, & Unspoken Truths",
+        description: "For adolescents and caregivers navigating identity formation, privacy boundaries, peer pressures, and mutual respect.",
+        participantMode: "dyadic",
+        themeColor: "from-violet-600 to-purple-900",
+        badge: "45 Cards",
+        passText: "Answer, then pass to your partner",
+        prompts: [
+          { tier: 1, type: "prompt", speaker: "If you could curate a 3-track soundtrack that encapsulates your current headspace this school year, what would those three songs be?", listener: "Caregiver: Stay curious about the vibe, themes, or production. Do not criticize explicit lyrics, genre choices, or volume.", tag: "#headspace" },
+          { tier: 1, type: "prompt", speaker: "What is the single most ridiculous, out-of-touch rule or policy enforced at your high school or middle school?", listener: "Caregiver: Validate their frustration with institutional bureaucracy without immediately defending school administration.", tag: "#school_life" },
+          { tier: 1, type: "wildcard", speaker: "WILDCARD: Roasting Immunity. For 60 seconds, both players can offer one playful, affectionate roast of the other person's quirky daily habits. Immunity guaranteed!", listener: "Caregiver: Lean into humor. Being able to take a light roast demonstrates emotional safety.", tag: "#humor" },
+          { tier: 2, type: "prompt", speaker: "What is a boundary or expectation regarding your privacy, phone, or bedroom that you feel I frequently overstep?", listener: "Caregiver: Resist arguing legal ownership or 'under my roof.' Listen to their felt need for sacred personal space.", tag: "#privacy" },
+          { tier: 2, type: "prompt", speaker: "In what specific areas of your life do you feel I treat you more like a child than the emerging young adult you are?", listener: "Caregiver: Acknowledge the lag between their real maturity and your protective instincts. Ask how you can step back.", tag: "#growing_up" },
+          { tier: 2, type: "wildcard", speaker: "WILDCARD: The Unsolicited Advice Pass. Teen: You receive a permanent pass that you can say anytime: 'Right now I just need you to listen, not fix it.' Caregiver: Commit to honoring this without exception.", listener: "Caregiver: Nod and repeat: 'Understood. I will listen without offering solutions.'", tag: "#active_listening" },
+          { tier: 3, type: "prompt", speaker: "What is your biggest unspoken fear when you look into the future toward adulthood and complete independence?", listener: "Caregiver: Do not dismiss their fear with 'You'll be fine.' Empathize deeply with the dread of adult uncertainty.", tag: "#future_fears" },
+          { tier: 3, type: "prompt", speaker: "If you made a devastating mistake right now—legal, financial, relational, or personal—would you come to me first, and if not, why?", listener: "Caregiver: Re-establish the Safe Harbor: 'No matter what happens, no mistake will ever make me turn my back on you. You can always call me.'", tag: "#safe_harbor" },
+          { tier: 3, type: "wildcard", speaker: "WILDCARD: Unvarnished Affirmation. Caregiver: State three undeniable strengths you see in the teen's character. Teen: State one thing you respect about the caregiver's endurance.", listener: "Caregiver: Deliver your affirmation with grounded conviction and total presence.", tag: "#mutual_respect" }
+        ]
+      },
+      {
+        id: "parent_child_adult_offspring",
+        title: "Parent & Adult Offspring",
+        subtitle: "Filial Maturity & Peer Reciprocity",
+        description: "For adult children and aging parents renegotiating relationship hierarchy into mutual adult peerhood and generational repair.",
+        participantMode: "dyadic",
+        themeColor: "from-stone-600 to-slate-800",
+        badge: "45 Cards",
+        passText: "Answer, then pass to your partner",
+        prompts: [
+          { tier: 1, type: "prompt", speaker: "Who was your closest, most influential friend in your early twenties, and what kind of trouble or fun did you get into together?", listener: "Offspring/Parent: Listen for the person they were before their current family identity was established.", tag: "#biography" },
+          { tier: 1, type: "prompt", speaker: "What is a culinary recipe, food tradition, or specific holiday meal from our family line that must never be lost?", listener: "Commit mentally to documenting or learning the recipe firsthand.", tag: "#heritage" },
+          { tier: 1, type: "wildcard", speaker: "WILDCARD: Toast to Adulthood. Raise an imaginary or real drink. Both players offer a genuine toast to the other person as an autonomous, capable adult.", listener: "Clink glasses or make eye contact. Celebrate meeting as peers.", tag: "#peer_meeting" },
+          { tier: 2, type: "prompt", speaker: "In what specific ways do you catch us slipping back into old parent-child patterns instead of relating as two equal adults?", listener: "Offspring/Parent: Avoid defensiveness. Look at the structural habit: unsolicited advice, overstepping, or reactive defiance.", tag: "#peer_transition" },
+          { tier: 2, type: "prompt", speaker: "What was an unseen financial, marital, or personal crisis in our family while I was growing up that you tried to shield me from?", listener: "Offspring: Receive the reality of adult struggle with deep empathy. Acknowledge what they carried in silence.", tag: "#unspoken_crises" },
+          { tier: 2, type: "wildcard", speaker: "WILDCARD: Mutual Acknowledgement of Effort. Both players complete this: 'I recognize how hard you worked to give me / make a good life, and I appreciate your endurance.'", listener: "Listen to the validation of unseen years of effort.", tag: "#validation" },
+          { tier: 3, type: "prompt", speaker: "What is the most profound regret you carry regarding our relationship, and what would it take for you to finally release it?", listener: "Sit in reverent silence. Do not brush their regret away. Say: 'I release that with you. We are here now.'", tag: "#forgiveness" },
+          { tier: 3, type: "prompt", speaker: "When you envision the day one of us is no longer on this earth, what is the single most vital truth you need to know is settled between us?", listener: "Look each other in the eye. Anchor that truth right now in the present moment.", tag: "#mortality" },
+          { tier: 3, type: "wildcard", speaker: "WILDCARD: The Generational Release. Speak aloud: 'I honor our past, I forgive our imperfections, and I choose to love who you are today.'", listener: "Breathe together. Let old baggage dissolve into present acceptance.", tag: "#closure" }
+        ]
+      }
+    ];
+
+    /* -------------------------------------------------------------
+       STATE CONTROLLER (Progression, Pacing, and Turn State)
+       ------------------------------------------------------------- */
+    const State = {
+      activeDeck: null,
+      sessionPrompts: [],
+      currentIndex: 0,
+      currentTier: 1,
+      tier1Count: 0,
+      tier2Count: 0,
+      tier3Count: 0,
+      tier2Unlocked: false,
+      tier3Unlocked: false,
+      tierQuota: 3, // prompts answered before prompting tier unlock
+      soundEnabled: true
+    };
+
+    /* -------------------------------------------------------------
+       DOM ELEMENT REFERENCES
+       ------------------------------------------------------------- */
+    const dom = {
+      header: document.getElementById('app-header'),
+      btnHome: document.getElementById('btn-home'),
+      btnConclude: document.getElementById('btn-conclude'),
+      btnSoundToggle: document.getElementById('btn-sound-toggle'),
+      iconSoundOn: document.getElementById('icon-sound-on'),
+      iconSoundOff: document.getElementById('icon-sound-off'),
+      deckIndicator: document.getElementById('deck-indicator'),
+      headerDeckTitle: document.getElementById('header-deck-title'),
+      headerTierIndicator: document.getElementById('header-tier-indicator'),
+
+      // Views
+      viewDeckSelect: document.getElementById('view-deck-select'),
+      viewIntroContract: document.getElementById('view-intro-contract'),
+      viewActiveCard: document.getElementById('view-active-card'),
+      viewTierUnlocked: document.getElementById('view-tier-unlocked'),
+      viewCheckout: document.getElementById('view-checkout'),
+      viewFinalFarewell: document.getElementById('view-final-farewell'),
+
+      // Deck list
+      deckListContainer: document.getElementById('deck-list-container'),
+
+      // Contract
+      contractDeckBadge: document.getElementById('contract-deck-badge'),
+      contractDeckTitle: document.getElementById('contract-deck-title'),
+      contractDeckDesc: document.getElementById('contract-deck-desc'),
+      contractPassInstruction: document.getElementById('contract-pass-instruction'),
+      btnStartSession: document.getElementById('btn-start-session'),
+
+      // Active Card UI
+      passIndicatorBar: document.getElementById('pass-indicator-bar'),
+      passDirectionText: document.getElementById('pass-direction-text'),
+      sessionCardCount: document.getElementById('session-card-count'),
+      splitCardContainer: document.getElementById('split-card-container'),
+      speakerHalf: document.getElementById('speaker-half'),
+      listenerHalf: document.getElementById('listener-half'),
+      cardTierPill: document.getElementById('card-tier-pill'),
+      cardTypePill: document.getElementById('card-type-pill'),
+      speakerPromptText: document.getElementById('speaker-prompt-text'),
+      listenerPromptText: document.getElementById('listener-prompt-text'),
+      speakerTagText: document.getElementById('speaker-tag-text'),
+      btnNextCard: document.getElementById('btn-next-card'),
+      btnPassPrompt: document.getElementById('btn-pass-prompt'),
+
+      // Unlock Screen
+      unlockBadgeContainer: document.getElementById('unlock-badge-container'),
+      unlockTierTitle: document.getElementById('unlock-tier-title'),
+      unlockTierDesc: document.getElementById('unlock-tier-desc'),
+      btnProceedUnlocked: document.getElementById('btn-proceed-unlocked'),
+
+      // Checkout Screen
+      btnCompleteCheckout: document.getElementById('btn-complete-checkout'),
+      btnBackToDecks: document.getElementById('btn-back-to-decks'),
+
+      // Toast
+      toastMessage: document.getElementById('toast-message'),
+      toastText: document.getElementById('toast-text')
+    };
+
+    /* -------------------------------------------------------------
+       UI HELPER: TOAST NOTIFICATION (Replaces alert())
+       ------------------------------------------------------------- */
+    let toastTimeout = null;
+    function showToast(msg) {
+      if (toastTimeout) clearTimeout(toastTimeout);
+      dom.toastText.textContent = msg;
+      dom.toastMessage.classList.remove('opacity-0', 'pointer-events-none');
+      dom.toastMessage.classList.add('opacity-100');
+      toastTimeout = setTimeout(() => {
+        dom.toastMessage.classList.remove('opacity-100');
+        dom.toastMessage.classList.add('opacity-0', 'pointer-events-none');
+      }, 2500);
+    }
+
+    /* -------------------------------------------------------------
+       VIEW SWITCHER
+       ------------------------------------------------------------- */
+    function switchView(viewName) {
+      const views = [
+        dom.viewDeckSelect,
+        dom.viewIntroContract,
+        dom.viewActiveCard,
+        dom.viewTierUnlocked,
+        dom.viewCheckout,
+        dom.viewFinalFarewell
+      ];
+      views.forEach(v => v.classList.add('hidden'));
+
+      switch (viewName) {
+        case 'decks':
+          dom.viewDeckSelect.classList.remove('hidden');
+          dom.deckIndicator.classList.add('hidden');
+          dom.btnConclude.classList.add('hidden');
+          break;
+        case 'contract':
+          dom.viewIntroContract.classList.remove('hidden');
+          dom.deckIndicator.classList.add('hidden');
+          dom.btnConclude.classList.add('hidden');
+          break;
+        case 'active':
+          dom.viewActiveCard.classList.remove('hidden');
+          dom.deckIndicator.classList.remove('hidden');
+          dom.btnConclude.classList.remove('hidden');
+          break;
+        case 'unlocked':
+          dom.viewTierUnlocked.classList.remove('hidden');
+          dom.deckIndicator.classList.add('hidden');
+          dom.btnConclude.classList.add('hidden');
+          break;
+        case 'checkout':
+          dom.viewCheckout.classList.remove('hidden');
+          dom.deckIndicator.classList.add('hidden');
+          dom.btnConclude.classList.add('hidden');
+          break;
+        case 'farewell':
+          dom.viewFinalFarewell.classList.remove('hidden');
+          dom.deckIndicator.classList.add('hidden');
+          dom.btnConclude.classList.add('hidden');
+          break;
+      }
+    }
+
+    /* -------------------------------------------------------------
+       RENDER DECK SELECTION LIST
+       ------------------------------------------------------------- */
+    function renderDeckList() {
+      dom.deckListContainer.innerHTML = '';
+      DECKS_REGISTRY.forEach(deck => {
+        const card = document.createElement('div');
+        card.className = "bg-slate-900/90 border border-slate-800 hover:border-slate-700 rounded-2xl p-4 transition-all duration-200 cursor-pointer active:scale-[0.99] flex items-center justify-between group shadow-md";
+        card.onclick = () => selectDeck(deck);
+
+        card.innerHTML = `
+          <div class="space-y-1 pr-3">
+            <div class="flex items-center space-x-2">
+              <span class="text-xs font-bold uppercase tracking-wider text-indigo-400 font-display">${deck.title}</span>
+              <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700/50">${deck.badge}</span>
+            </div>
+            <p class="text-xs font-medium text-slate-200">${deck.subtitle}</p>
+            <p class="text-[11px] text-slate-400 line-clamp-2 leading-relaxed">${deck.description}</p>
+          </div>
+          <div class="w-8 h-8 rounded-full bg-slate-800 group-hover:bg-indigo-600 flex items-center justify-center text-slate-400 group-hover:text-white transition-colors shrink-0">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+          </div>
+        `;
+        dom.deckListContainer.appendChild(card);
+      });
+    }
+
+    /* -------------------------------------------------------------
+       SELECT DECK & POPULATE CONTRACT VIEW
+       ------------------------------------------------------------- */
+    function selectDeck(deck) {
+      sound.playTone(400, 'sine', 0.1);
+      State.activeDeck = deck;
+      dom.contractDeckTitle.textContent = deck.title;
+      dom.contractDeckDesc.textContent = deck.description;
+      dom.contractDeckBadge.textContent = deck.subtitle;
+      dom.contractPassInstruction.innerHTML = `<strong class="text-white">${deck.passText}.</strong> The phone acts as the talking piece.`;
+
+      switchView('contract');
+    }
+
+    /* -------------------------------------------------------------
+       INITIALIZE SESSION WITH PROGRESSION GATING
+       ------------------------------------------------------------- */
+    function startSession() {
+      sound.playTone(500, 'triangle', 0.15);
+      const deck = State.activeDeck;
+
+      // Group prompts by tier
+      const t1 = deck.prompts.filter(p => p.tier === 1);
+      const t2 = deck.prompts.filter(p => p.tier === 2);
+      const t3 = deck.prompts.filter(p => p.tier === 3);
+
+      // Simple Fisher-Yates shuffle
+      const shuffle = arr => [...arr].sort(() => Math.random() - 0.5);
+
+      // Stack: T1 prompts first, then T2, then T3
+      State.sessionPrompts = [...shuffle(t1), ...shuffle(t2), ...shuffle(t3)];
+      State.currentIndex = 0;
+      State.currentTier = 1;
+      State.tier1Count = 0;
+      State.tier2Count = 0;
+      State.tier3Count = 0;
+      State.tier2Unlocked = false;
+      State.tier3Unlocked = false;
+
+      // Update Header
+      dom.headerDeckTitle.textContent = deck.title;
+      dom.passDirectionText.textContent = deck.passText;
+
+      updateCardDisplay();
+      switchView('active');
+    }
+
+    /* -------------------------------------------------------------
+       UPDATE SPLIT CARD VIEW
+       ------------------------------------------------------------- */
+    function updateCardDisplay() {
+      const prompt = State.sessionPrompts[State.currentIndex];
+      if (!prompt) {
+        openCheckout();
+        return;
+      }
+
+      // Check for Tier Transitions
+      if (prompt.tier === 2 && !State.tier2Unlocked) {
+        triggerTierUnlock(2);
+        return;
+      }
+      if (prompt.tier === 3 && !State.tier3Unlocked) {
+        triggerTierUnlock(3);
+        return;
+      }
+
+      State.currentTier = prompt.tier;
+
+      // Update counters
+      dom.sessionCardCount.textContent = `${State.currentIndex + 1} / ${State.sessionPrompts.length}`;
+      
+      // Update Texts
+      dom.speakerPromptText.textContent = prompt.speaker;
+      dom.listenerPromptText.textContent = prompt.listener;
+      dom.speakerTagText.textContent = prompt.tag || "#connection";
+
+      // Pill formatting
+      if (prompt.type === 'wildcard') {
+        dom.cardTypePill.classList.remove('hidden');
+        dom.cardTierPill.classList.add('hidden');
+      } else {
+        dom.cardTypePill.classList.add('hidden');
+        dom.cardTierPill.classList.remove('hidden');
+        
+        if (prompt.tier === 1) {
+          dom.cardTierPill.textContent = "Level 1: Warm Up";
+          dom.cardTierPill.className = "px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+          dom.headerTierIndicator.innerHTML = `
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            <span class="text-[10px] text-emerald-400 font-medium tracking-wide">LEVEL 1: WARM UP</span>
+          `;
+          dom.speakerHalf.style.backgroundColor = "#131B2E";
+          dom.listenerHalf.style.backgroundColor = "#0D1525";
+        } else if (prompt.tier === 2) {
+          dom.cardTierPill.textContent = "Level 2: Confessions";
+          dom.cardTierPill.className = "px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-amber-500/20 text-amber-400 border border-amber-500/30";
+          dom.headerTierIndicator.innerHTML = `
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+            <span class="text-[10px] text-amber-400 font-medium tracking-wide">LEVEL 2: CONFESSIONS</span>
+          `;
+          dom.speakerHalf.style.backgroundColor = "#1C1917";
+          dom.listenerHalf.style.backgroundColor = "#141210";
+        } else {
+          dom.cardTierPill.textContent = "Level 3: Getting Deep";
+          dom.cardTierPill.className = "px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-rose-500/20 text-rose-400 border border-rose-500/30";
+          dom.headerTierIndicator.innerHTML = `
+            <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
+            <span class="text-[10px] text-rose-400 font-medium tracking-wide">LEVEL 3: GETTING DEEP</span>
+          `;
+          dom.speakerHalf.style.backgroundColor = "#180D1E";
+          dom.listenerHalf.style.backgroundColor = "#100814";
+        }
+      }
+
+      // Micro haptic & audio feedback
+      sound.cardFlip();
+    }
+
+    /* -------------------------------------------------------------
+       TIER UNLOCK SCREEN CONTROLLER
+       ------------------------------------------------------------- */
+    function triggerTierUnlock(tierNumber) {
+      sound.tierUnlock();
+      if (tierNumber === 2) {
+        State.tier2Unlocked = true;
+        dom.unlockTierTitle.textContent = "Level 2 Unlocked: Confessions";
+        dom.unlockTierDesc.textContent = "You've established baseline psychological comfort. The questions will now dig deeper into unexpressed thoughts, life lessons, and vulnerabilities.";
+        dom.unlockBadgeContainer.innerHTML = "🌱";
+        dom.btnProceedUnlocked.textContent = "Enter Level 2: Confessions";
+      } else if (tierNumber === 3) {
+        State.tier3Unlocked = true;
+        dom.unlockTierTitle.textContent = "Level 3 Unlocked: Getting Deep";
+        dom.unlockTierDesc.textContent = "You've reached deep vulnerability territory. Honor every disclosure with sacred reverence and uninterrupted attention.";
+        dom.unlockBadgeContainer.innerHTML = "🌌";
+        dom.btnProceedUnlocked.textContent = "Enter Level 3: Getting Deep";
+      }
+      switchView('unlocked');
+    }
+
+    /* -------------------------------------------------------------
+       PROGRESSION ACTIONS
+       ------------------------------------------------------------- */
+    function nextCard() {
+      State.currentIndex++;
+      if (State.currentIndex >= State.sessionPrompts.length) {
+        openCheckout();
+      } else {
+        updateCardDisplay();
+      }
+    }
+
+    function passPrompt() {
+      sound.playTone(280, 'sine', 0.1);
+      showToast("Question passed without question. Absolute safety respected.");
+      nextCard();
+    }
+
+    function openCheckout() {
+      sound.checkoutBell();
+      switchView('checkout');
+    }
+
+    /* -------------------------------------------------------------
+       TOUCH SWIPE GESTURE SUPPORT (Mobile Ergonomics)
+       ------------------------------------------------------------- */
+    let touchStartX = 0;
+    let touchStartY = 0;
+    const cardEl = dom.splitCardContainer;
+
+    cardEl.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    cardEl.addEventListener('touchend', (e) => {
+      const touchEndX = e.changedTouches[0].screenX;
+      const touchEndY = e.changedTouches[0].screenY;
+      const diffX = touchEndX - touchStartX;
+      const diffY = touchEndY - touchStartY;
+
+      // Swipe Left or Swipe Up triggers next card
+      if (Math.abs(diffX) > 60 && diffX < 0) {
+        nextCard();
+      } else if (Math.abs(diffY) > 60 && diffY < 0) {
+        nextCard();
+      }
+    }, { passive: true });
+
+    /* -------------------------------------------------------------
+       EVENT LISTENERS & BINDINGS
+       ------------------------------------------------------------- */
+    dom.btnStartSession.onclick = startSession;
+    dom.btnNextCard.onclick = nextCard;
+    dom.btnPassPrompt.onclick = passPrompt;
+
+    dom.btnProceedUnlocked.onclick = () => {
+      sound.playTone(480, 'triangle', 0.15);
+      switchView('active');
+      updateCardDisplay();
+    };
+
+    dom.btnConclude.onclick = openCheckout;
+
+    dom.btnCompleteCheckout.onclick = () => {
+      sound.playTone(400, 'sine', 0.2);
+      switchView('farewell');
+    };
+
+    dom.btnBackToDecks.onclick = () => {
+      sound.playTone(300, 'sine', 0.1);
+      switchView('decks');
+    };
+
+    dom.btnHome.onclick = () => {
+      sound.playTone(300, 'sine', 0.1);
+      switchView('decks');
+    };
+
+    // Sound toggle
+    dom.btnSoundToggle.onclick = () => {
+      sound.enabled = !sound.enabled;
+      if (sound.enabled) {
+        dom.iconSoundOn.classList.remove('hidden');
+        dom.iconSoundOff.classList.add('hidden');
+        showToast("Audio effects enabled");
+        sound.playTone(440, 'sine', 0.1);
+      } else {
+        dom.iconSoundOn.classList.add('hidden');
+        dom.iconSoundOff.classList.remove('hidden');
+        showToast("Muted audio");
+      }
+    };
+
+    /* -------------------------------------------------------------
+       INITIALIZATION
+       ------------------------------------------------------------- */
+    window.onload = function() {
+      renderDeckList();
+      switchView('decks');
+    };
+  </script>
+</body>
+</html>

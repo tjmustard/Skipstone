@@ -1,0 +1,416 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "deckId": "lovers_committed_v1",
+  "title": "Lovers & Committed Partners (Depth, Rekindling, & Sacred Attunement)",
+  "description": "Engineered for long-term and committed partners to reverse relational drift, navigate recurring gridlocks, voice unspoken yearnings, and deepen emotional and physical intimacy.",
+  "targetAudience": "lovers",
+  "subCategory": "committed_romance",
+  "participantMode": "dyadic",
+  "prompts": [
+    {
+      "id": "lov_t1_01",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is a physical feature, mannerism, or subtle expression of mine that you still find quietly irresistible?",
+      "listenerPrompt": "Absorb the attraction without false modesty. Look into their eyes and smile.",
+      "passAction": "pass_partner",
+      "tags": ["attraction", "fondness"]
+    },
+    {
+      "id": "lov_t1_02",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What was a specific trip, quiet evening, or chaotic adventure in our history together where you fell in love with me all over again?",
+      "listenerPrompt": "Relive the scene together. Notice what emotional climate made that memory shine.",
+      "passAction": "pass_partner",
+      "tags": ["nostalgia", "fondness"]
+    },
+    {
+      "id": "lov_t1_03",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is one mundane domestic routine we do together (making coffee, grocery shopping, brushing teeth) that secretly feels like a sacred anchor to you?",
+      "listenerPrompt": "Appreciate the quiet beauty found in everyday domestic life.",
+      "passAction": "pass_partner",
+      "tags": ["daily_rituals", "connection"]
+    },
+    {
+      "id": "lov_t1_04",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "If we could hire someone to handle one stressful domestic chore or administrative burden permanently, which one would liberate the most joy for us?",
+      "listenerPrompt": "Acknowledge how operational logistics drain romantic bandwidth.",
+      "passAction": "pass_partner",
+      "tags": ["domestic_life", "logistics"]
+    },
+    {
+      "id": "lov_t1_05",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What was the most hilarious, unglamorous, or ridiculous disaster we navigated together where we ended up laughing until we cried?",
+      "listenerPrompt": "Laugh and enjoy your shared history of overcoming chaos with humor.",
+      "passAction": "pass_partner",
+      "tags": ["humor", "resilience"]
+    },
+    {
+      "id": "lov_t1_06",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is an inside joke or goofy phrase between us that would sound completely unhinged to any outside observer?",
+      "listenerPrompt": "Celebrate the private language that belongs only to your partnership.",
+      "passAction": "pass_partner",
+      "tags": ["private_culture", "playfulness"]
+    },
+    {
+      "id": "lov_t1_07",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is an album, artist, or specific track that will forever belong to our relationship?",
+      "listenerPrompt": "Ask: 'What exact feeling does that track bring back into your body?'",
+      "passAction": "pass_partner",
+      "tags": ["music", "nostalgia"]
+    },
+    {
+      "id": "lov_t1_08",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is something I cooked, planned, or surprised you with that blew away your expectations?",
+      "listenerPrompt": "Receive the recognition for your effort and care.",
+      "passAction": "pass_partner",
+      "tags": ["appreciation", "surprises"]
+    },
+    {
+      "id": "lov_t1_09",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "If we could take a 3-day spontaneous getaway next weekend with zero phones or laptops, what environment would revive our souls the most?",
+      "listenerPrompt": "Listen to whether your partner craves solitude in nature, cultural energy, or pure rest.",
+      "passAction": "pass_partner",
+      "tags": ["rest", "getaway"]
+    },
+    {
+      "id": "lov_t1_10",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is one small way I showed affection or thoughtfulness this past week that made you feel deeply cherished?",
+      "listenerPrompt": "Take note of what acts register most deeply in their emotional bank account.",
+      "passAction": "pass_partner",
+      "tags": ["love_languages", "gratitude"]
+    },
+    {
+      "id": "lov_t1_11",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is a dream date night that we haven't done in way too long because life got in the way?",
+      "listenerPrompt": "Commit mentally to scheduling that exact date within the next two weeks.",
+      "passAction": "pass_partner",
+      "tags": ["dating", "intentionality"]
+    },
+    {
+      "id": "lov_t1_12",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is an outfit or style of mine that you secretly love seeing me wear around the house or out in public?",
+      "listenerPrompt": "Enjoy the complimentary gaze and mutual attraction.",
+      "passAction": "pass_partner",
+      "tags": ["style", "attraction"]
+    },
+    {
+      "id": "lov_t1_13",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "What is a quirk or idiosyncratic habit of mine that you used to find strange, but now find completely endearing?",
+      "listenerPrompt": "Smile at how intimacy transforms oddities into affection.",
+      "passAction": "pass_partner",
+      "tags": ["quirks", "acceptance"]
+    },
+    {
+      "id": "lov_t1_14",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "When was the last time we experienced pure, uninterrupted play or silliness together with zero adult obligations?",
+      "listenerPrompt": "Reflect on how vital play is for keeping adult partnerships light and resilient.",
+      "passAction": "pass_partner",
+      "tags": ["play", "joy"]
+    },
+    {
+      "id": "lov_t1_15",
+      "tier": 1,
+      "type": "prompt",
+      "speakerPrompt": "On a scale from 1 (running on fumes) to 10 (thriving and vibrant), how nurtured does our romantic connection feel to you right now?",
+      "listenerPrompt": "Receive their score with open curiosity, not defensiveness. Say: 'Thank you for your honesty.'",
+      "passAction": "pass_partner",
+      "tags": ["state_of_union", "temperature_check"]
+    },
+    {
+      "id": "lov_t2_01",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is an emotional need or desire of yours that has gone largely unmet recently because we've both been in survival/work mode?",
+      "listenerPrompt": "Resist explaining why you have been busy. Listen to the yearning underneath the unmet need.",
+      "passAction": "pass_partner",
+      "tags": ["unmet_needs", "reconnection"]
+    },
+    {
+      "id": "lov_t2_02",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "When we find ourselves in our recurring argument or gridlock, what is the painful story your mind tells you about my feelings for you?",
+      "listenerPrompt": "Do not argue with their internal narrative. Say: 'I hate that my reaction makes you feel that story.'",
+      "passAction": "pass_partner",
+      "tags": ["gridlock", "attachment"]
+    },
+    {
+      "id": "lov_t2_03",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is something I do when I am stressed or irritable that makes you feel emotionally shut out or unsafe?",
+      "listenerPrompt": "Notice your own defense mechanisms (stonewalling, snapping, sarcasm). Own your impact on your partner.",
+      "passAction": "pass_partner",
+      "tags": ["stress_response", "safety"]
+    },
+    {
+      "id": "lov_t2_04",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "In what ways do you feel our physical or sexual intimacy has changed, and what do you miss most about how we used to connect?",
+      "listenerPrompt": "Listen with tender vulnerability. Physical intimacy is deeply delicate; honor their honesty.",
+      "passAction": "pass_partner",
+      "tags": ["physical_intimacy", "desire"]
+    },
+    {
+      "id": "lov_t2_05",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is an unexpressed resentment or petty frustration you've been harboring toward me that you haven't brought up to avoid a fight?",
+      "listenerPrompt": "Take a slow breath. Welcome the lance being lanced: 'Thank you for letting it out so we can clear the air.'",
+      "passAction": "pass_partner",
+      "tags": ["resentment", "clearing_air"]
+    },
+    {
+      "id": "lov_t2_06",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is an area of our joint life (finances, future planning, division of labor) where you feel we are not operating as a unified team?",
+      "listenerPrompt": "Focus on partnership alignment rather than assigning blame: 'How do we get back in lockstep?'",
+      "passAction": "pass_partner",
+      "tags": ["teamwork", "alignment"]
+    },
+    {
+      "id": "lov_t2_07",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "When was the last time you felt truly lonely or invisible while we were sitting in the exact same room?",
+      "listenerPrompt": "Hold their hand. Acknowledge that emotional loneliness inside a relationship hurts deeply.",
+      "passAction": "pass_partner",
+      "tags": ["loneliness", "presence"]
+    },
+    {
+      "id": "lov_t2_08",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is a personal dream, hobby, or part of your independent identity that you feel you have neglected since becoming a couple?",
+      "listenerPrompt": "Encourage their individuality: 'I want that part of you to flourish. How can I support it?'",
+      "passAction": "pass_partner",
+      "tags": ["differentiation", "identity"]
+    },
+    {
+      "id": "lov_t2_09",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is something I say or do when you are trying to share feelings that makes you feel dismissed, analyzed, or lectured?",
+      "listenerPrompt": "Notice if you jump to problem-solving instead of validation. Commit to offering empathy first.",
+      "passAction": "pass_partner",
+      "tags": ["communication", "attunement"]
+    },
+    {
+      "id": "lov_t2_10",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is an unspoken sacrifice or effort you make for our relationship or home every single week that you wish I recognized more?",
+      "listenerPrompt": "Validate their unseen labor: 'I see how hard you work at that, and I am so grateful.'",
+      "passAction": "pass_partner",
+      "tags": ["unseen_labor", "appreciation"]
+    },
+    {
+      "id": "lov_t2_11",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "If you could change one communication habit during our disagreements, what would create the biggest relief for you?",
+      "listenerPrompt": "Agree to experiment with their requested shift during the very next disagreement.",
+      "passAction": "pass_partner",
+      "tags": ["conflict_habits", "repair"]
+    },
+    {
+      "id": "lov_t2_12",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is a way I have changed or grown since we first met that has made you respect and love me more?",
+      "listenerPrompt": "Receive this recognition of your maturity and character evolution.",
+      "passAction": "pass_partner",
+      "tags": ["growth", "fondness"]
+    },
+    {
+      "id": "lov_t2_13",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is an emotional fear or insecurity you have about our future together that you rarely speak aloud?",
+      "listenerPrompt": "Wrap them in reassurance: 'We are in this together, and we will face whatever comes as partners.'",
+      "passAction": "pass_partner",
+      "tags": ["future_fears", "security"]
+    },
+    {
+      "id": "lov_t2_14",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What does optimal emotional attunement look like when one of us comes home after a traumatic or draining day?",
+      "listenerPrompt": "Clarify each other's decompression needs: touch, silent presence, venting, or space.",
+      "passAction": "pass_partner",
+      "tags": ["co_regulation", "comfort"]
+    },
+    {
+      "id": "lov_t2_15",
+      "tier": 2,
+      "type": "prompt",
+      "speakerPrompt": "What is something sensual or romantic that you crave from me, but hesitate to ask for directly?",
+      "listenerPrompt": "Receive their romantic desire with warmth, curiosity, and excitement.",
+      "passAction": "pass_partner",
+      "tags": ["romance", "desire"]
+    },
+    {
+      "id": "lov_t3_01",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is an old wound or betrayal in our past together that you still haven't fully healed from, even if we said we moved on?",
+      "listenerPrompt": "Do not say 'Are we still talking about that?' Hear the residual pain. Say: 'I am so sorry for the scar that left.'",
+      "passAction": "pass_partner",
+      "tags": ["deep_repair", "past_wounds"]
+    },
+    {
+      "id": "lov_t3_02",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is your deepest terror when you contemplate what our relationship would look like if we let life pull us completely apart?",
+      "listenerPrompt": "Acknowledge the gravity of drift. Reaffirm your commitment to fight for the relationship.",
+      "passAction": "pass_partner",
+      "tags": ["relational_drift", "commitment"]
+    },
+    {
+      "id": "lov_t3_03",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "In what moments do you feel I withdraw my love, affection, or warmth as a subtle punishment?",
+      "listenerPrompt": "Confront your emotional withdrawal. Commit to keeping your heart open even when frustrated.",
+      "passAction": "pass_partner",
+      "tags": ["emotional_withholding", "safety"]
+    },
+    {
+      "id": "lov_t3_04",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is a vulnerable truth about your self-image or body that you are afraid makes you less attractive to me over time?",
+      "listenerPrompt": "Look at them with complete, unconditional adoration: 'I love who you are, and you are beautiful to me.'",
+      "passAction": "pass_partner",
+      "tags": ["body_image", "vulnerability"]
+    },
+    {
+      "id": "lov_t3_05",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What does genuine emotional sanctuary mean to you, and how can our home become that safe space for you every single day?",
+      "listenerPrompt": "Listen to what allows their nervous system to fully downshift and rest with you.",
+      "passAction": "pass_partner",
+      "tags": ["emotional_sanctuary", "home"]
+    },
+    {
+      "id": "lov_t3_06",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "If you could ask me to radically change one behavioral pattern or coping mechanism for the sake of our long-term health, what would it be?",
+      "listenerPrompt": "Receive this loving challenge as medicine. Say: 'I know you love me, and I hear why that matters to you.'",
+      "passAction": "pass_partner",
+      "tags": ["growth", "loving_challenge"]
+    },
+    {
+      "id": "lov_t3_07",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "What is a fantasy, sensual yearning, or erotic desire you have kept hidden because you feared shame or judgment?",
+      "listenerPrompt": "Create a container of zero judgment, total safety, and open-minded acceptance.",
+      "passAction": "pass_partner",
+      "tags": ["erotic_intimacy", "unspoken_desire"]
+    },
+    {
+      "id": "lov_t3_08",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "When you think about aging together and facing illness or death, what promise do you need us to make to each other right now?",
+      "listenerPrompt": "Hold their hand tightly. Speak that sacred covenant aloud.",
+      "passAction": "pass_partner",
+      "tags": ["aging", "covenant", "mortality"]
+    },
+    {
+      "id": "lov_t3_09",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "In what specific ways have I helped heal a wound you brought into our relationship from your childhood or past heartbreak?",
+      "listenerPrompt": "Let the beauty of your healing impact on your partner land deeply in your heart.",
+      "passAction": "pass_partner",
+      "tags": ["healing", "sanctuary"]
+    },
+    {
+      "id": "lov_t3_10",
+      "tier": 3,
+      "type": "prompt",
+      "speakerPrompt": "Right now, looking into my eyes, what is the most honest, unfiltered statement you can make about your commitment to us?",
+      "listenerPrompt": "Breathe together. Absorb every word of their presence and devotion.",
+      "passAction": "pass_partner",
+      "tags": ["commitment", "presence"]
+    },
+    {
+      "id": "lov_wild_01",
+      "tier": 1,
+      "type": "wildcard",
+      "speakerPrompt": "WILDCARD: 60-Second Forehead Rest. Set the phone down. Gently press your foreheads together with eyes closed and take 5 synchronized deep breaths in silence.",
+      "listenerPrompt": "Sync your heartbeats and breathing rhythms. Let physical tension melt.",
+      "passAction": "pass_partner",
+      "tags": ["somatic", "oxytocin"]
+    },
+    {
+      "id": "lov_wild_02",
+      "tier": 1,
+      "type": "wildcard",
+      "speakerPrompt": "WILDCARD: The Unconditional Compliment Blitz. For 60 seconds, take turns rapid-firing compliments about why you are glad you chose the other person.",
+      "listenerPrompt": "Say 'Thank you' and immediately fire one back!",
+      "passAction": "pass_partner",
+      "tags": ["fondness", "playful"]
+    },
+    {
+      "id": "lov_wild_03",
+      "tier": 2,
+      "type": "wildcard",
+      "speakerPrompt": "WILDCARD: The Sincere Amends. Both partners complete this prompt: 'One specific moment recently where I was impatient, distracted, or cold with you is... and I am genuinely sorry.'",
+      "listenerPrompt": "Receive their apology with grace. Say: 'I accept your apology, and I love you.'",
+      "passAction": "pass_partner",
+      "tags": ["amends", "repair"]
+    },
+    {
+      "id": "lov_wild_04",
+      "tier": 2,
+      "type": "wildcard",
+      "speakerPrompt": "WILDCARD: Love Language Swap. Each partner shares one exact, concrete action the other can do in the next 48 hours to make them feel deeply loved.",
+      "listenerPrompt": "Write it down or commit it to memory. Execute it without needing a reminder.",
+      "passAction": "pass_partner",
+      "tags": ["love_languages", "action"]
+    },
+    {
+      "id": "lov_wild_05",
+      "tier": 3,
+      "type": "wildcard",
+      "speakerPrompt": "WILDCARD: The Covenant Gaze. Place the phone down between you. Hold hands across the table or bed. Maintain unbroken eye contact in silence for 45 seconds while recalling the first week you met.",
+      "listenerPrompt": "Do not break away. Let every year of your shared journey exist in the gaze.",
+      "passAction": "pass_partner",
+      "tags": ["sacred_gaze", "devotion"]
+    }
+  ]
+}

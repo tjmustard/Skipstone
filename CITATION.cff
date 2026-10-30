@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: >-
+  If you use Skipstone in your research or reference it in a paper,
+  please cite it using the metadata below.
+type: software
+title: "Skipstone"
+abstract: >-
+  Free, open-source, offline-first relational intimacy application modeled on skipping stones across water.
+authors:
+  - given-names: Thomas J. L. Mustard Ph.D.
+    family-names: ""
+    alias: tjmustard
+repository-code: "https://github.com/tjmustard/skipstone"
+license: MIT
+version: "0.1.0"
+date-released: "2026-10-29"
+keywords:
+  - Skipstone
