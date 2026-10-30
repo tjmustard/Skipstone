@@ -44,7 +44,7 @@ Skipstone turns a single phone into a physical **talking piece** passed hand-to-
 - **Zero Monetization & Zero Dark Patterns:** No paywalls, subscription tiers, locked expansion decks, daily streaks, ads, or behavioral engagement loops.
 - **Dual-Zone Split Layout:** The top half displays the speaker prompt to read aloud; the bottom half provides real-time **Active Listener Attunement** guidance based on psychological research (validating and holding space without offering unsolicited advice).
 - **Single-Device Pass-and-Play:** No Bluetooth discovery, Wi-Fi pairing, user accounts, or player profile typing. The physical device is passed between participants (`"pass to your partner"` or `"pass to your left"`).
-- **Autonomous Pacing & Felt Safety:** Higher depth tiers are gated behind baseline exposure thresholds, and advancement is always non-coercive—groups can choose to stay in their current level to draw more cards at any time. Every participant holds an unconditional right to pass.
+- **Autonomous Pacing & Felt Safety:** Higher depth tiers are gated behind baseline exposure thresholds, and advancement is non-coercive. When groups choose to stay in a level, a persistent progression action button unlocks directly in the game view, enabling players to advance or conclude the session on their own terms. Every participant holds an unconditional right to pass.
 - **Embedded Web Audio Synthesizer:** Pure parametric sine waves and harmonic sweeps (440 Hz–880 Hz) generated directly in the browser via the native Web Audio API with zero external audio asset downloads.
 - **De-escalation Checkout:** Every session concludes with a structured 2-step cooldown (one-word emotional state naming + mutual listener appreciation) followed by a screen reminding players to put the phone away.
 
@@ -73,17 +73,21 @@ https://tjmustard.github.io/Skipstone/
 
 ```mermaid
 flowchart LR
-    T1["Tier 1: Warm Up<br/>(Surface Skimming)"] -->|4+ Cards Answered| Modal{"Advance or Stay?"}
-    Modal -->|Advance| T2["Tier 2: Vulnerability<br/>(Concentric Ripples)"]
-    Modal -->|Stay| T1
+    T1["Tier 1: Warm Up<br/>(Surface Skimming)"] -->|4+ Cards Answered| Modal1{"Advance or Stay?"}
+    Modal1 -->|Advance| T2["Tier 2: Vulnerability<br/>(Concentric Ripples)"]
+    Modal1 -->|Stay| T1Btn["Tier 1 Extended Play<br/>(Advance Button Unlocked)"]
+    T1Btn -->|Advance to Level 2| T2
     T2 -->|4+ Cards Answered| Modal2{"Advance or Stay?"}
     Modal2 -->|Advance| T3["Tier 3: Core Truths<br/>(Clear Deep Water)"]
-    Modal2 -->|Stay| T2
+    Modal2 -->|Stay| T2Btn["Tier 2 Extended Play<br/>(Advance Button Unlocked)"]
+    T2Btn -->|Advance to Level 3| T3
+    T3 -->|4+ Cards Answered| Checkout["Grounding Checkout<br/>(Complete Session Unlocked)"]
 ```
 
 - **Tier 1 (Surface / Warm Up):** Low-stakes perceptions, nostalgic grounding, sensory preferences, and laughter.
 - **Tier 2 (Ripples / Vulnerability):** Formative lessons, unmet needs, childhood patterns, and non-defensive candor.
 - **Tier 3 (Deep Water / Core Truths):** Mortality, unspoken burdens, forgiveness, sacred vows, and deep emotional repair.
+- **Persistent Progression & Session Completion:** Choosing to stay in Tier 1 or 2 unlocks a persistent bottom action button (`Advance to Level [N+1] →`) so groups can progress whenever ready. In Tier 3, answering 4+ cards unlocks `Complete Session →` directly into the 2-step grounding checkout.
 - **Wildcard Bernoulli Randomization ($P \approx 0.12$):** Each draw triggers an independent probability trial pulling from tier-specific somatic and circle challenges (silent eye contact, the hot seat, or collective silence).
 
 ---

@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-10-30
+
+### Added
+- **Persistent Tier Progression Button (`src/ui/views/SplitGameView.ts`)**: Added dynamic, tier-aware third action button (`#progression-action-btn`) mounted in bottom navigation when progression is unlocked (`(currentTier < 3 && hasShownProgressionForTier) || (currentTier === 3 && cardsAnsweredInTier >= 4)`).
+- **Mobile-Responsive 2-Row Navigation**: Implemented stacked 2-row layout on mobile viewports (<640px) with the persistent progression button on top and Previous/Next buttons below, preserving $\ge 44$px touch targets and preventing spatial displacement.
+- **Session Persistence (`src/core/state.ts`, `src/data/types.ts`)**: Added `hasShownProgressionForTier` tracking and getter to `StateMachine`, persisting state through `EphemeralSessionPayload` in `sessionStorage` across mobile tab suspension and page refreshes.
+- **Verification & Accessibility Suite (`tests/ui.test.ts`, `tests/contrast.test.ts`, `tests/engine.test.ts`)**: Added 15 new automated deterministic tests (expanding suite to 41 tests) asserting navigation button mounting, action dispatching, transition debouncing, session serialization, and WCAG AAA contrast compliance ($\ge 7.0:1$) across all tier progression button tokens.
+
+### Changed
+- **`src/ui/views/BriefingView.ts`**: Refined agreement card typography and styling to match dark-surface aesthetic.
+- **Service Worker (`src/service-worker.ts`)**: Incremented cache name to `skipstone-v1.0.1`.
+
+### Fixed
+- **Tier Progression Deadlock**: Resolved issue where participants selecting "Stay in Current Level" in `ProgressionModal` had no persistent, localized controls in `SplitGameView` to advance tiers or conclude the session.
+- **Transition Race Conditions**: Added immediate button disablement and 400ms transition guard to prevent accidental double-tap tier skipping.
+
 ## [1.0.0] - 2026-10-29
 
 ### Added

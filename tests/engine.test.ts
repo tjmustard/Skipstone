@@ -106,10 +106,53 @@ describe('Core Engine Verification', () => {
       expect(loaded).toBeNull();
       expect(sessionStorage.getItem(SESSION_STORAGE_KEY)).toBeNull();
     });
+
+    it('preserves hasShownProgressionForTier across session serialization and tryRestoreSession', () => {
+      const sm = new StateMachine(4321);
+      sm.selectDeck(generalDeck);
+      sm.startSession();
+      // Draw until progression modal triggers at card 4+
+      sm.nextCard(); // card 2
+      sm.nextCard(); // card 3
+      sm.nextCard(); // card 4
+      sm.nextCard(); // triggers PROGRESSION_MODAL, sets hasShownProgressionForTier = true
+      expect(sm.getHasShownProgressionForTier()).toBe(true);
+      sm.stayInCurrentTier(); // back to IN_SESSION, auto-persisting session
+
+      // Restore into fresh state machine
+      const smRestored = new StateMachine(9999);
+      const restored = smRestored.tryRestoreSession(BUILT_IN_DECKS);
+      expect(restored).toBe(true);
+      expect(smRestored.getHasShownProgressionForTier()).toBe(true);
+      expect(smRestored.getState().cardsAnsweredInTier).toBe(4);
+    });
   });
 
   describe('Finite State Machine', () => {
     const generalDeck = BUILT_IN_DECKS[0];
+
+    it('tracks getHasShownProgressionForTier getter transitions and resets correctly', () => {
+      const sm = new StateMachine(5555);
+      expect(sm.getHasShownProgressionForTier()).toBe(false);
+
+      sm.selectDeck(generalDeck);
+      sm.startSession();
+      expect(sm.getHasShownProgressionForTier()).toBe(false);
+
+      sm.nextCard(); // 2
+      sm.nextCard(); // 3
+      sm.nextCard(); // 4
+      expect(sm.getHasShownProgressionForTier()).toBe(false);
+
+      sm.nextCard(); // triggers PROGRESSION_MODAL
+      expect(sm.getHasShownProgressionForTier()).toBe(true);
+
+      sm.stayInCurrentTier();
+      expect(sm.getHasShownProgressionForTier()).toBe(true);
+
+      sm.advanceTier();
+      expect(sm.getHasShownProgressionForTier()).toBe(false);
+    });
 
     it('manages complete session progression from DECK_SELECT to GROUNDING_CHECKOUT', () => {
       const sm = new StateMachine(1234);

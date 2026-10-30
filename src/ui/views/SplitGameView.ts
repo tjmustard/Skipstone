@@ -1,8 +1,26 @@
-import type { AppState } from '../../core/state';
+import type { AppState, StateMachine } from '../../core/state';
 import { globalStateMachine } from '../../core/state';
 import { GestureHandler } from '../../core/gestures';
 
-export function createSplitGameView(state: AppState): { element: HTMLElement; cleanup: () => void } {
+export const TIER_PROGRESSION_COLORS = {
+  1: {
+    hex: '#5eead4', // teal-300
+    classes: 'bg-teal-950/80 hover:bg-teal-900/90 text-teal-300 border-teal-700/80 shadow-teal-950/40',
+  },
+  2: {
+    hex: '#fcd34d', // amber-300
+    classes: 'bg-amber-950/80 hover:bg-amber-900/90 text-amber-300 border-amber-700/80 shadow-amber-950/40',
+  },
+  3: {
+    hex: '#6ee7b7', // emerald-300
+    classes: 'bg-emerald-950/80 hover:bg-emerald-900/90 text-emerald-300 border-emerald-700/80 shadow-emerald-950/40',
+  },
+} as const;
+
+export function createSplitGameView(
+  state: AppState,
+  stateMachine: StateMachine = globalStateMachine
+): { element: HTMLElement; cleanup: () => void } {
   const card = state.activeCard;
   if (!card) {
     const fallback = document.createElement('div');
@@ -126,42 +144,101 @@ export function createSplitGameView(state: AppState): { element: HTMLElement; cl
   container.appendChild(cardFrame);
 
   // Bottom Navigation & Gesture Instruction Bar
+  const isProgressionUnlocked =
+    (state.currentTier < 3 && stateMachine.getHasShownProgressionForTier()) ||
+    (state.currentTier === 3 && state.cardsAnsweredInTier >= 4);
+
   const navBar = document.createElement('div');
-  navBar.className = 'flex items-center justify-between pt-3 pb-1 shrink-0 text-xs text-slate-400';
 
   // 1-Step Undo Button
   const undoBtn = document.createElement('button');
   undoBtn.type = 'button';
-  undoBtn.className = `inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border text-xs font-medium transition-colors ${
-    state.previousCard
-      ? 'border-slate-700 bg-slate-900/70 text-slate-300 hover:text-white hover:bg-slate-800'
-      : 'border-slate-800/40 bg-slate-950/20 text-slate-600 cursor-not-allowed'
-  }`;
   undoBtn.disabled = !state.previousCard;
   undoBtn.textContent = '↩ Previous Card';
   undoBtn.onclick = (e) => {
     e.stopPropagation();
-    globalStateMachine.previousCard();
+    stateMachine.previousCard();
   };
-  navBar.appendChild(undoBtn);
 
   // Advance Hint / Button
   const advanceBtn = document.createElement('button');
   advanceBtn.type = 'button';
-  advanceBtn.className = 'inline-flex items-center gap-1 px-4 py-1.5 rounded-lg bg-indigo-600/20 hover:bg-indigo-600/30 border border-indigo-500/40 text-indigo-300 font-medium transition-colors';
   advanceBtn.textContent = 'Next Card →';
   advanceBtn.onclick = () => {
-    globalStateMachine.nextCard();
+    stateMachine.nextCard();
   };
-  navBar.appendChild(advanceBtn);
+
+  if (!isProgressionUnlocked) {
+    navBar.className = 'flex items-center justify-between pt-3 pb-1 shrink-0 text-xs text-slate-400';
+
+    undoBtn.className = `inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border text-xs font-medium transition-colors ${
+      state.previousCard
+        ? 'border-slate-700 bg-slate-900/70 text-slate-300 hover:text-white hover:bg-slate-800'
+        : 'border-slate-800/40 bg-slate-950/20 text-slate-600 cursor-not-allowed'
+    }`;
+    advanceBtn.className = 'inline-flex items-center gap-1 px-4 py-1.5 rounded-lg bg-indigo-600/20 hover:bg-indigo-600/30 border border-indigo-500/40 text-indigo-300 font-medium transition-colors';
+
+    navBar.appendChild(undoBtn);
+    navBar.appendChild(advanceBtn);
+  } else {
+    navBar.className = 'grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-3 pb-1 shrink-0 text-xs text-slate-400 items-center';
+
+    undoBtn.className = `order-2 sm:order-1 inline-flex items-center justify-center gap-1 px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-0 rounded-lg border text-xs font-medium transition-colors ${
+      state.previousCard
+        ? 'border-slate-700 bg-slate-900/70 text-slate-300 hover:text-white hover:bg-slate-800'
+        : 'border-slate-800/40 bg-slate-950/20 text-slate-600 cursor-not-allowed'
+    }`;
+
+    advanceBtn.className = 'order-3 sm:order-3 inline-flex items-center justify-center gap-1 px-4 py-2 sm:py-1.5 min-h-[44px] sm:min-h-0 rounded-lg bg-indigo-600/20 hover:bg-indigo-600/30 border border-indigo-500/40 text-indigo-300 font-medium transition-colors';
+
+    const progressionTheme = TIER_PROGRESSION_COLORS[state.currentTier];
+    const progressionLabel =
+      state.currentTier === 1
+        ? 'Advance to Level 2 →'
+        : state.currentTier === 2
+        ? 'Advance to Level 3 →'
+        : 'Complete Session →';
+
+    const progressionBtn = document.createElement('button');
+    progressionBtn.type = 'button';
+    progressionBtn.id = 'progression-action-btn';
+    progressionBtn.setAttribute('role', 'button');
+    progressionBtn.setAttribute('aria-label', progressionLabel);
+    progressionBtn.setAttribute('aria-live', 'polite');
+    progressionBtn.className = `col-span-2 sm:col-span-1 order-1 sm:order-2 inline-flex items-center justify-center gap-1.5 px-4 py-2 sm:py-1.5 min-h-[44px] sm:min-h-0 rounded-lg border font-semibold text-xs transition-all active:scale-95 shadow-md ${progressionTheme.classes}`;
+    progressionBtn.textContent = progressionLabel;
+
+    let isTransitioning = false;
+    progressionBtn.onclick = (e) => {
+      e.stopPropagation();
+      if (isTransitioning || progressionBtn.disabled) return;
+      isTransitioning = true;
+      progressionBtn.disabled = true;
+
+      if (state.currentTier === 3) {
+        stateMachine.startGroundingCheckout();
+      } else {
+        stateMachine.advanceTier();
+      }
+
+      setTimeout(() => {
+        isTransitioning = false;
+        progressionBtn.disabled = false;
+      }, 400);
+    };
+
+    navBar.appendChild(undoBtn);
+    navBar.appendChild(progressionBtn);
+    navBar.appendChild(advanceBtn);
+  }
 
   container.appendChild(navBar);
 
   // Initialize Gesture Listener on cardFrame
   const gestures = new GestureHandler(cardFrame, {
-    onNext: () => globalStateMachine.nextCard(),
-    onPrevious: () => globalStateMachine.previousCard(),
-    onToggleSound: () => globalStateMachine.toggleSound(),
+    onNext: () => stateMachine.nextCard(),
+    onPrevious: () => stateMachine.previousCard(),
+    onToggleSound: () => stateMachine.toggleSound(),
   });
 
   return {

@@ -3,7 +3,8 @@ nodes:
   dimension: System
   status: clean
   associated_file: spec/compiled/SuperPRD.md
-  description: Offline-first PWA conversational intimacy web application orchestrating prompt catalogs, audio engine, state transitions, and responsive touch UI
+  description: Offline-first PWA conversational intimacy web application orchestrating
+    prompt catalogs, audio engine, state transitions, persistent tier progression, session completion navigation, and responsive touch UI
   inputs:
   - data_type: user_touch_and_keyboard_events
     source_id: browser_dom
@@ -29,7 +30,8 @@ nodes:
   dimension: Module
   status: clean
   associated_file: src/service-worker.ts
-  description: Vite asset pipeline, Tailwind styling, local font subsets (Inter, Outfit), and cache-first Service Worker with passive background updates
+  description: Vite asset pipeline, Tailwind styling, local font subsets (Inter, Outfit),
+    and cache-first Service Worker with passive background updates
   inputs:
   - data_type: source_assets_and_webmanifest
     source_id: filesystem
@@ -48,7 +50,8 @@ nodes:
   dimension: Module
   status: clean
   associated_file: src/data/registry.ts
-  description: Static TypeScript compilation and static registry of 8 prompt catalogs (415 items) across 3 intimacy tiers extracted from SI/
+  description: Static TypeScript compilation and static registry of 8 prompt catalogs
+    (415 items) across 3 intimacy tiers extracted from SI/
   inputs:
   - data_type: markdown_catalog_tables
     source_id: SI/
@@ -68,7 +71,8 @@ nodes:
   dimension: Module
   status: clean
   associated_file: src/core/state.ts
-  description: Finite state machine, seedable Mulberry32 PRNG dealer with smoothed Bernoulli wildcards, Web Audio synthesis engine, touch gestures, and 15-min TTL session storage
+  description: Finite state machine, seedable Mulberry32 PRNG dealer with smoothed
+    Bernoulli wildcards, Web Audio synthesis engine, touch gestures, 15-min TTL session storage with hasShownProgressionForTier persistence, and tier progression / grounding checkout navigation
   inputs:
   - data_type: built_in_prompt_catalogs
     source_id: module_prompt_catalogs
@@ -92,7 +96,7 @@ nodes:
   dimension: Module
   status: clean
   associated_file: src/ui/views/SplitGameView.ts
-  description: Modular UI views including responsive dual-zone SplitGameView (textContent-safe), DeckSelectorView, BriefingView, ProgressionModal, GroundingCheckoutView, and OS switcher privacy shield
+  description: Modular UI views including responsive dual-zone SplitGameView with dynamic tier-aware third action button for persistent level advancement and session completion, WCAG AAA styling tokens, DeckSelectorView, BriefingView, ProgressionModal, GroundingCheckoutView, and OS switcher privacy shield
   inputs:
   - data_type: app_state_and_card_stream
     source_id: module_core_engine
@@ -118,7 +122,7 @@ nodes:
   dimension: Module
   status: clean
   associated_file: src/data/validator.ts
-  description: Zero-dependency <2KB schema validator with 1MB file limit, custom_ ID namespacing, IndexedDB persistence, and JSON deck exporter
+  description: Zero-dependency schema validator with 1MB file limit, custom_ ID namespacing, validation error reporting, and sanitization for custom deck imports
   inputs:
   - data_type: custom_deck_file_selection
     source_id: module_ui_shell
@@ -144,7 +148,7 @@ nodes:
   dimension: Module
   status: clean
   associated_file: tests/engine.test.ts
-  description: Automated Vitest test suite, headless AudioContext mocks, WCAG AAA color contrast verifier, and 180KB gzipped bundle budget assertion script
+  description: Automated Vitest test suite covering PRNG determinism, Smoothed Bernoulli dealer spacing, Ephemeral storage TTL and hasShownProgressionForTier persistence, Finite State Machine tier progression/modal flows, headless AudioContext mocks, WCAG AAA color contrast verifier, and bundle size budget assertions
   inputs:
   - data_type: app_state_and_card_stream
     source_id: module_core_engine

@@ -34,5 +34,6 @@ export interface EphemeralSessionPayload {
   activeCard: ConversationPrompt | null;
   previousCard: ConversationPrompt | null;
   soundEnabled: boolean;
+  hasShownProgressionForTier?: boolean;
   lastActiveTimestamp: number;        // For 15-min TTL expiry check
 }

@@ -2,7 +2,7 @@
 
 declare const self: ServiceWorkerGlobalScope;
 
-const CACHE_NAME = 'skipstone-v1.0.0';
+const CACHE_NAME = 'skipstone-v1.0.1';
 const PRECACHE_URLS = [
   '/',
   '/index.html',

@@ -62,6 +62,36 @@ describe('WCAG AAA Color Contrast Verification', () => {
       text: '#34d399',
       bg: '#020617',
     },
+    {
+      name: 'Tier 1 Progression Button: Teal 300 on Slate 900 container',
+      text: '#5eead4',
+      bg: '#0f172a',
+    },
+    {
+      name: 'Tier 1 Progression Button: Teal 300 on Slate 950 background',
+      text: '#5eead4',
+      bg: '#020617',
+    },
+    {
+      name: 'Tier 2 Progression Button: Amber 300 on Stone 900 container',
+      text: '#fcd34d',
+      bg: '#1c1917',
+    },
+    {
+      name: 'Tier 2 Progression Button: Amber 300 on Slate 950 background',
+      text: '#fcd34d',
+      bg: '#020617',
+    },
+    {
+      name: 'Tier 3 Progression Button: Emerald 300 on Zinc 900 container',
+      text: '#6ee7b7',
+      bg: '#18181b',
+    },
+    {
+      name: 'Tier 3 Progression Button: Emerald 300 on Slate 950 background',
+      text: '#6ee7b7',
+      bg: '#020617',
+    },
   ];
 
   pairings.forEach(({ name, text, bg }) => {

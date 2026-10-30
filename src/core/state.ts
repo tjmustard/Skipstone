@@ -63,6 +63,10 @@ export class StateMachine {
     return { ...this.state };
   }
 
+  public getHasShownProgressionForTier(): boolean {
+    return this.hasShownProgressionForTier;
+  }
+
   public subscribe(listener: StateListener): () => void {
     this.listeners.add(listener);
     listener(this.getState());
@@ -87,6 +91,7 @@ export class StateMachine {
           previousCard: this.state.previousCard,
           soundEnabled: this.state.soundEnabled,
           lastActiveTimestamp: Date.now(),
+          hasShownProgressionForTier: this.hasShownProgressionForTier,
         };
         EphemeralStorageManager.saveSession(payload);
       }
@@ -267,6 +272,7 @@ export class StateMachine {
     this.state.drawnPromptIds = saved.drawnPromptIds || [];
     this.state.soundEnabled = saved.soundEnabled ?? true;
     this.state.view = 'IN_SESSION';
+    this.hasShownProgressionForTier = saved.hasShownProgressionForTier ?? false;
 
     this.dealer.loadDeck(deck, saved.currentTier);
     globalSoundEngine.setSoundEnabled(this.state.soundEnabled);
