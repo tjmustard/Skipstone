@@ -33,7 +33,7 @@ describe('UI Shell & View Components Verification', () => {
 
     expect(briefing.textContent).toContain(deck.title);
     expect(briefing.textContent).toContain('Begin Conversational Journey');
-    expect(briefing.textContent).toContain('Relational Agreements');
+    expect(briefing.textContent).toContain('SHARED AGREEMENTS');
   });
 
   it('renders SplitGameView with top Speaker zone and bottom Listener zone using textContent', () => {
