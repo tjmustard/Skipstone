@@ -74,7 +74,30 @@ export function createSplitGameView(
   tierBadge.textContent = tierColor.tierName;
   speakerHeader.appendChild(tierBadge);
 
-  if (card.type === 'wildcard') {
+  // Speaker Role Badge (Task 2)
+  if (state.currentDeck?.isBilateral || card.targetRole) {
+    const speakerRoleBadge = document.createElement('span');
+    speakerRoleBadge.id = 'speaker-role-badge';
+    if (card.type === 'wildcard' || card.targetRole === 'mutual') {
+      speakerRoleBadge.className = 'px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider rounded-full bg-purple-950/80 text-purple-300 border border-purple-800 animate-pulse';
+      speakerRoleBadge.textContent = '[Mutual - Both Answer]';
+    } else {
+      const activeRoleKey = state.activeRole || card.targetRole || state.currentDeck?.roleA;
+      let roleLabel = 'Speaker';
+      if (state.currentDeck) {
+        if (activeRoleKey === state.currentDeck.roleA) {
+          roleLabel = state.currentDeck.roleLabels?.roleA ?? (activeRoleKey ? activeRoleKey.charAt(0).toUpperCase() + activeRoleKey.slice(1) : 'Speaker');
+        } else if (activeRoleKey === state.currentDeck.roleB) {
+          roleLabel = state.currentDeck.roleLabels?.roleB ?? (activeRoleKey ? activeRoleKey.charAt(0).toUpperCase() + activeRoleKey.slice(1) : 'Speaker');
+        } else if (activeRoleKey) {
+          roleLabel = activeRoleKey.charAt(0).toUpperCase() + activeRoleKey.slice(1);
+        }
+      }
+      speakerRoleBadge.className = 'px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider rounded-full bg-indigo-950/80 text-indigo-300 border border-indigo-800';
+      speakerRoleBadge.textContent = `[Speaker: ${roleLabel}]`;
+    }
+    speakerHeader.appendChild(speakerRoleBadge);
+  } else if (card.type === 'wildcard') {
     const wildcardBadge = document.createElement('span');
     wildcardBadge.className = 'px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider rounded-full bg-purple-950/80 text-purple-300 border border-purple-800 animate-pulse';
     wildcardBadge.textContent = '★ Wildcard';
@@ -143,53 +166,75 @@ export function createSplitGameView(
 
   container.appendChild(cardFrame);
 
-  // Bottom Navigation & Gesture Instruction Bar
+  // ==========================================
+  // BOTTOM NAVIGATION & ACTIONS BAR (Tasks 3, 4, 5)
+  // ==========================================
   const isProgressionUnlocked =
     (state.currentTier < 3 && stateMachine.getHasShownProgressionForTier()) ||
     (state.currentTier === 3 && state.cardsAnsweredInTier >= 4);
 
   const navBar = document.createElement('div');
+  navBar.id = 'nav-actions-container';
 
-  // 1-Step Undo Button
+  const baseButtonClass =
+    'flex-1 inline-flex items-center justify-center gap-1 px-2 sm:px-3 py-2 sm:py-1.5 min-h-[44px] min-w-[44px] rounded-lg border text-xs sm:text-sm font-medium transition-colors text-center whitespace-nowrap';
+
+  // 1-Step Undo Button (Task 4)
   const undoBtn = document.createElement('button');
   undoBtn.type = 'button';
-  undoBtn.disabled = !state.previousCard;
-  undoBtn.textContent = '↩ Previous Card';
+  undoBtn.id = 'prev-card-btn';
+  undoBtn.setAttribute('aria-label', 'Previous Card');
+  undoBtn.disabled = !state.hasUndoAvailable;
+  undoBtn.className = `${baseButtonClass} ${
+    state.hasUndoAvailable
+      ? 'border-slate-700 bg-slate-900/70 text-slate-300 hover:text-white hover:bg-slate-800 cursor-pointer'
+      : 'border-slate-800/40 bg-slate-950/20 text-slate-600 cursor-not-allowed'
+  }`;
+  undoBtn.innerHTML = '<span class="hidden sm:inline">↩ Previous Card</span><span class="inline sm:hidden">↩ Prev</span>';
   undoBtn.onclick = (e) => {
     e.stopPropagation();
+    if (undoBtn.disabled) return;
+    undoBtn.disabled = true;
     stateMachine.previousCard();
   };
 
-  // Advance Hint / Button
+  // Skip Card Button (Task 3)
+  const canSkip = stateMachine.canSkip();
+  const skipBtn = document.createElement('button');
+  skipBtn.type = 'button';
+  skipBtn.id = 'skip-card-btn';
+  skipBtn.setAttribute('aria-label', 'Skip Card');
+  skipBtn.disabled = !canSkip;
+  skipBtn.className = `${baseButtonClass} ${
+    canSkip
+      ? 'border-slate-700 bg-slate-900/70 text-slate-300 hover:text-white hover:bg-slate-800 cursor-pointer'
+      : 'border-slate-800/40 bg-slate-950/20 text-slate-600 cursor-not-allowed'
+  }`;
+  skipBtn.innerHTML = '<span class="hidden sm:inline">Skip Card ↷</span><span class="inline sm:hidden">Skip ↷</span>';
+  skipBtn.onclick = (e) => {
+    e.stopPropagation();
+    if (skipBtn.disabled) return;
+    stateMachine.skipCard();
+  };
+
+  // Next Card Button
   const advanceBtn = document.createElement('button');
   advanceBtn.type = 'button';
-  advanceBtn.textContent = 'Next Card →';
+  advanceBtn.id = 'next-card-btn';
+  advanceBtn.setAttribute('aria-label', 'Next Card');
+  advanceBtn.className = `${baseButtonClass} bg-indigo-600/20 hover:bg-indigo-600/30 border-indigo-500/40 text-indigo-300 cursor-pointer`;
+  advanceBtn.innerHTML = '<span class="hidden sm:inline">Next Card →</span><span class="inline sm:hidden">Next →</span>';
   advanceBtn.onclick = () => {
     stateMachine.nextCard();
   };
 
   if (!isProgressionUnlocked) {
-    navBar.className = 'flex items-center justify-between pt-3 pb-1 shrink-0 text-xs text-slate-400';
-
-    undoBtn.className = `inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border text-xs font-medium transition-colors ${
-      state.previousCard
-        ? 'border-slate-700 bg-slate-900/70 text-slate-300 hover:text-white hover:bg-slate-800'
-        : 'border-slate-800/40 bg-slate-950/20 text-slate-600 cursor-not-allowed'
-    }`;
-    advanceBtn.className = 'inline-flex items-center gap-1 px-4 py-1.5 rounded-lg bg-indigo-600/20 hover:bg-indigo-600/30 border border-indigo-500/40 text-indigo-300 font-medium transition-colors';
-
+    navBar.className = 'flex items-center justify-between gap-1.5 sm:gap-2 pt-3 pb-1 shrink-0 text-xs sm:text-sm text-slate-400 flex-nowrap overflow-x-hidden w-full';
     navBar.appendChild(undoBtn);
+    navBar.appendChild(skipBtn);
     navBar.appendChild(advanceBtn);
   } else {
-    navBar.className = 'grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-3 pb-1 shrink-0 text-xs text-slate-400 items-center';
-
-    undoBtn.className = `order-2 sm:order-1 inline-flex items-center justify-center gap-1 px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-0 rounded-lg border text-xs font-medium transition-colors ${
-      state.previousCard
-        ? 'border-slate-700 bg-slate-900/70 text-slate-300 hover:text-white hover:bg-slate-800'
-        : 'border-slate-800/40 bg-slate-950/20 text-slate-600 cursor-not-allowed'
-    }`;
-
-    advanceBtn.className = 'order-3 sm:order-3 inline-flex items-center justify-center gap-1 px-4 py-2 sm:py-1.5 min-h-[44px] sm:min-h-0 rounded-lg bg-indigo-600/20 hover:bg-indigo-600/30 border border-indigo-500/40 text-indigo-300 font-medium transition-colors';
+    navBar.className = 'flex flex-col gap-2 pt-3 pb-1 shrink-0 text-xs sm:text-sm text-slate-400 w-full overflow-x-hidden';
 
     const progressionTheme = TIER_PROGRESSION_COLORS[state.currentTier];
     const progressionLabel =
@@ -205,14 +250,14 @@ export function createSplitGameView(
     progressionBtn.setAttribute('role', 'button');
     progressionBtn.setAttribute('aria-label', progressionLabel);
     progressionBtn.setAttribute('aria-live', 'polite');
-    progressionBtn.className = `col-span-2 sm:col-span-1 order-1 sm:order-2 inline-flex items-center justify-center gap-1.5 px-4 py-2 sm:py-1.5 min-h-[44px] sm:min-h-0 rounded-lg border font-semibold text-xs transition-all active:scale-95 shadow-md ${progressionTheme.classes}`;
+    progressionBtn.className = `w-full inline-flex items-center justify-center gap-1.5 px-4 py-2 sm:py-1.5 min-h-[44px] rounded-lg border font-semibold text-xs sm:text-sm transition-all active:scale-95 shadow-md ${progressionTheme.classes}`;
     progressionBtn.textContent = progressionLabel;
 
-    let isTransitioning = false;
+    let isProgressionTransitioning = false;
     progressionBtn.onclick = (e) => {
       e.stopPropagation();
-      if (isTransitioning || progressionBtn.disabled) return;
-      isTransitioning = true;
+      if (isProgressionTransitioning || progressionBtn.disabled) return;
+      isProgressionTransitioning = true;
       progressionBtn.disabled = true;
 
       if (state.currentTier === 3) {
@@ -222,19 +267,43 @@ export function createSplitGameView(
       }
 
       setTimeout(() => {
-        isTransitioning = false;
+        isProgressionTransitioning = false;
         progressionBtn.disabled = false;
       }, 400);
     };
 
-    navBar.appendChild(undoBtn);
+    const primaryRow = document.createElement('div');
+    primaryRow.className = 'flex items-center justify-between gap-1.5 sm:gap-2 flex-nowrap overflow-x-hidden w-full';
+    primaryRow.appendChild(undoBtn);
+    primaryRow.appendChild(skipBtn);
+    primaryRow.appendChild(advanceBtn);
+
     navBar.appendChild(progressionBtn);
-    navBar.appendChild(advanceBtn);
+    navBar.appendChild(primaryRow);
   }
 
   container.appendChild(navBar);
 
-  // Initialize Gesture Listener on cardFrame
+  // Task 7: Visibility Inactivity Refresh Listener
+  const handleVisibilityChange = () => {
+    if (document.visibilityState === 'visible') {
+      try {
+        if (typeof window !== 'undefined' && window.sessionStorage) {
+          const raw = window.sessionStorage.getItem('skipstone_ephemeral_session');
+          if (raw) {
+            const session = JSON.parse(raw);
+            session.lastActiveTimestamp = Date.now();
+            window.sessionStorage.setItem('skipstone_ephemeral_session', JSON.stringify(session));
+          }
+        }
+      } catch {
+        // ignore storage errors
+      }
+    }
+  };
+  document.addEventListener('visibilitychange', handleVisibilityChange);
+
+  // Initialize Gesture Listener on cardFrame (Task 6: only onNext and onPrevious)
   const gestures = new GestureHandler(cardFrame, {
     onNext: () => stateMachine.nextCard(),
     onPrevious: () => stateMachine.previousCard(),
@@ -243,6 +312,9 @@ export function createSplitGameView(
 
   return {
     element: container,
-    cleanup: () => gestures.detach(),
+    cleanup: () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      gestures.detach();
+    },
   };
 }

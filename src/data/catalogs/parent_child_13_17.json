@@ -1,8 +1,8 @@
 {
   "id": "parent_child_13_17",
   "title": "Parent & Teen",
-  "subtitle": "Identity, Freedom, & Unspoken Truths (Ages 13–17)",
-  "description": "Engineered for adolescents and caregivers navigating identity formation, privacy boundaries, peer pressures, and the renegotiation of authority into mutual respect.",
+  "subtitle": "Identity, Freedom, & Unspoken Truths (Ages 13\u201317)",
+  "description": "Engineered for adolescents and caregivers working through identity formation, privacy boundaries, peer pressures, and the renegotiation of authority into mutual respect.",
   "targetAudience": "parent_child",
   "defaultPassAction": "pass_partner",
   "participantMode": "dyadic",
@@ -21,19 +21,21 @@
         "culture",
         "headspace",
         "music"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc1317_t1_02",
       "tier": 1,
       "type": "prompt",
       "speakerPrompt": "What is an internet subculture, aesthetic, or community that you find fascinating, even if you only observe from the sidelines?",
-      "listenerPrompt": "Caregiver: Treat their digital ecosystem as a genuine cultural landscape. Ask: 'What attracts people to that subculture?'",
+      "listenerPrompt": "Caregiver: Treat their digital ecosystem as a genuine culture. Ask: 'What attracts people to that space?'",
       "passAction": "pass_partner",
       "tags": [
         "digital_world",
         "subcultures"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc1317_t1_03",
@@ -45,7 +47,8 @@
       "tags": [
         "desires",
         "fun"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc1317_t1_04",
@@ -57,7 +60,8 @@
       "tags": [
         "school_life",
         "institutions"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc1317_t1_05",
@@ -69,7 +73,8 @@
       "tags": [
         "style",
         "self_expression"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc1317_t1_06",
@@ -81,7 +86,8 @@
       "tags": [
         "rest",
         "rhythm"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc1317_t1_07",
@@ -93,7 +99,8 @@
       "tags": [
         "growth",
         "perspective"
-      ]
+      ],
+      "targetRole": "teen"
     },
     {
       "id": "pc1317_t1_08",
@@ -105,7 +112,8 @@
       "tags": [
         "family_quirks",
         "humor"
-      ]
+      ],
+      "targetRole": "teen"
     },
     {
       "id": "pc1317_t1_09",
@@ -117,7 +125,8 @@
       "tags": [
         "role_models",
         "values"
-      ]
+      ],
+      "targetRole": "teen"
     },
     {
       "id": "pc1317_t1_10",
@@ -129,7 +138,8 @@
       "tags": [
         "bonding",
         "rituals"
-      ]
+      ],
+      "targetRole": "teen"
     },
     {
       "id": "pc1317_t1_11",
@@ -141,7 +151,8 @@
       "tags": [
         "slang",
         "generational_divide"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc1317_t1_12",
@@ -153,19 +164,21 @@
       "tags": [
         "curiosity",
         "learning"
-      ]
+      ],
+      "targetRole": "teen"
     },
     {
       "id": "pc1317_t1_13",
       "tier": 1,
       "type": "prompt",
-      "speakerPrompt": "What is your honest assessment of the food in our house—what is in high rotation that you are completely sick of?",
+      "speakerPrompt": "What is your honest assessment of the food in our house: what is in high rotation that you are completely sick of?",
       "listenerPrompt": "Caregiver: Receive the grocery critique without taking offense. Make an authentic note to refresh the pantry.",
       "passAction": "pass_partner",
       "tags": [
         "preferences",
         "daily_life"
-      ]
+      ],
+      "targetRole": "teen"
     },
     {
       "id": "pc1317_t1_14",
@@ -177,7 +190,8 @@
       "tags": [
         "independence",
         "future"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc1317_t1_15",
@@ -189,7 +203,8 @@
       "tags": [
         "milestones",
         "adventures"
-      ]
+      ],
+      "targetRole": "teen"
     },
     {
       "id": "pc1317_t2_01",
@@ -201,7 +216,8 @@
       "tags": [
         "privacy",
         "boundaries"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc1317_t2_02",
@@ -213,7 +229,8 @@
       "tags": [
         "peer_groups",
         "misconceptions"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc1317_t2_03",
@@ -225,7 +242,8 @@
       "tags": [
         "conflict_patterns",
         "parent_accountability"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc1317_t2_04",
@@ -237,7 +255,8 @@
       "tags": [
         "peer_pressure",
         "empathy"
-      ]
+      ],
+      "targetRole": "teen"
     },
     {
       "id": "pc1317_t2_05",
@@ -249,7 +268,8 @@
       "tags": [
         "autonomy",
         "growing_up"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc1317_t2_06",
@@ -261,7 +281,8 @@
       "tags": [
         "authenticity",
         "fear_of_judgment"
-      ]
+      ],
+      "targetRole": "teen"
     },
     {
       "id": "pc1317_t2_07",
@@ -273,7 +294,8 @@
       "tags": [
         "academic_pressure",
         "expectations"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc1317_t2_08",
@@ -285,7 +307,8 @@
       "tags": [
         "burnout",
         "care"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc1317_t2_09",
@@ -297,7 +320,8 @@
       "tags": [
         "justice",
         "family_dynamics"
-      ]
+      ],
+      "targetRole": "teen"
     },
     {
       "id": "pc1317_t2_10",
@@ -309,7 +333,8 @@
       "tags": [
         "parental_flaws",
         "humility"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc1317_t2_11",
@@ -321,7 +346,8 @@
       "tags": [
         "boundaries",
         "decompression"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc1317_t2_12",
@@ -333,7 +359,8 @@
       "tags": [
         "modern_adolescence",
         "culture"
-      ]
+      ],
+      "targetRole": "teen"
     },
     {
       "id": "pc1317_t2_13",
@@ -345,7 +372,8 @@
       "tags": [
         "parentification",
         "emotional_boundaries"
-      ]
+      ],
+      "targetRole": "teen"
     },
     {
       "id": "pc1317_t2_14",
@@ -357,7 +385,8 @@
       "tags": [
         "life_skills",
         "independence"
-      ]
+      ],
+      "targetRole": "teen"
     },
     {
       "id": "pc1317_t2_15",
@@ -369,7 +398,8 @@
       "tags": [
         "appreciation",
         "connection"
-      ]
+      ],
+      "targetRole": "teen"
     },
     {
       "id": "pc1317_t3_01",
@@ -381,7 +411,8 @@
       "tags": [
         "future_fears",
         "existential"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc1317_t3_02",
@@ -393,7 +424,8 @@
       "tags": [
         "silent_pain",
         "felt_safety"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc1317_t3_03",
@@ -405,7 +437,8 @@
       "tags": [
         "unconditional_love",
         "attachment"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc1317_t3_04",
@@ -417,7 +450,8 @@
       "tags": [
         "individuation",
         "core_values"
-      ]
+      ],
+      "targetRole": "teen"
     },
     {
       "id": "pc1317_t3_05",
@@ -429,7 +463,8 @@
       "tags": [
         "relational_repair",
         "reconciliation"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc1317_t3_06",
@@ -441,19 +476,21 @@
       "tags": [
         "inner_critic",
         "vulnerability"
-      ]
+      ],
+      "targetRole": "teen"
     },
     {
       "id": "pc1317_t3_07",
       "tier": 3,
       "type": "prompt",
-      "speakerPrompt": "If you made a devastating mistake right now—legal, financial, relational, or personal—would you come to me first, and if not, why?",
+      "speakerPrompt": "If you made a devastating mistake right now (legal, financial, relational, or personal), would you come to me first, and if not, why?",
       "listenerPrompt": "Caregiver: Re-establish the Safe Harbor: 'No matter what happens, no mistake will ever make me turn my back on you. You can always call me.'",
       "passAction": "pass_partner",
       "tags": [
         "safe_harbor",
         "trust"
-      ]
+      ],
+      "targetRole": "teen"
     },
     {
       "id": "pc1317_t3_08",
@@ -465,7 +502,8 @@
       "tags": [
         "generational_healing",
         "parenting"
-      ]
+      ],
+      "targetRole": "teen"
     },
     {
       "id": "pc1317_t3_09",
@@ -477,7 +515,8 @@
       "tags": [
         "disenfranchised_grief",
         "validation"
-      ]
+      ],
+      "targetRole": "teen"
     },
     {
       "id": "pc1317_t3_10",
@@ -489,7 +528,8 @@
       "tags": [
         "future_bond",
         "lifelong_connection"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc1317_wild_01",
@@ -501,7 +541,8 @@
       "tags": [
         "music",
         "attunement"
-      ]
+      ],
+      "targetRole": "mutual"
     },
     {
       "id": "pc1317_wild_02",
@@ -513,7 +554,8 @@
       "tags": [
         "playful",
         "humor"
-      ]
+      ],
+      "targetRole": "mutual"
     },
     {
       "id": "pc1317_wild_03",
@@ -525,7 +567,8 @@
       "tags": [
         "conflict_reduction",
         "peace"
-      ]
+      ],
+      "targetRole": "mutual"
     },
     {
       "id": "pc1317_wild_04",
@@ -537,7 +580,8 @@
       "tags": [
         "boundaries",
         "active_listening"
-      ]
+      ],
+      "targetRole": "mutual"
     },
     {
       "id": "pc1317_wild_05",
@@ -549,7 +593,15 @@
       "tags": [
         "affirmation",
         "mutual_respect"
-      ]
+      ],
+      "targetRole": "mutual"
     }
-  ]
+  ],
+  "isBilateral": true,
+  "roleA": "parent",
+  "roleB": "teen",
+  "roleLabels": {
+    "roleA": "Parent",
+    "roleB": "Teen"
+  }
 }

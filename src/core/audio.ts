@@ -40,6 +40,54 @@ export class SoundEngine {
   }
 
   /**
+   * Play distinct double-tick acoustic cue for card skip.
+   */
+  public playCardSkip(): void {
+    this.triggerVisualPulse();
+    if (!this.soundEnabled) return;
+
+    const ctx = this.initContext();
+    if (!ctx) return;
+
+    try {
+      const now = ctx.currentTime;
+      const ticks = [
+        { freq: 750, time: now, duration: 0.035 },
+        { freq: 1100, time: now + 0.055, duration: 0.035 },
+      ];
+
+      ticks.forEach((tick) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(tick.freq, tick.time);
+
+        gain.gain.setValueAtTime(0.001, tick.time);
+        gain.gain.linearRampToValueAtTime(0.07, tick.time + 0.005);
+        gain.gain.exponentialRampToValueAtTime(0.0001, tick.time + tick.duration);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(tick.time);
+        osc.stop(tick.time + tick.duration + 0.01);
+
+        osc.onended = () => {
+          try {
+            osc.disconnect();
+            gain.disconnect();
+          } catch {
+            // ignore disconnect errors
+          }
+        };
+      });
+    } catch (err) {
+      console.warn('[SoundEngine] playCardSkip error:', err);
+    }
+  }
+
+  /**
    * Play gentle card slide sound with strict node reclamation.
    */
   public playCardSlide(): void {

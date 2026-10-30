@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.2] - 2026-10-30
+
+### Added
+- **Bilateral Turn Alternation (`src/core/dealer.ts`, `src/core/state.ts`)**: Implemented role-partitioned card dealing (`roleAPool`, `roleBPool`, `wildcardPool`) for parent-child dyads (`parent_child_5_8`, `parent_child_9_12`, `parent_child_13_17`, `parent_child_adult_offspring`), drawing prompts for the active speaker and toggling counterpart roles upon advance.
+- **Dedicated Skip Action (`src/core/dealer.ts`, `src/ui/views/SplitGameView.ts`)**: Added `[Skip Card ↷]` navigation control allowing the active speaker to bypass a prompt without forfeiting their turn or advancing tier counters; recycles the skipped card to the tail of the active role's pool and automatically disables when $\le 1$ prompt remains in the pool.
+- **Stateful 1-Step Undo Symmetry (`src/core/state.ts`)**: Implemented 1-step undo ledger tracking `previousActionType: 'NEXT' | 'SKIP'`, `previousRole`, and `previousCard`. Accurately restores prior state without turn desynchronization or counter corruption, and disables immediately after a single invocation.
+- **Starter Role Selection (`src/ui/views/BriefingView.ts`)**: Added interactive starter role selector pills in `BriefingView` for bilateral decks, allowing dyads to choose who asks the first question before beginning (defaults to `roleA`).
+- **Acoustic Skip Cue (`src/core/audio.ts`)**: Synthesized distinct double-tick acoustic cue (750 Hz / 1100 Hz triangle oscillator pulse) via the native Web Audio API with safe context error handling.
+- **Mobile Action Bar Ergonomics (`src/ui/views/SplitGameView.ts`)**: Configured responsive compact button labels (`[↩ Prev]`, `[Skip ↷]`, `[Next →]`) with `flex-nowrap`, preserving $\ge 44$px touch targets and eliminating horizontal overflow on $\ge 320$px viewports.
+- **Tab Visibility Inactivity Refresh (`src/ui/views/SplitGameView.ts`)**: Added document visibility listener updating `lastActiveTimestamp` in `sessionStorage` when returning from background or tab suspension.
+- **Bilateral Catalog Metadata & Schema Validation (`src/data/types.ts`, `src/data/validator.ts`, `src/data/catalogs/`)**: Tagged all 180 prompts across 4 parent-child catalogs with explicit `targetRole` values (`roleA`, `roleB`, or `mutual`), added deck-level bilateral properties (`isBilateral`, `roleA`, `roleB`, `roleLabels`), and supported optional bilateral schema fields in custom deck validation.
+- **Deterministic Test Coverage (`tests/dealer.test.ts`, `tests/state.test.ts`, `tests/catalogs.test.ts`, `tests/ui.test.ts`)**: Expanded automated Vitest suite to 77 deterministic tests covering role pool partitioning, turn alternation, skip semantics, undo symmetry, rehydration filtering, and UI role badges.
+
+### Changed
+- **`package.json`**: Bumped version to `1.0.2`.
+- **Service Worker (`src/service-worker.ts`)**: Incremented cache name to `skipstone-v1.0.2`.
+- **Session Rehydration Validation (`src/core/state.ts`)**: Enforced strict validation of saved session deck existence, current tier, active card presence, role alignment, and drawn prompt IDs; filters drawn cards from dealer role pools during rehydration and purges corrupted payloads to `DECK_SELECT`.
+- **Transition Debounce Lockout (`src/core/state.ts`)**: Implemented 350ms lockout flag (`isTransitioning`) preventing multi-tap race conditions across Next, Skip, and Previous actions.
+- **Catalog Writing Style & Tone Alignment (`src/data/catalogs/`)**: Aligned all 415 prompts across the 8 built-in catalogs with writing style standards and verified against `voice_lint.py`:
+  - Eliminated 13 em dashes, restructuring clauses with colons, semicolons, commas, or parentheses.
+  - Replaced florid AI vocabulary (`transformative`, `pivotal`) with plain language (`major formative`, `turning point`).
+  - Rewrote 7 figurative term usages (`navigate`, `unlock`, `cultural landscape`) to concrete verbs and domain descriptions.
+
+### Fixed
+- **Parent-Child Conversational Asymmetry**: Resolved conversational dissonance where prompts framed for a child were dealt to parents or vice-versa, and eliminated consecutive turn imbalances.
+
 ## [1.0.1] - 2026-10-30
 
 ### Added

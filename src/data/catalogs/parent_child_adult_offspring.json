@@ -21,7 +21,8 @@
         "biography",
         "youth",
         "stories"
-      ]
+      ],
+      "targetRole": "adult_child"
     },
     {
       "id": "pcao_t1_02",
@@ -33,7 +34,8 @@
       "tags": [
         "nostalgia",
         "culture"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pcao_t1_03",
@@ -45,7 +47,8 @@
       "tags": [
         "independence",
         "early_adulthood"
-      ]
+      ],
+      "targetRole": "adult_child"
     },
     {
       "id": "pcao_t1_04",
@@ -57,7 +60,8 @@
       "tags": [
         "family_lore",
         "humor"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pcao_t1_05",
@@ -69,7 +73,8 @@
       "tags": [
         "heritage",
         "tradition"
-      ]
+      ],
+      "targetRole": "adult_child"
     },
     {
       "id": "pcao_t1_06",
@@ -81,7 +86,8 @@
       "tags": [
         "travel",
         "bonding"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pcao_t1_07",
@@ -93,19 +99,21 @@
       "tags": [
         "lineage",
         "mannerisms"
-      ]
+      ],
+      "targetRole": "adult_child"
     },
     {
       "id": "pcao_t1_08",
       "tier": 1,
       "type": "prompt",
-      "speakerPrompt": "What is a music album, artist, or live concert that defined an entire transformative season of your life?",
+      "speakerPrompt": "What is a music album, artist, or live concert that defined a major formative season of your life?",
       "listenerPrompt": "Inquire about what was happening emotionally in their world when that music was on repeat.",
       "passAction": "pass_partner",
       "tags": [
         "music",
         "identity"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pcao_t1_09",
@@ -117,7 +125,8 @@
       "tags": [
         "money",
         "humility"
-      ]
+      ],
+      "targetRole": "adult_child"
     },
     {
       "id": "pcao_t1_10",
@@ -129,7 +138,8 @@
       "tags": [
         "career",
         "fulfillment"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pcao_t1_11",
@@ -141,7 +151,8 @@
       "tags": [
         "daily_life",
         "craft"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pcao_t1_12",
@@ -153,7 +164,8 @@
       "tags": [
         "nostalgia",
         "humor"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pcao_t1_13",
@@ -165,7 +177,8 @@
       "tags": [
         "curiosity",
         "aspirations"
-      ]
+      ],
+      "targetRole": "adult_child"
     },
     {
       "id": "pcao_t1_14",
@@ -177,7 +190,8 @@
       "tags": [
         "ancestral_voices",
         "wisdom"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pcao_t1_15",
@@ -189,7 +203,8 @@
       "tags": [
         "rituals",
         "connection"
-      ]
+      ],
+      "targetRole": "adult_child"
     },
     {
       "id": "pcao_t2_01",
@@ -201,7 +216,8 @@
       "tags": [
         "differentiation",
         "peer_transition"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pcao_t2_02",
@@ -213,7 +229,8 @@
       "tags": [
         "family_lore",
         "unspoken_crises"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pcao_t2_03",
@@ -225,7 +242,8 @@
       "tags": [
         "boundaries",
         "acceptance"
-      ]
+      ],
+      "targetRole": "adult_child"
     },
     {
       "id": "pcao_t2_04",
@@ -237,7 +255,8 @@
       "tags": [
         "hard_seasons",
         "reflection"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pcao_t2_05",
@@ -249,7 +268,8 @@
       "tags": [
         "sacrifices",
         "identity"
-      ]
+      ],
+      "targetRole": "adult_child"
     },
     {
       "id": "pcao_t2_06",
@@ -261,7 +281,8 @@
       "tags": [
         "boundaries",
         "differentiation"
-      ]
+      ],
+      "targetRole": "adult_child"
     },
     {
       "id": "pcao_t2_07",
@@ -273,7 +294,8 @@
       "tags": [
         "generational_patterns",
         "self_awareness"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pcao_t2_08",
@@ -285,7 +307,8 @@
       "tags": [
         "concern",
         "health"
-      ]
+      ],
+      "targetRole": "adult_child"
     },
     {
       "id": "pcao_t2_09",
@@ -297,7 +320,8 @@
       "tags": [
         "breaking_cycles",
         "ancestral_healing"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pcao_t2_10",
@@ -309,7 +333,8 @@
       "tags": [
         "filial_maturity",
         "letting_go"
-      ]
+      ],
+      "targetRole": "adult_child"
     },
     {
       "id": "pcao_t2_11",
@@ -321,7 +346,8 @@
       "tags": [
         "avoidance",
         "taboo"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pcao_t2_12",
@@ -333,7 +359,8 @@
       "tags": [
         "aging",
         "mortality"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pcao_t2_13",
@@ -345,7 +372,8 @@
       "tags": [
         "amends",
         "relational_repair"
-      ]
+      ],
+      "targetRole": "adult_child"
     },
     {
       "id": "pcao_t2_14",
@@ -357,7 +385,8 @@
       "tags": [
         "growth",
         "family_roles"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pcao_t2_15",
@@ -369,7 +398,8 @@
       "tags": [
         "virtue",
         "mutual_respect"
-      ]
+      ],
+      "targetRole": "adult_child"
     },
     {
       "id": "pcao_t3_01",
@@ -381,7 +411,8 @@
       "tags": [
         "regret",
         "forgiveness"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pcao_t3_02",
@@ -393,7 +424,8 @@
       "tags": [
         "mortality",
         "unspoken_truths"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pcao_t3_03",
@@ -405,7 +437,8 @@
       "tags": [
         "family_labor",
         "sacrifice"
-      ]
+      ],
+      "targetRole": "adult_child"
     },
     {
       "id": "pcao_t3_04",
@@ -417,19 +450,21 @@
       "tags": [
         "endurance",
         "humanity"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pcao_t3_05",
       "tier": 3,
       "type": "prompt",
-      "speakerPrompt": "What is a forgiveness you need to extend to me—or ask from me—for a specific wound that has never fully scarred over?",
+      "speakerPrompt": "What is a forgiveness you need to extend to me, or ask from me, for a specific wound that has never fully scarred over?",
       "listenerPrompt": "Step into humble repair. Say: 'I forgive you' or 'I am deeply, truly sorry for what I caused.'",
       "passAction": "pass_partner",
       "tags": [
         "forgiveness",
         "deep_repair"
-      ]
+      ],
+      "targetRole": "adult_child"
     },
     {
       "id": "pcao_t3_06",
@@ -441,7 +476,8 @@
       "tags": [
         "legacy",
         "world_fears"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pcao_t3_07",
@@ -453,7 +489,8 @@
       "tags": [
         "allyship",
         "adult_needs"
-      ]
+      ],
+      "targetRole": "adult_child"
     },
     {
       "id": "pcao_t3_08",
@@ -465,7 +502,8 @@
       "tags": [
         "final_words",
         "sacred_legacy"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pcao_t3_09",
@@ -477,7 +515,8 @@
       "tags": [
         "inheritance",
         "mirroring"
-      ]
+      ],
+      "targetRole": "adult_child"
     },
     {
       "id": "pcao_t3_10",
@@ -489,7 +528,8 @@
       "tags": [
         "peace",
         "generational_harmony"
-      ]
+      ],
+      "targetRole": "adult_child"
     },
     {
       "id": "pcao_wild_01",
@@ -501,19 +541,21 @@
       "tags": [
         "photos",
         "nostalgia"
-      ]
+      ],
+      "targetRole": "mutual"
     },
     {
       "id": "pcao_wild_02",
       "tier": 1,
       "type": "wildcard",
-      "speakerPrompt": "WILDCARD: Toast to Adulthood. Raise an imaginary or real drink. Both players offer a genuine toast to the other person as an autonomous, capable adult navigating this complicated world.",
+      "speakerPrompt": "WILDCARD: Toast to Adulthood. Raise an imaginary or real drink. Both players offer a genuine toast to the other person as an autonomous, capable adult making their way in this complicated world.",
       "listenerPrompt": "Clink glasses or make eye contact. Celebrate meeting as peers.",
       "passAction": "pass_partner",
       "tags": [
         "affirmation",
         "peer_meeting"
-      ]
+      ],
+      "targetRole": "mutual"
     },
     {
       "id": "pcao_wild_03",
@@ -525,7 +567,8 @@
       "tags": [
         "boundaries",
         "truce"
-      ]
+      ],
+      "targetRole": "mutual"
     },
     {
       "id": "pcao_wild_04",
@@ -537,7 +580,8 @@
       "tags": [
         "validation",
         "endurance"
-      ]
+      ],
+      "targetRole": "mutual"
     },
     {
       "id": "pcao_wild_05",
@@ -549,7 +593,15 @@
       "tags": [
         "release",
         "closure"
-      ]
+      ],
+      "targetRole": "mutual"
     }
-  ]
+  ],
+  "isBilateral": true,
+  "roleA": "parent",
+  "roleB": "adult_child",
+  "roleLabels": {
+    "roleA": "Parent",
+    "roleB": "Adult Child"
+  }
 }

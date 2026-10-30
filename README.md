@@ -44,6 +44,8 @@ Skipstone turns a single phone into a physical **talking piece** passed hand-to-
 - **Zero Monetization & Zero Dark Patterns:** No paywalls, subscription tiers, locked expansion decks, daily streaks, ads, or behavioral engagement loops.
 - **Dual-Zone Split Layout:** The top half displays the speaker prompt to read aloud; the bottom half provides real-time **Active Listener Attunement** guidance based on psychological research (validating and holding space without offering unsolicited advice).
 - **Single-Device Pass-and-Play:** No Bluetooth discovery, Wi-Fi pairing, user accounts, or player profile typing. The physical device is passed between participants (`"pass to your partner"` or `"pass to your left"`).
+- **Bilateral Turn Alternation & Role Attribution:** Parent-child decks feature structured bilateral turn-taking with explicit speaker role badges, starter role selection pills in the briefing view, and developmentally attuned prompt routing between parent and child.
+- **Dedicated Skip & 1-Step Undo Controls:** Participants can skip uncomfortable prompts without forfeiting their turn (`[Skip Card ↷]`), recycling cards to the back of the active pool, with a stateful 1-step undo ledger guarding against accidental taps.
 - **Autonomous Pacing & Felt Safety:** Higher depth tiers are gated behind baseline exposure thresholds, and advancement is non-coercive. When groups choose to stay in a level, a persistent progression action button unlocks directly in the game view, enabling players to advance or conclude the session on their own terms. Every participant holds an unconditional right to pass.
 - **Embedded Web Audio Synthesizer:** Pure parametric sine waves and harmonic sweeps (440 Hz–880 Hz) generated directly in the browser via the native Web Audio API with zero external audio asset downloads.
 - **De-escalation Checkout:** Every session concludes with a structured 2-step cooldown (one-word emotional state naming + mutual listener appreciation) followed by a screen reminding players to put the phone away.
@@ -87,6 +89,7 @@ flowchart LR
 - **Tier 1 (Surface / Warm Up):** Low-stakes perceptions, nostalgic grounding, sensory preferences, and laughter.
 - **Tier 2 (Ripples / Vulnerability):** Formative lessons, unmet needs, childhood patterns, and non-defensive candor.
 - **Tier 3 (Deep Water / Core Truths):** Mortality, unspoken burdens, forgiveness, sacred vows, and deep emotional repair.
+- **Dedicated Skip & 1-Step Undo:** Skipping a card (`[Skip Card ↷]`) moves it to the back of the active role's pool without advancing tier counts or switching speakers. Accidental taps can be reverted immediately via `[↩ Prev]`.
 - **Persistent Progression & Session Completion:** Choosing to stay in Tier 1 or 2 unlocks a persistent bottom action button (`Advance to Level [N+1] →`) so groups can progress whenever ready. In Tier 3, answering 4+ cards unlocks `Complete Session →` directly into the 2-step grounding checkout.
 - **Wildcard Bernoulli Randomization ($P \approx 0.12$):** Each draw triggers an independent probability trial pulling from tier-specific somatic and circle challenges (silent eye contact, the hot seat, or collective silence).
 
@@ -102,10 +105,10 @@ All 415 structured prompts and listener attunement prompts are statically bundle
 | 2 | **Dating & Early Courtship** | First dates, early romance, & new connections | 45 Cards | Pass to Partner (Dyadic) |
 | 3 | **Lovers & Committed Partners** | Long-term couples, life partners, & marriages | 45 Cards | Pass to Partner (Dyadic) |
 | 4 | **Family Circles** | Intergenerational family gatherings ($N \ge 3$) | 45 Cards | Pass to Left ($N \ge 3$) |
-| 5 | **Parent & Child: Ages 5–8** | Early childhood & primary caregivers | 45 Cards | Pass to Partner (Dyadic) |
-| 6 | **Parent & Child: Ages 9–12** | Pre-teens / middle childhood & caregivers | 45 Cards | Pass to Partner (Dyadic) |
-| 7 | **Parent & Child: Ages 13–17** | Adolescents & caregivers | 45 Cards | Pass to Partner (Dyadic) |
-| 8 | **Parent & Child: Adult Offspring** | Adult children & aging parents | 45 Cards | Pass to Partner (Dyadic) |
+| 5 | **Parent & Child: Ages 5–8** | Early childhood & primary caregivers | 45 Cards | Bilateral Dyadic (Parent ⮂ Child) |
+| 6 | **Parent & Child: Ages 9–12** | Pre-teens / middle childhood & caregivers | 45 Cards | Bilateral Dyadic (Parent ⮂ Child) |
+| 7 | **Parent & Child: Ages 13–17** | Adolescents & caregivers | 45 Cards | Bilateral Dyadic (Parent ⮂ Teen) |
+| 8 | **Parent & Child: Adult Offspring** | Adult children & aging parents | 45 Cards | Bilateral Dyadic (Parent ⮂ Offspring) |
 
 ---
 

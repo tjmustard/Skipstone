@@ -10,10 +10,23 @@ export interface DrawResult {
 export class SmoothedBernoulliDealer {
   private prng: Mulberry32;
   private currentTier: TierLevel = 1;
+  private deck: DeckCatalog | null = null;
+  private isBilateral: boolean = false;
+
+  // Non-bilateral unified pools
   private regularPool: ConversationPrompt[] = [];
-  private wildcardPool: ConversationPrompt[] = [];
   private allTierRegular: ConversationPrompt[] = [];
+
+  // Bilateral role-specific pools
+  private roleAPool: ConversationPrompt[] = [];
+  private roleBPool: ConversationPrompt[] = [];
+  private allTierRoleA: ConversationPrompt[] = [];
+  private allTierRoleB: ConversationPrompt[] = [];
+
+  // Wildcard pools (shared across both modes)
+  private wildcardPool: ConversationPrompt[] = [];
   private allTierWildcard: ConversationPrompt[] = [];
+
   private cardsSinceWildcard: number = 3; // start eligible for wildcard
   private wildcardProbability: number = 0.12;
   private minSpacing: number = 3;
@@ -30,39 +43,68 @@ export class SmoothedBernoulliDealer {
     this.prng = new Mulberry32(seed);
   }
 
-  public loadDeck(deck: DeckCatalog, tier: TierLevel = 1): void {
+  public loadDeck(deck: DeckCatalog, tier: TierLevel = 1, drawnPromptIds?: string[]): void {
+    this.deck = deck;
+    this.isBilateral = Boolean(deck.isBilateral && deck.roleA && deck.roleB);
     this.currentTier = tier;
     this.cardsSinceWildcard = this.minSpacing; // start ready for draw
-    this.setupTierPools(deck, tier);
+    this.setupTierPools(deck, tier, drawnPromptIds);
   }
 
-  public setTier(deck: DeckCatalog, tier: TierLevel): void {
+  public setTier(deck: DeckCatalog, tier: TierLevel, drawnPromptIds?: string[]): void {
+    this.deck = deck;
+    this.isBilateral = Boolean(deck.isBilateral && deck.roleA && deck.roleB);
     this.currentTier = tier;
     this.cardsSinceWildcard = this.minSpacing;
-    this.setupTierPools(deck, tier);
+    this.setupTierPools(deck, tier, drawnPromptIds);
   }
 
-  private setupTierPools(deck: DeckCatalog, tier: TierLevel): void {
+  private setupTierPools(deck: DeckCatalog, tier: TierLevel, drawnPromptIds?: string[]): void {
+    const drawnSet = new Set(drawnPromptIds || []);
     const tierCards = deck.prompts.filter((p) => p.tier === tier);
-    this.allTierRegular = tierCards.filter((p) => p.type === 'prompt');
-    this.allTierWildcard = tierCards.filter((p) => p.type === 'wildcard');
 
-    // Clone and shuffle
-    this.regularPool = this.prng.shuffle([...this.allTierRegular]);
-    this.wildcardPool = this.prng.shuffle([...this.allTierWildcard]);
+    // Wildcards
+    this.allTierWildcard = tierCards.filter((p) => p.type === 'wildcard');
+    const availWildcards = this.allTierWildcard.filter((p) => !drawnSet.has(p.id));
+    this.wildcardPool = this.prng.shuffle(
+      availWildcards.length > 0 ? [...availWildcards] : [...this.allTierWildcard]
+    );
+
+    // Regular unified pool
+    this.allTierRegular = tierCards.filter((p) => p.type === 'prompt');
+    const availRegular = this.allTierRegular.filter((p) => !drawnSet.has(p.id));
+    this.regularPool = this.prng.shuffle(
+      availRegular.length > 0 ? [...availRegular] : [...this.allTierRegular]
+    );
+
+    // Bilateral role pools
+    if (this.isBilateral && deck.roleA && deck.roleB) {
+      this.allTierRoleA = tierCards.filter(
+        (p) => p.type === 'prompt' && (p.targetRole === deck.roleA || p.targetRole === 'mutual')
+      );
+      this.allTierRoleB = tierCards.filter(
+        (p) => p.type === 'prompt' && (p.targetRole === deck.roleB || p.targetRole === 'mutual')
+      );
+
+      const availA = this.allTierRoleA.filter((p) => !drawnSet.has(p.id));
+      const availB = this.allTierRoleB.filter((p) => !drawnSet.has(p.id));
+
+      this.roleAPool = this.prng.shuffle(availA.length > 0 ? [...availA] : [...this.allTierRoleA]);
+      this.roleBPool = this.prng.shuffle(availB.length > 0 ? [...availB] : [...this.allTierRoleB]);
+    } else {
+      this.allTierRoleA = [];
+      this.allTierRoleB = [];
+      this.roleAPool = [];
+      this.roleBPool = [];
+    }
   }
 
   /**
    * Draws next card with smoothed Bernoulli trial and pool recycling.
+   * If role is supplied and deck is bilateral, draws from the active role pool.
    */
-  public drawNext(): DrawResult {
+  public drawNext(role?: string): DrawResult {
     let isRecycled = false;
-
-    // Check if we need to recycle regular pool
-    if (this.regularPool.length === 0) {
-      this.regularPool = this.prng.shuffle([...this.allTierRegular]);
-      isRecycled = true;
-    }
 
     // Check if wildcard pool needs recycle
     if (this.wildcardPool.length === 0 && this.allTierWildcard.length > 0) {
@@ -93,8 +135,46 @@ export class SmoothedBernoulliDealer {
     }
 
     // Default to regular prompt
+    return this.drawRegularCard(role);
+  }
+
+  /**
+   * Draws a regular prompt for the specified role, bypassing the wildcard Bernoulli check.
+   */
+  public drawRegularCard(role?: string): DrawResult {
+    let isRecycled = false;
+
+    if (this.isBilateral && this.deck) {
+      if (role === this.deck.roleA) {
+        if (this.roleAPool.length === 0) {
+          this.roleAPool = this.prng.shuffle([...this.allTierRoleA]);
+          isRecycled = true;
+        }
+        if (this.roleAPool.length > 0) {
+          const card = this.roleAPool.shift()!;
+          this.cardsSinceWildcard++;
+          return { card, isRecycled, isWildcard: false };
+        }
+      } else if (role === this.deck.roleB) {
+        if (this.roleBPool.length === 0) {
+          this.roleBPool = this.prng.shuffle([...this.allTierRoleB]);
+          isRecycled = true;
+        }
+        if (this.roleBPool.length > 0) {
+          const card = this.roleBPool.shift()!;
+          this.cardsSinceWildcard++;
+          return { card, isRecycled, isWildcard: false };
+        }
+      }
+    }
+
+    // Fallback to regular pool
     if (this.regularPool.length === 0) {
-      // In extreme case of no prompts at all in tier, return wildcard or fallback
+      this.regularPool = this.prng.shuffle([...this.allTierRegular]);
+      isRecycled = true;
+    }
+
+    if (this.regularPool.length === 0) {
       if (this.wildcardPool.length > 0) {
         const card = this.wildcardPool.shift()!;
         this.cardsSinceWildcard = 0;
@@ -108,11 +188,59 @@ export class SmoothedBernoulliDealer {
     return { card, isRecycled, isWildcard: false };
   }
 
+  /**
+   * Skips the current card, recycling it to the tail of the corresponding pool,
+   * and draws the next prompt for the active role.
+   */
+  public skipCurrent(card: ConversationPrompt, role?: string): DrawResult {
+    if (card.type === 'wildcard') {
+      this.wildcardPool.push(card);
+      this.cardsSinceWildcard = this.minSpacing; // Reset spacing guard to 3
+      return this.drawRegularCard(role);
+    }
+
+    if (this.isBilateral && this.deck) {
+      if (role === this.deck.roleA) {
+        this.roleAPool.push(card);
+      } else if (role === this.deck.roleB) {
+        this.roleBPool.push(card);
+      } else {
+        this.regularPool.push(card);
+      }
+    } else {
+      this.regularPool.push(card);
+    }
+
+    return this.drawNext(role);
+  }
+
+  /**
+   * Returns remaining prompt count for the specified role in the current tier.
+   */
+  public getPoolRemaining(role?: string): number {
+    if (this.isBilateral && this.deck) {
+      if (role === this.deck.roleA) return this.roleAPool.length;
+      if (role === this.deck.roleB) return this.roleBPool.length;
+    }
+    return this.regularPool.length;
+  }
+
+  /**
+   * Returns whether skip is permitted (disables skip if pool has <= 1 prompt remaining).
+   */
+  public canSkip(role?: string): boolean {
+    return this.getPoolRemaining(role) > 1;
+  }
+
   public getCardsSinceWildcard(): number {
     return this.cardsSinceWildcard;
   }
 
   public getCurrentTier(): TierLevel {
     return this.currentTier;
+  }
+
+  public getIsBilateral(): boolean {
+    return this.isBilateral;
   }
 }

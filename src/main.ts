@@ -54,6 +54,18 @@ export function initPrivacyShield(): void {
       shield.classList.remove('hidden');
     } else {
       shield.classList.add('hidden');
+      try {
+        if (typeof window !== 'undefined' && window.sessionStorage) {
+          const raw = window.sessionStorage.getItem('skipstone_ephemeral_session');
+          if (raw) {
+            const session = JSON.parse(raw);
+            session.lastActiveTimestamp = Date.now();
+            window.sessionStorage.setItem('skipstone_ephemeral_session', JSON.stringify(session));
+          }
+        }
+      } catch {
+        // ignore storage errors
+      }
     }
   };
 

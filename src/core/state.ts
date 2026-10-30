@@ -1,4 +1,10 @@
-import type { DeckCatalog, ConversationPrompt, TierLevel, EphemeralSessionPayload } from '../data/types';
+import type {
+  DeckCatalog,
+  ConversationPrompt,
+  TierLevel,
+  EphemeralSessionPayload,
+  ActionType,
+} from '../data/types';
 import { getDeckById } from '../data/registry';
 import { SmoothedBernoulliDealer } from './dealer';
 import { globalSoundEngine } from './audio';
@@ -13,6 +19,11 @@ export interface AppState {
   cardsAnsweredInTier: number;
   activeCard: ConversationPrompt | null;
   previousCard: ConversationPrompt | null;
+  activeRole?: string | null;
+  startingRole?: string | null;
+  previousRole?: string | null;
+  previousActionType?: ActionType | null;
+  hasUndoAvailable?: boolean;
   drawnPromptIds: string[];
   soundEnabled: boolean;
   isRecycled: boolean;
@@ -26,6 +37,8 @@ export class StateMachine {
   private dealer: SmoothedBernoulliDealer;
   private listeners: Set<StateListener> = new Set();
   private hasShownProgressionForTier: boolean = false;
+  private isTransitioning: boolean = false;
+  private transitionTimer: ReturnType<typeof setTimeout> | null = null;
   private boundBeforeUnload: (e: BeforeUnloadEvent) => void;
 
   constructor(initialSeed?: number) {
@@ -37,6 +50,11 @@ export class StateMachine {
       cardsAnsweredInTier: 0,
       activeCard: null,
       previousCard: null,
+      activeRole: null,
+      startingRole: null,
+      previousRole: null,
+      previousActionType: null,
+      hasUndoAvailable: false,
       drawnPromptIds: [],
       soundEnabled: true,
       isRecycled: false,
@@ -63,8 +81,39 @@ export class StateMachine {
     return { ...this.state };
   }
 
+  public getDealer(): SmoothedBernoulliDealer {
+    return this.dealer;
+  }
+
   public getHasShownProgressionForTier(): boolean {
     return this.hasShownProgressionForTier;
+  }
+
+  public getIsTransitioning(): boolean {
+    return this.isTransitioning;
+  }
+
+  public resetTransitionLockout(): void {
+    this.isTransitioning = false;
+    if (this.transitionTimer) {
+      clearTimeout(this.transitionTimer);
+      this.transitionTimer = null;
+    }
+  }
+
+  public canSkip(): boolean {
+    return this.dealer.canSkip(this.state.activeRole ?? undefined);
+  }
+
+  private startTransitionLockout(durationMs: number = 350): void {
+    this.isTransitioning = true;
+    if (this.transitionTimer) {
+      clearTimeout(this.transitionTimer);
+    }
+    this.transitionTimer = setTimeout(() => {
+      this.isTransitioning = false;
+      this.transitionTimer = null;
+    }, durationMs);
   }
 
   public subscribe(listener: StateListener): () => void {
@@ -89,6 +138,10 @@ export class StateMachine {
           drawnPromptIds: this.state.drawnPromptIds,
           activeCard: this.state.activeCard,
           previousCard: this.state.previousCard,
+          activeRole: this.state.activeRole,
+          startingRole: this.state.startingRole,
+          previousRole: this.state.previousRole,
+          previousActionType: this.state.previousActionType,
           soundEnabled: this.state.soundEnabled,
           lastActiveTimestamp: Date.now(),
           hasShownProgressionForTier: this.hasShownProgressionForTier,
@@ -104,6 +157,11 @@ export class StateMachine {
     this.state.cardsAnsweredInTier = 0;
     this.state.activeCard = null;
     this.state.previousCard = null;
+    this.state.activeRole = deck.isBilateral ? (deck.roleA ?? null) : null;
+    this.state.startingRole = deck.isBilateral ? (deck.roleA ?? null) : null;
+    this.state.previousRole = null;
+    this.state.previousActionType = null;
+    this.state.hasUndoAvailable = false;
     this.state.drawnPromptIds = [];
     this.state.isRecycled = false;
     this.state.view = 'BRIEFING';
@@ -111,13 +169,50 @@ export class StateMachine {
     this.notify();
   }
 
-  public startSession(): void {
+  public setStarterRole(role: string): void {
+    if (!this.state.currentDeck?.isBilateral) return;
+    this.state.startingRole = role;
+    this.state.activeRole = role;
+    this.notify();
+  }
+
+  public startSession(deckIdOrStarterRole?: string, starterRoleArg?: string): void {
+    let resolvedStarterRole: string | undefined = starterRoleArg;
+
+    if (deckIdOrStarterRole) {
+      const matchedDeck = getDeckById(deckIdOrStarterRole);
+      if (matchedDeck) {
+        this.selectDeck(matchedDeck);
+      } else {
+        // Argument was a starter role string
+        resolvedStarterRole = deckIdOrStarterRole;
+      }
+    }
+
     if (!this.state.currentDeck) return;
+
+    // Resolve bilateral roles
+    if (this.state.currentDeck.isBilateral) {
+      const selectedRole =
+        resolvedStarterRole ||
+        this.state.startingRole ||
+        this.state.currentDeck.roleA ||
+        'roleA';
+      this.state.startingRole = selectedRole;
+      this.state.activeRole = selectedRole;
+    } else {
+      this.state.startingRole = null;
+      this.state.activeRole = null;
+    }
+
     this.dealer.loadDeck(this.state.currentDeck, this.state.currentTier);
-    const draw = this.dealer.drawNext();
+    const draw = this.dealer.drawNext(this.state.activeRole ?? undefined);
 
     this.state.activeCard = draw.card;
     this.state.previousCard = null;
+    this.state.previousRole = null;
+    this.state.previousActionType = null;
+    this.state.hasUndoAvailable = false;
     this.state.cardsAnsweredInTier = 1;
     this.state.drawnPromptIds = [draw.card.id];
     this.state.isRecycled = draw.isRecycled;
@@ -134,7 +229,8 @@ export class StateMachine {
   }
 
   public nextCard(): void {
-    if (this.state.view !== 'IN_SESSION' || !this.state.currentDeck) return;
+    if (this.isTransitioning) return;
+    if (this.state.view !== 'IN_SESSION' || !this.state.currentDeck || !this.state.activeCard) return;
 
     // Check if 4 cards answered in tier and haven't shown progression modal yet
     if (this.state.cardsAnsweredInTier >= 4 && !this.hasShownProgressionForTier && this.state.currentTier < 3) {
@@ -144,8 +240,24 @@ export class StateMachine {
       return;
     }
 
-    const draw = this.dealer.drawNext();
+    this.startTransitionLockout();
+
+    // Record in undo ledger
     this.state.previousCard = this.state.activeCard;
+    this.state.previousRole = this.state.activeRole;
+    this.state.previousActionType = 'NEXT';
+    this.state.hasUndoAvailable = true;
+
+    // Alternate role for bilateral decks
+    if (this.state.currentDeck.isBilateral && this.state.currentDeck.roleA && this.state.currentDeck.roleB) {
+      const nextRole =
+        this.state.activeRole === this.state.currentDeck.roleA
+          ? this.state.currentDeck.roleB
+          : this.state.currentDeck.roleA;
+      this.state.activeRole = nextRole;
+    }
+
+    const draw = this.dealer.drawNext(this.state.activeRole ?? undefined);
     this.state.activeCard = draw.card;
     this.state.cardsAnsweredInTier++;
     this.state.drawnPromptIds.push(draw.card.id);
@@ -160,13 +272,58 @@ export class StateMachine {
     this.notify();
   }
 
-  public previousCard(): void {
-    if (!this.state.previousCard) return;
+  public skipCard(): void {
+    if (this.isTransitioning) return;
+    if (this.state.view !== 'IN_SESSION' || !this.state.currentDeck || !this.state.activeCard) return;
 
-    // 1-step undo
-    const temp = this.state.activeCard;
-    this.state.activeCard = this.state.previousCard;
-    this.state.previousCard = temp;
+    this.startTransitionLockout();
+
+    // Record in undo ledger
+    this.state.previousCard = this.state.activeCard;
+    this.state.previousRole = this.state.activeRole;
+    this.state.previousActionType = 'SKIP';
+    this.state.hasUndoAvailable = true;
+
+    // Draw next card for current activeRole via dealer.skipCurrent
+    const draw = this.dealer.skipCurrent(
+      this.state.activeCard,
+      this.state.activeRole ?? undefined
+    );
+
+    this.state.activeCard = draw.card;
+    this.state.drawnPromptIds.push(draw.card.id);
+    this.state.isRecycled = draw.isRecycled;
+
+    // Maintain cardsAnsweredInTier and activeRole unchanged
+    globalSoundEngine.playCardSkip();
+    this.notify();
+  }
+
+  public previousCard(): void {
+    if (this.isTransitioning) return;
+    if (!this.state.hasUndoAvailable || !this.state.previousCard) return;
+
+    this.startTransitionLockout();
+
+    const restoredCard = this.state.previousCard;
+    const actionType = this.state.previousActionType;
+
+    if (actionType === 'NEXT') {
+      if (this.state.cardsAnsweredInTier > 1) {
+        this.state.cardsAnsweredInTier--;
+      }
+      if (this.state.previousRole) {
+        this.state.activeRole = this.state.previousRole;
+      }
+    } else if (actionType === 'SKIP') {
+      // Restore card while leaving cardsAnsweredInTier and activeRole unchanged
+    }
+
+    this.state.activeCard = restoredCard;
+    this.state.previousCard = null;
+    this.state.previousRole = null;
+    this.state.previousActionType = null;
+    this.state.hasUndoAvailable = false;
 
     globalSoundEngine.playCardSlide();
     this.notify();
@@ -178,10 +335,13 @@ export class StateMachine {
     this.state.currentTier = (this.state.currentTier + 1) as TierLevel;
     this.state.cardsAnsweredInTier = 0;
     this.hasShownProgressionForTier = false;
+    this.state.previousCard = null;
+    this.state.previousRole = null;
+    this.state.previousActionType = null;
+    this.state.hasUndoAvailable = false;
     this.dealer.setTier(this.state.currentDeck, this.state.currentTier);
 
-    const draw = this.dealer.drawNext();
-    this.state.previousCard = null;
+    const draw = this.dealer.drawNext(this.state.activeRole ?? undefined);
     this.state.activeCard = draw.card;
     this.state.cardsAnsweredInTier = 1;
     this.state.drawnPromptIds.push(draw.card.id);
@@ -202,10 +362,13 @@ export class StateMachine {
     this.state.currentTier = tier;
     this.state.cardsAnsweredInTier = 0;
     this.hasShownProgressionForTier = false;
+    this.state.previousCard = null;
+    this.state.previousRole = null;
+    this.state.previousActionType = null;
+    this.state.hasUndoAvailable = false;
     this.dealer.setTier(this.state.currentDeck, tier);
 
-    const draw = this.dealer.drawNext();
-    this.state.previousCard = null;
+    const draw = this.dealer.drawNext(this.state.activeRole ?? undefined);
     this.state.activeCard = draw.card;
     this.state.cardsAnsweredInTier = 1;
     this.state.drawnPromptIds.push(draw.card.id);
@@ -244,6 +407,11 @@ export class StateMachine {
     this.state.currentDeck = null;
     this.state.activeCard = null;
     this.state.previousCard = null;
+    this.state.activeRole = null;
+    this.state.startingRole = null;
+    this.state.previousRole = null;
+    this.state.previousActionType = null;
+    this.state.hasUndoAvailable = false;
     this.state.cardsAnsweredInTier = 0;
     this.state.drawnPromptIds = [];
     this.state.isRecycled = false;
@@ -261,20 +429,63 @@ export class StateMachine {
     const saved = EphemeralStorageManager.loadSession();
     if (!saved) return false;
 
+    // Validate deck existence
     const deck = allDecks.find((d) => d.id === saved.deckId) || getDeckById(saved.deckId);
-    if (!deck || !saved.activeCard) return false;
+    if (!deck || !saved.activeCard) {
+      EphemeralStorageManager.clearSession();
+      return false;
+    }
+
+    // Validate tier
+    if (![1, 2, 3].includes(saved.currentTier)) {
+      EphemeralStorageManager.clearSession();
+      return false;
+    }
+
+    // Validate activeCard matches catalog prompt and currentTier
+    const cardExists = deck.prompts.some(
+      (p) => p.id === saved.activeCard?.id && p.tier === saved.currentTier
+    );
+    if (!cardExists) {
+      EphemeralStorageManager.clearSession();
+      return false;
+    }
+
+    // Validate bilateral role constraints
+    if (deck.isBilateral && saved.activeRole) {
+      if (saved.activeRole !== deck.roleA && saved.activeRole !== deck.roleB) {
+        EphemeralStorageManager.clearSession();
+        return false;
+      }
+    }
+
+    // Validate drawnPromptIds against catalog
+    if (saved.drawnPromptIds && Array.isArray(saved.drawnPromptIds)) {
+      const catalogPromptIds = new Set(deck.prompts.map((p) => p.id));
+      const allValid = saved.drawnPromptIds.every((id) => catalogPromptIds.has(id));
+      if (!allValid) {
+        EphemeralStorageManager.clearSession();
+        return false;
+      }
+    }
 
     this.state.currentDeck = deck;
     this.state.currentTier = saved.currentTier;
     this.state.cardsAnsweredInTier = saved.cardsAnsweredInTier;
     this.state.activeCard = saved.activeCard;
     this.state.previousCard = saved.previousCard;
+    this.state.activeRole = saved.activeRole ?? (deck.isBilateral ? deck.roleA ?? null : null);
+    this.state.startingRole = saved.startingRole ?? (deck.isBilateral ? deck.roleA ?? null : null);
+    this.state.previousRole = saved.previousRole ?? null;
+    this.state.previousActionType = saved.previousActionType ?? null;
+    this.state.hasUndoAvailable = Boolean(saved.previousCard);
     this.state.drawnPromptIds = saved.drawnPromptIds || [];
     this.state.soundEnabled = saved.soundEnabled ?? true;
     this.state.view = 'IN_SESSION';
     this.hasShownProgressionForTier = saved.hasShownProgressionForTier ?? false;
 
-    this.dealer.loadDeck(deck, saved.currentTier);
+    // Rehydrate dealer filtering already-drawn prompt IDs
+    this.dealer.loadDeck(deck, saved.currentTier, this.state.drawnPromptIds);
     globalSoundEngine.setSoundEnabled(this.state.soundEnabled);
 
     this.notify();

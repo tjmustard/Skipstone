@@ -112,9 +112,13 @@ describe('Core Engine Verification', () => {
       sm.selectDeck(generalDeck);
       sm.startSession();
       // Draw until progression modal triggers at card 4+
+      sm.resetTransitionLockout();
       sm.nextCard(); // card 2
+      sm.resetTransitionLockout();
       sm.nextCard(); // card 3
+      sm.resetTransitionLockout();
       sm.nextCard(); // card 4
+      sm.resetTransitionLockout();
       sm.nextCard(); // triggers PROGRESSION_MODAL, sets hasShownProgressionForTier = true
       expect(sm.getHasShownProgressionForTier()).toBe(true);
       sm.stayInCurrentTier(); // back to IN_SESSION, auto-persisting session
@@ -139,11 +143,15 @@ describe('Core Engine Verification', () => {
       sm.startSession();
       expect(sm.getHasShownProgressionForTier()).toBe(false);
 
+      sm.resetTransitionLockout();
       sm.nextCard(); // 2
+      sm.resetTransitionLockout();
       sm.nextCard(); // 3
+      sm.resetTransitionLockout();
       sm.nextCard(); // 4
       expect(sm.getHasShownProgressionForTier()).toBe(false);
 
+      sm.resetTransitionLockout();
       sm.nextCard(); // triggers PROGRESSION_MODAL
       expect(sm.getHasShownProgressionForTier()).toBe(true);
 
@@ -168,26 +176,33 @@ describe('Core Engine Verification', () => {
       expect(sm.getState().cardsAnsweredInTier).toBe(1);
 
       // Advance cards up to card 4
+      sm.resetTransitionLockout();
       sm.nextCard(); // card 2
+      sm.resetTransitionLockout();
       sm.nextCard(); // card 3
+      sm.resetTransitionLockout();
       sm.nextCard(); // card 4
 
       expect(sm.getState().cardsAnsweredInTier).toBe(4);
 
       // Trigger progression modal on 5th draw attempt
+      sm.resetTransitionLockout();
       sm.nextCard();
       expect(sm.getState().view).toBe('PROGRESSION_MODAL');
 
       // Test Advance
+      sm.resetTransitionLockout();
       sm.advanceTier();
       expect(sm.getState().view).toBe('IN_SESSION');
       expect(sm.getState().currentTier).toBe(2);
 
       // Test 1-step undo
       const firstCardT2 = sm.getState().activeCard;
+      sm.resetTransitionLockout();
       sm.nextCard();
       expect(sm.getState().previousCard).toBe(firstCardT2);
 
+      sm.resetTransitionLockout();
       sm.previousCard();
       expect(sm.getState().activeCard).toBe(firstCardT2);
 

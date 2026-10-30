@@ -39,6 +39,51 @@ export function validateCustomDeck(data: unknown): ValidationResult {
   const targetAudience = typeof raw.targetAudience === 'string' ? raw.targetAudience.trim() : 'Custom Audience';
   const defaultPassAction: PassAction = raw.defaultPassAction === 'pass_left' ? 'pass_left' : 'pass_partner';
 
+  // Bilateral deck metadata (optional)
+  let isBilateral: boolean | undefined = undefined;
+  if (raw.isBilateral !== undefined) {
+    if (typeof raw.isBilateral === 'boolean') {
+      isBilateral = raw.isBilateral;
+    } else {
+      errors.push('If provided, isBilateral must be a boolean.');
+    }
+  }
+
+  let roleA: string | undefined = undefined;
+  if (raw.roleA !== undefined) {
+    if (typeof raw.roleA === 'string' && raw.roleA.trim().length > 0) {
+      roleA = raw.roleA.trim();
+    } else {
+      errors.push('If provided, roleA must be a non-empty string.');
+    }
+  }
+
+  let roleB: string | undefined = undefined;
+  if (raw.roleB !== undefined) {
+    if (typeof raw.roleB === 'string' && raw.roleB.trim().length > 0) {
+      roleB = raw.roleB.trim();
+    } else {
+      errors.push('If provided, roleB must be a non-empty string.');
+    }
+  }
+
+  let roleLabels: { roleA: string; roleB: string } | undefined = undefined;
+  if (raw.roleLabels !== undefined) {
+    if (typeof raw.roleLabels === 'object' && raw.roleLabels !== null && !Array.isArray(raw.roleLabels)) {
+      const rl = raw.roleLabels as Record<string, unknown>;
+      if (typeof rl.roleA === 'string' && typeof rl.roleB === 'string') {
+        roleLabels = {
+          roleA: rl.roleA.trim(),
+          roleB: rl.roleB.trim()
+        };
+      } else {
+        errors.push('roleLabels must contain string properties roleA and roleB.');
+      }
+    } else {
+      errors.push('If provided, roleLabels must be an object.');
+    }
+  }
+
   // 4. Prompts array validation
   if (!Array.isArray(raw.prompts) || raw.prompts.length === 0) {
     errors.push('Deck must contain a non-empty prompts array.');
@@ -89,8 +134,11 @@ export function validateCustomDeck(data: unknown): ValidationResult {
     const promptType = rp.type === 'wildcard' ? 'wildcard' : 'prompt';
     const passAction: PassAction = rp.passAction === 'pass_left' ? 'pass_left' : defaultPassAction;
     const tags = Array.isArray(rp.tags) ? rp.tags.map(t => String(t).slice(0, 50)) : [];
+    const targetRole = typeof rp.targetRole === 'string' && rp.targetRole.trim().length > 0
+      ? rp.targetRole.trim()
+      : undefined;
 
-    cleanPrompts.push({
+    const cleanPrompt: ConversationPrompt = {
       id: sanitizedPid,
       tier: tierNum as TierLevel,
       type: promptType,
@@ -98,7 +146,13 @@ export function validateCustomDeck(data: unknown): ValidationResult {
       listenerPrompt,
       passAction,
       tags
-    });
+    };
+
+    if (targetRole) {
+      cleanPrompt.targetRole = targetRole;
+    }
+
+    cleanPrompts.push(cleanPrompt);
   });
 
   if (errors.length > 0) {
@@ -116,6 +170,19 @@ export function validateCustomDeck(data: unknown): ValidationResult {
     isCustom: true,
     prompts: cleanPrompts
   };
+
+  if (isBilateral !== undefined) {
+    sanitizedDeck.isBilateral = isBilateral;
+  }
+  if (roleA !== undefined) {
+    sanitizedDeck.roleA = roleA;
+  }
+  if (roleB !== undefined) {
+    sanitizedDeck.roleB = roleB;
+  }
+  if (roleLabels !== undefined) {
+    sanitizedDeck.roleLabels = roleLabels;
+  }
 
   return { valid: true, errors: [], deck: sanitizedDeck };
 }

@@ -1,7 +1,7 @@
 {
   "id": "parent_child_5_8",
   "title": "Parent & Child",
-  "subtitle": "Wonder & Big Feelings (Ages 5–8)",
+  "subtitle": "Wonder & Big Feelings (Ages 5\u20138)",
   "description": "Engineered for young children and their caregivers. Transitions gently from playful imagination to emotional naming and secure attachment.",
   "targetAudience": "parent_child",
   "defaultPassAction": "pass_partner",
@@ -20,7 +20,8 @@
       "tags": [
         "imagination",
         "playful"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc58_t1_02",
@@ -32,7 +33,8 @@
       "tags": [
         "humor",
         "joy"
-      ]
+      ],
+      "targetRole": "child"
     },
     {
       "id": "pc58_t1_03",
@@ -44,7 +46,8 @@
       "tags": [
         "secret_worlds",
         "play"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc58_t1_04",
@@ -56,7 +59,8 @@
       "tags": [
         "powers",
         "agency"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc58_t1_05",
@@ -68,7 +72,8 @@
       "tags": [
         "connection",
         "shared_play"
-      ]
+      ],
+      "targetRole": "child"
     },
     {
       "id": "pc58_t1_06",
@@ -80,19 +85,21 @@
       "tags": [
         "sensory",
         "creativity"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc58_t1_07",
       "tier": 1,
       "type": "prompt",
       "speakerPrompt": "Which of your stuffed animals or toys do you think has the biggest adventures when we leave the room?",
-      "listenerPrompt": "Caregiver: Lean into animism—it is developmentally natural for this age. Treat the toy as a real character.",
+      "listenerPrompt": "Caregiver: Lean into animism; it is developmentally natural for this age. Treat the toy as a real character.",
       "passAction": "pass_partner",
       "tags": [
         "pretend_play",
         "wonder"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc58_t1_08",
@@ -104,7 +111,8 @@
       "tags": [
         "adventure",
         "bonding"
-      ]
+      ],
+      "targetRole": "child"
     },
     {
       "id": "pc58_t1_09",
@@ -116,7 +124,8 @@
       "tags": [
         "sensory",
         "favorites"
-      ]
+      ],
+      "targetRole": "child"
     },
     {
       "id": "pc58_t1_10",
@@ -128,7 +137,8 @@
       "tags": [
         "agency",
         "humor"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc58_t1_11",
@@ -140,7 +150,8 @@
       "tags": [
         "grown_up_world",
         "observation"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc58_t1_12",
@@ -152,7 +163,8 @@
       "tags": [
         "perspective",
         "body_movement"
-      ]
+      ],
+      "targetRole": "child"
     },
     {
       "id": "pc58_t1_13",
@@ -164,7 +176,8 @@
       "tags": [
         "self_worth",
         "pride"
-      ]
+      ],
+      "targetRole": "child"
     },
     {
       "id": "pc58_t1_14",
@@ -176,7 +189,8 @@
       "tags": [
         "play",
         "cooperation"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc58_t1_15",
@@ -188,7 +202,8 @@
       "tags": [
         "comfort",
         "bedtime"
-      ]
+      ],
+      "targetRole": "child"
     },
     {
       "id": "pc58_t2_01",
@@ -200,19 +215,21 @@
       "tags": [
         "big_feelings",
         "anger"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc58_t2_02",
       "tier": 2,
       "type": "prompt",
       "speakerPrompt": "When you feel sad or hurt, what helps your heart feel just a little bit better?",
-      "listenerPrompt": "Caregiver: Learn their emotional repair language—do they need a silent hug, a blanket, or space?",
+      "listenerPrompt": "Caregiver: Learn their emotional repair language: do they need a silent hug, a blanket, or space?",
       "passAction": "pass_partner",
       "tags": [
         "emotional_regulation",
         "comfort"
-      ]
+      ],
+      "targetRole": "child"
     },
     {
       "id": "pc58_t2_03",
@@ -224,7 +241,8 @@
       "tags": [
         "belonging",
         "somatic_awareness"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc58_t2_04",
@@ -236,7 +254,8 @@
       "tags": [
         "grit",
         "growth_mindset"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc58_t2_05",
@@ -248,7 +267,8 @@
       "tags": [
         "boundaries",
         "listening"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc58_t2_06",
@@ -260,7 +280,8 @@
       "tags": [
         "safety",
         "unconditional_love"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc58_t2_07",
@@ -272,7 +293,8 @@
       "tags": [
         "empathy",
         "kindness"
-      ]
+      ],
+      "targetRole": "child"
     },
     {
       "id": "pc58_t2_08",
@@ -284,7 +306,8 @@
       "tags": [
         "parent_mirror",
         "awareness"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc58_t2_09",
@@ -296,7 +319,8 @@
       "tags": [
         "curiosity",
         "big_questions"
-      ]
+      ],
+      "targetRole": "child"
     },
     {
       "id": "pc58_t2_10",
@@ -308,7 +332,8 @@
       "tags": [
         "emotional_metaphor",
         "attunement"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc58_t2_11",
@@ -320,7 +345,8 @@
       "tags": [
         "validation",
         "words_of_affirmation"
-      ]
+      ],
+      "targetRole": "child"
     },
     {
       "id": "pc58_t2_12",
@@ -332,7 +358,8 @@
       "tags": [
         "jealousy",
         "sibling_dynamics"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc58_t2_13",
@@ -344,7 +371,8 @@
       "tags": [
         "somatic",
         "anxiety"
-      ]
+      ],
+      "targetRole": "child"
     },
     {
       "id": "pc58_t2_14",
@@ -356,7 +384,8 @@
       "tags": [
         "growing_up",
         "autonomy"
-      ]
+      ],
+      "targetRole": "child"
     },
     {
       "id": "pc58_t2_15",
@@ -368,7 +397,8 @@
       "tags": [
         "role_reversal",
         "confidence"
-      ]
+      ],
+      "targetRole": "child"
     },
     {
       "id": "pc58_t3_01",
@@ -380,7 +410,8 @@
       "tags": [
         "fears",
         "felt_safety"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc58_t3_02",
@@ -392,7 +423,8 @@
       "tags": [
         "reassurance",
         "attachment"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc58_t3_03",
@@ -404,7 +436,8 @@
       "tags": [
         "empathy",
         "childhood"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc58_t3_04",
@@ -416,7 +449,8 @@
       "tags": [
         "grief",
         "comfort"
-      ]
+      ],
+      "targetRole": "child"
     },
     {
       "id": "pc58_t3_05",
@@ -428,7 +462,8 @@
       "tags": [
         "wishes",
         "inner_heart"
-      ]
+      ],
+      "targetRole": "child"
     },
     {
       "id": "pc58_t3_06",
@@ -440,7 +475,8 @@
       "tags": [
         "bravery",
         "resilience"
-      ]
+      ],
+      "targetRole": "child"
     },
     {
       "id": "pc58_t3_07",
@@ -452,7 +488,8 @@
       "tags": [
         "perfectionism",
         "acceptance"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc58_t3_08",
@@ -464,7 +501,8 @@
       "tags": [
         "family_memory",
         "joy"
-      ]
+      ],
+      "targetRole": "child"
     },
     {
       "id": "pc58_t3_09",
@@ -476,7 +514,8 @@
       "tags": [
         "security",
         "family_fears"
-      ]
+      ],
+      "targetRole": "child"
     },
     {
       "id": "pc58_t3_10",
@@ -488,7 +527,8 @@
       "tags": [
         "unconditional_love",
         "attachment"
-      ]
+      ],
+      "targetRole": "parent"
     },
     {
       "id": "pc58_wild_01",
@@ -500,7 +540,8 @@
       "tags": [
         "physical_play",
         "co-regulation"
-      ]
+      ],
+      "targetRole": "mutual"
     },
     {
       "id": "pc58_wild_02",
@@ -512,7 +553,8 @@
       "tags": [
         "shared_ritual",
         "play"
-      ]
+      ],
+      "targetRole": "mutual"
     },
     {
       "id": "pc58_wild_03",
@@ -524,7 +566,8 @@
       "tags": [
         "somatic",
         "oxytocin"
-      ]
+      ],
+      "targetRole": "mutual"
     },
     {
       "id": "pc58_wild_04",
@@ -536,7 +579,8 @@
       "tags": [
         "gratitude",
         "reciprocity"
-      ]
+      ],
+      "targetRole": "mutual"
     },
     {
       "id": "pc58_wild_05",
@@ -548,7 +592,15 @@
       "tags": [
         "intimacy",
         "affirmation"
-      ]
+      ],
+      "targetRole": "mutual"
     }
-  ]
+  ],
+  "isBilateral": true,
+  "roleA": "parent",
+  "roleB": "child",
+  "roleLabels": {
+    "roleA": "Parent",
+    "roleB": "Child"
+  }
 }

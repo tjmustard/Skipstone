@@ -1,7 +1,10 @@
 import type { DeckCatalog } from '../../data/types';
-import { globalStateMachine } from '../../core/state';
+import { StateMachine, globalStateMachine } from '../../core/state';
 
-export function createBriefingView(deck: DeckCatalog): HTMLElement {
+export function createBriefingView(
+  deck: DeckCatalog,
+  stateMachine: StateMachine = globalStateMachine
+): HTMLElement {
   const container = document.createElement('div');
   container.className = 'w-full h-full flex flex-col justify-between overflow-y-auto px-4 py-6 max-w-xl mx-auto';
 
@@ -112,18 +115,80 @@ export function createBriefingView(deck: DeckCatalog): HTMLElement {
   const bottomBar = document.createElement('div');
   bottomBar.className = 'flex flex-col gap-3 pt-6 pb-2';
 
+  let selectedRole = deck.roleA ?? 'roleA';
+
+  // Bilateral Deck Starter Role Pills (Task 1)
+  if (deck.isBilateral && deck.roleA && deck.roleB) {
+    const roleSelectorContainer = document.createElement('div');
+    roleSelectorContainer.className = 'flex flex-col gap-2 mb-1';
+
+    const roleHeading = document.createElement('span');
+    roleHeading.className = 'text-xs font-semibold text-slate-400 uppercase tracking-wider text-center';
+    roleHeading.textContent = 'Who asks the first question?';
+    roleSelectorContainer.appendChild(roleHeading);
+
+    const pillsRow = document.createElement('div');
+    pillsRow.className = 'grid grid-cols-2 gap-2.5';
+
+    const labelA = deck.roleLabels?.roleA ?? deck.roleA;
+    const labelB = deck.roleLabels?.roleB ?? deck.roleB;
+
+    const roleABtn = document.createElement('button');
+    roleABtn.type = 'button';
+    roleABtn.setAttribute('data-role', deck.roleA);
+    roleABtn.textContent = labelA;
+
+    const roleBBtn = document.createElement('button');
+    roleBBtn.type = 'button';
+    roleBBtn.setAttribute('data-role', deck.roleB);
+    roleBBtn.textContent = labelB;
+
+    const updatePillStyles = () => {
+      if (selectedRole === deck.roleA) {
+        roleABtn.className = 'py-2.5 px-4 rounded-xl font-medium text-xs sm:text-sm border min-h-[44px] min-w-[44px] transition-all bg-indigo-600/30 border-indigo-500 text-indigo-200 shadow-sm';
+        roleABtn.setAttribute('aria-pressed', 'true');
+        roleBBtn.className = 'py-2.5 px-4 rounded-xl font-medium text-xs sm:text-sm border min-h-[44px] min-w-[44px] transition-all bg-slate-900/60 border-slate-800 text-slate-400 hover:text-slate-200 hover:bg-slate-800/60';
+        roleBBtn.setAttribute('aria-pressed', 'false');
+      } else {
+        roleABtn.className = 'py-2.5 px-4 rounded-xl font-medium text-xs sm:text-sm border min-h-[44px] min-w-[44px] transition-all bg-slate-900/60 border-slate-800 text-slate-400 hover:text-slate-200 hover:bg-slate-800/60';
+        roleABtn.setAttribute('aria-pressed', 'false');
+        roleBBtn.className = 'py-2.5 px-4 rounded-xl font-medium text-xs sm:text-sm border min-h-[44px] min-w-[44px] transition-all bg-indigo-600/30 border-indigo-500 text-indigo-200 shadow-sm';
+        roleBBtn.setAttribute('aria-pressed', 'true');
+      }
+    };
+
+    updatePillStyles();
+
+    roleABtn.onclick = () => {
+      selectedRole = deck.roleA!;
+      updatePillStyles();
+    };
+
+    roleBBtn.onclick = () => {
+      selectedRole = deck.roleB!;
+      updatePillStyles();
+    };
+
+    pillsRow.appendChild(roleABtn);
+    pillsRow.appendChild(roleBBtn);
+    roleSelectorContainer.appendChild(pillsRow);
+    bottomBar.appendChild(roleSelectorContainer);
+  }
+
   const startBtn = document.createElement('button');
   startBtn.type = 'button';
-  startBtn.className = 'w-full py-3.5 px-6 rounded-xl font-display font-semibold text-base text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 shadow-xl shadow-indigo-950/40 transition-all';
+  startBtn.className = 'w-full py-3.5 px-6 min-h-[44px] rounded-xl font-display font-semibold text-base text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 shadow-xl shadow-indigo-950/40 transition-all';
   startBtn.textContent = 'Begin Conversational Journey';
-  startBtn.onclick = () => globalStateMachine.startSession();
+  startBtn.onclick = () => {
+    stateMachine.startSession(deck.id, deck.isBilateral ? selectedRole : undefined);
+  };
   bottomBar.appendChild(startBtn);
 
   const cancelBtn = document.createElement('button');
   cancelBtn.type = 'button';
-  cancelBtn.className = 'w-full py-2 px-4 rounded-xl text-xs text-slate-400 hover:text-slate-200 transition-colors';
+  cancelBtn.className = 'w-full py-2 px-4 min-h-[44px] rounded-xl text-xs text-slate-400 hover:text-slate-200 transition-colors';
   cancelBtn.textContent = 'Choose a Different Deck';
-  cancelBtn.onclick = () => globalStateMachine.quitToDeckSelect();
+  cancelBtn.onclick = () => stateMachine.quitToDeckSelect();
   bottomBar.appendChild(cancelBtn);
 
   container.appendChild(bottomBar);

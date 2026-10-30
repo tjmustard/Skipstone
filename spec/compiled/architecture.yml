@@ -4,7 +4,10 @@ nodes:
   status: clean
   associated_file: spec/compiled/SuperPRD.md
   description: Offline-first PWA conversational intimacy web application orchestrating
-    prompt catalogs, audio engine, state transitions, persistent tier progression, session completion navigation, and responsive touch UI
+    8 prompt catalogs with bilateral turn alternation, Web Audio synthesis engine,
+    finite state transitions, persistent tier progression, 3-step grounding checkout,
+    responsive dual-zone touch UI with starter role selection and skip controls, and
+    zero-telemetry client storage
   inputs:
   - data_type: user_touch_and_keyboard_events
     source_id: browser_dom
@@ -50,8 +53,10 @@ nodes:
   dimension: Module
   status: clean
   associated_file: src/data/registry.ts
-  description: Static TypeScript compilation and static registry of 8 prompt catalogs
-    (415 items) across 3 intimacy tiers extracted from SI/
+  description: Static TypeScript compilation and registry of 8 prompt catalogs (415
+    items) across 3 intimacy tiers, including bilateral turn alternation metadata
+    (isBilateral, roleA, roleB, roleLabels) and prompt-level targetRole tags across
+    parent-child catalogs
   inputs:
   - data_type: markdown_catalog_tables
     source_id: SI/
@@ -71,8 +76,12 @@ nodes:
   dimension: Module
   status: clean
   associated_file: src/core/state.ts
-  description: Finite state machine, seedable Mulberry32 PRNG dealer with smoothed
-    Bernoulli wildcards, Web Audio synthesis engine, touch gestures, 15-min TTL session storage with hasShownProgressionForTier persistence, and tier progression / grounding checkout navigation
+  description: Finite state machine orchestrating reactive app state (DECK_SELECT,
+    BRIEFING, IN_SESSION, PROGRESSION_MODAL, GROUNDING_CHECKOUT), role-partitioned
+    Smoothed Bernoulli dealer with bilateral turn alternation, non-advancing card
+    skips with tail recycling, stateful 1-step undo symmetry, 350ms transition debounce
+    lockout, synthesized Web Audio cues (including skip double-tick), safe session
+    rehydration filtering already-drawn prompts, and tier progression navigation
   inputs:
   - data_type: built_in_prompt_catalogs
     source_id: module_prompt_catalogs
@@ -96,7 +105,13 @@ nodes:
   dimension: Module
   status: clean
   associated_file: src/ui/views/SplitGameView.ts
-  description: Modular UI views including responsive dual-zone SplitGameView with dynamic tier-aware third action button for persistent level advancement and session completion, WCAG AAA styling tokens, DeckSelectorView, BriefingView, ProgressionModal, GroundingCheckoutView, and OS switcher privacy shield
+  description: Modular responsive UI views including dual-zone SplitGameView (speaker
+    reading zone with role/mutual badges and active listener coaching zone), BriefingView
+    with bilateral starter role selector pills and shared agreements, dedicated skip card
+    action and immediate 1-step undo disable state, persistent tier progression and
+    session completion action buttons, responsive >=320px flex-nowrap action bar ergonomics,
+    DeckSelectorView, ProgressionModal, GroundingCheckoutView 3-step closure, WCAG AAA styling
+    tokens, tab visibility session TTL refresh, and OS switcher privacy blur shield
   inputs:
   - data_type: app_state_and_card_stream
     source_id: module_core_engine
@@ -122,7 +137,11 @@ nodes:
   dimension: Module
   status: clean
   associated_file: src/data/validator.ts
-  description: Zero-dependency schema validator with 1MB file limit, custom_ ID namespacing, validation error reporting, and sanitization for custom deck imports
+  description: Zero-dependency schema validator (<2KB) and file processor enforcing
+    1MB file limit, custom_ ID namespacing, prompt field bounds, validation error
+    reporting, and optional bilateral role metadata (isBilateral, roleA, roleB, roleLabels,
+    targetRole) with backward-compatibility for custom deck imports/exports and IndexedDB
+    persistence
   inputs:
   - data_type: custom_deck_file_selection
     source_id: module_ui_shell
@@ -148,7 +167,14 @@ nodes:
   dimension: Module
   status: clean
   associated_file: tests/engine.test.ts
-  description: Automated Vitest test suite covering PRNG determinism, Smoothed Bernoulli dealer spacing, Ephemeral storage TTL and hasShownProgressionForTier persistence, Finite State Machine tier progression/modal flows, headless AudioContext mocks, WCAG AAA color contrast verifier, and bundle size budget assertions
+  description: Automated Vitest test suite covering Mulberry32 PRNG determinism, Smoothed
+    Bernoulli dealer spacing and drought guards, role-partitioned bilateral dealing,
+    non-advancing skips, stateful 1-step undo symmetry, 350ms transition debounce
+    lockout, ephemeral session storage TTL and progression persistence, Finite State
+    Machine tier navigation and modal flows, catalog schema validation and bilateral
+    role distributions across 415 prompts, custom deck 1MB ceiling and namespacing,
+    WCAG AAA color contrast verification, and UI component rendering with bilateral
+    starter pills and 320px responsive navigation
   inputs:
   - data_type: app_state_and_card_stream
     source_id: module_core_engine
