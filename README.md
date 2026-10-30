@@ -1,4 +1,5 @@
 <div align="center">
+    <img src="./media/icons/web/icon-192.webp" width="128" height="128" alt="Skipstone App Icon" style="border-radius: 28px; box-shadow: 0 8px 24px rgba(0,0,0,0.25);" />
     <h1>🌊 Skipstone</h1>
     <p><strong>Start on the surface. Settle in the deep.</strong></p>
     <p><em>A 100% free, privacy-first, offline-first relational intimacy app modeled on skipping stones across water.</em></p>
