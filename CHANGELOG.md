@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.3] - 2026-10-31
+
+### Changed
+- **Catalog Presentation Sequence (`src/data/registry.ts`, `README.md`)**: Reordered built-in deck catalogs so the deck selector presents a natural relational progression: General Edition, Family Circles, Parent & Child (5–8, 9–12, 13–17, adult offspring), Dating & Early Courtship, and Lovers & Committed Partners.
+- **Service Worker (`src/service-worker.ts`)**: Incremented cache name to `skipstone-v1.0.3`.
+- **`package.json`**: Bumped version to `1.0.3`.
+
+### Added
+- **Catalog Order Regression Verification (`tests/catalogs.test.ts`)**: Added deterministic test validating the canonical deck ID sequence across `BUILT_IN_DECKS`.
+
 ## [1.0.2] - 2026-10-30
 
 ### Added
