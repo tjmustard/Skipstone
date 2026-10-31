@@ -10,6 +10,20 @@ describe('Prompt Catalogs Verification', () => {
     expect(totalPrompts).toBe(415);
   });
 
+  it('should maintain canonical catalog ordering across built-in decks', () => {
+    const deckIds = BUILT_IN_DECKS.map((d) => d.id);
+    expect(deckIds).toEqual([
+      'general_edition',
+      'family_circles',
+      'parent_child_5_8',
+      'parent_child_9_12',
+      'parent_child_13_17',
+      'parent_child_adult_offspring',
+      'dating_courtship',
+      'lovers_committed',
+    ]);
+  });
+
   it('should resolve decks by id and v1 alias', () => {
     const general = getDeckById('general_edition');
     expect(general).toBeDefined();

@@ -102,13 +102,13 @@ All 415 structured prompts and listener attunement prompts are statically bundle
 | # | Deck Name | Target Audience | Scope | Turn Mechanism |
 |---|---|---|---|---|
 | 1 | **General Edition** | Friends, dinner parties, community circles, & strangers | 100 Cards | Pass to Left ($N \ge 2$) |
-| 2 | **Dating & Early Courtship** | First dates, early romance, & new connections | 45 Cards | Pass to Partner (Dyadic) |
-| 3 | **Lovers & Committed Partners** | Long-term couples, life partners, & marriages | 45 Cards | Pass to Partner (Dyadic) |
-| 4 | **Family Circles** | Intergenerational family gatherings ($N \ge 3$) | 45 Cards | Pass to Left ($N \ge 3$) |
-| 5 | **Parent & Child: Ages 5–8** | Early childhood & primary caregivers | 45 Cards | Bilateral Dyadic (Parent ⮂ Child) |
-| 6 | **Parent & Child: Ages 9–12** | Pre-teens / middle childhood & caregivers | 45 Cards | Bilateral Dyadic (Parent ⮂ Child) |
-| 7 | **Parent & Child: Ages 13–17** | Adolescents & caregivers | 45 Cards | Bilateral Dyadic (Parent ⮂ Teen) |
-| 8 | **Parent & Child: Adult Offspring** | Adult children & aging parents | 45 Cards | Bilateral Dyadic (Parent ⮂ Offspring) |
+| 2 | **Family Circles** | Intergenerational family gatherings ($N \ge 3$) | 45 Cards | Pass to Left ($N \ge 3$) |
+| 3 | **Parent & Child: Ages 5–8** | Early childhood & primary caregivers | 45 Cards | Bilateral Dyadic (Parent ⮂ Child) |
+| 4 | **Parent & Child: Ages 9–12** | Pre-teens / middle childhood & caregivers | 45 Cards | Bilateral Dyadic (Parent ⮂ Child) |
+| 5 | **Parent & Child: Ages 13–17** | Adolescents & caregivers | 45 Cards | Bilateral Dyadic (Parent ⮂ Child) |
+| 6 | **Parent & Child: Adult Offspring** | Adult children & aging parents | 45 Cards | Bilateral Dyadic (Parent ⮂ Offspring) |
+| 7 | **Dating & Early Courtship** | First dates, early romance, & new connections | 45 Cards | Pass to Partner (Dyadic) |
+| 8 | **Lovers & Committed Partners** | Long-term couples, life partners, & marriages | 45 Cards | Pass to Partner (Dyadic) |
 
 ---
 

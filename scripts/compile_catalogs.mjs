@@ -68,13 +68,13 @@ const deckMetaOverrides = {
 
 const deckFiles = [
   'general_edition_deck.md',
-  'dating_early_courtship_deck.md',
-  'lovers_committed_romantic_partners_deck.md',
   'family_circles_intergenerational_deck.md',
   'parent_to_child_deck_ages_5_8.md',
   'parent_to_child_deck_ages_9_12.md',
   'parent_to_child_deck_ages_13_17.md',
-  'parent_to_child_deck_adult_offspring.md'
+  'parent_to_child_deck_adult_offspring.md',
+  'dating_early_courtship_deck.md',
+  'lovers_committed_romantic_partners_deck.md'
 ];
 
 let totalPromptsCount = 0;
